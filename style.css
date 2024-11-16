@@ -217,7 +217,7 @@ header h1 {
 
 .control-btn {
     width: 48px;
-    height: 48px;
+    height: 55px;
     border-radius: 50%;
     border: none;
     background: var(--card-bg);
