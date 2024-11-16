@@ -175,21 +175,21 @@ class TaskManager {
     toggleTimer() {
         if (this.currentTimer.isRunning) {
             this.currentTimer.pause();
-            this.elements.startBtn.textContent = '▶️';
+            this.elements.startBtn.textContent = '▶';
         } else {
             this.currentTimer.start();
-            this.elements.startBtn.textContent = '⏸️';
+            this.elements.startBtn.textContent = '⏸';
         }
     }
 
     resetTimer() {
         this.currentTimer.reset();
-        this.elements.startBtn.textContent = '▶️';
+        this.elements.startBtn.textContent = '▶';
     }
 
     toggleMode() {
         this.currentTimer.pause();
-        this.elements.startBtn.textContent = '▶️';
+        this.elements.startBtn.textContent = '▶';
         
         if (this.currentMode === 'stopwatch') {
             this.currentMode = 'pomodoro';
