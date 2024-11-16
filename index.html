@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskTimer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header-controls">
+            <button class="theme-toggle">🌙</button>
+            <button class="settings-toggle">⚙️</button>
+        </div>
+        
+        <div class="settings-panel">
+            <h3>⚙️ Settings</h3>
+            <div class="setting-group">
+                <label>
+                    Work Duration (min)
+                    <input type="number" id="workDuration" value="50" min="1" max="120">
+                </label>
+                <label>
+                    Break Duration (min)
+                    <input type="number" id="breakDuration" value="10" min="1" max="30">
+                </label>
+            </div>
+        </div>
+
+        <div class="container">
+            <header>
+                <h1>⏱️ TaskTimer</h1>
+                <p>Manage your tasks and time efficiently</p>
+            </header>
+
+            <div class="add-task">
+                <input type="text" id="taskInput" placeholder="Add a new task...">
+                <button id="addTaskBtn">+ Add Task</button>
+            </div>
+
+            <div class="timer-container">
+                <div class="task-select-container">
+                    <select id="taskSelect">
+                        <option value="">Select a task...</option>
+                    </select>
+                </div>
+                
+                <div class="timer-display">
+                    <div class="progress-ring">
+                        <svg width="200" height="200">
+                            <circle class="progress-ring-circle-bg" cx="100" cy="100" r="90"/>
+                            <circle class="progress-ring-circle" cx="100" cy="100" r="90"/>
+                        </svg>
+                        <div class="time">00:00:00</div>
+                    </div>
+                    <div class="timer-mode">Stopwatch Mode</div>
+                    <div class="timer-label">No task selected</div>
+                </div>
+
+                <div class="timer-controls">
+                    <button id="startBtn" class="control-btn">▶️</button>
+                    <button id="resetBtn" class="control-btn">🔄</button>
+                    <button id="modeToggleBtn" class="mode-toggle">Switch to Pomodoro</button>
+                </div>
+            </div>
+
+            <div id="taskList" class="task-list"></div>
+        </div>
+    </div>
+
+    <audio id="notificationSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
