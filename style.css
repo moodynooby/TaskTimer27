@@ -217,13 +217,13 @@ header h1 {
 
 .control-btn {
     width: 48px;
-    height: 48px;
+    height: 55px;
     border-radius: 50%;
     border: none;
     background: var(--card-bg);
     box-shadow: 0 2px 4px var(--shadow-color);
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
