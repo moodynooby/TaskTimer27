@@ -1,84 +1,70 @@
-// Create a new file for the Pomodoro timer
-class PomodoroTimer {
-    constructor() {
-        this.settings = {
-            workDuration: 50 * 60,
-            breakDuration: 10 * 60,
-            isWorkTime: true,
-            remainingTime: 50 * 60
-        };
-        
-        this.isRunning = false;
-        this.timerInterval = null;
-        this.elements = {
-            display: document.querySelector('.time'),
-            mode: document.querySelector('.timer-mode'),
-            progressRing: document.querySelector('.progress-ring-circle'),
-            notification: document.getElementById('notificationSound')
-        };
+class PomodoroTimer extends Timer {
+    constructor(displayElement, modeElement, progressElement) {
+        super(displayElement);
+        this.modeElement = modeElement;
+        this.progressElement = progressElement;
+        this.workDuration = 50 * 60;
+        this.breakDuration = 10 * 60;
+        this.isWorkTime = true;
+        this.remainingTime = this.workDuration;
+        this.notificationSound = document.getElementById('notificationSound');
+        this.notificationSound.volume = 1.0;
     }
 
     start() {
         if (!this.isRunning) {
             this.isRunning = true;
-            this.timerInterval = setInterval(() => this.updateTimer(), 1000);
+            this.interval = setInterval(() => this.updateTimer(), 1000);
         }
     }
 
-    pause() {
-        this.isRunning = false;
-        clearInterval(this.timerInterval);
+    updateTimer() {
+        this.remainingTime--;
+        
+        if (this.remainingTime <= 0) {
+            this.pause();
+            this.notificationSound.play().catch(e => console.log('Audio playback failed:', e));
+            this.isWorkTime = !this.isWorkTime;
+            this.remainingTime = this.isWorkTime ? this.workDuration : this.breakDuration;
+            
+            // Update UI to show session ended
+            const sessionType = this.isWorkTime ? 'Work' : 'Break';
+            this.modeElement.textContent = `${sessionType} Session - Click play to start`;
+        }
+        
+        this.updateDisplay();
     }
 
     reset() {
         this.pause();
-        this.settings.isWorkTime = true;
-        this.settings.remainingTime = this.settings.workDuration;
-        this.updateDisplay();
-    }
-
-    updateTimer() {
-        this.settings.remainingTime--;
-        
-        if (this.settings.remainingTime <= 0) {
-            this.elements.notification.play().catch(e => console.log('Audio playback failed:', e));
-            this.settings.isWorkTime = !this.settings.isWorkTime;
-            this.settings.remainingTime = this.settings.isWorkTime ? 
-                this.settings.workDuration : 
-                this.settings.breakDuration;
-        }
-        
+        this.isWorkTime = true;
+        this.remainingTime = this.workDuration;
         this.updateDisplay();
     }
 
     updateDisplay() {
-        const timeStr = this.formatTime(this.settings.remainingTime);
-        this.elements.display.textContent = timeStr;
-        this.elements.mode.textContent = `${this.settings.isWorkTime ? 'Work' : 'Break'} Time`;
-        
-        const totalTime = this.settings.isWorkTime ? 
-            this.settings.workDuration : 
-            this.settings.breakDuration;
-        const progress = 1 - (this.settings.remainingTime / totalTime);
-        const circumference = 2 * Math.PI * 90;
-        this.elements.progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
-        this.elements.progressRing.style.strokeDashoffset = circumference * (1 - progress);
-    }
-
-    formatTime(seconds) {
-        const hrs = Math.floor(seconds / 3600);
-        const mins = Math.floor((seconds % 3600) / 60);
-        const secs = seconds % 60;
-        return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        if (this.displayElement) {
+            this.displayElement.textContent = this.formatTime(this.remainingTime);
+        }
+        if (this.modeElement) {
+            this.modeElement.textContent = `${this.isWorkTime ? 'Work' : 'Break'} Time`;
+        }
+        if (this.progressElement) {
+            const totalTime = this.isWorkTime ? this.workDuration : this.breakDuration;
+            const progress = 1 - (this.remainingTime / totalTime);
+            const circumference = 2 * Math.PI * 90;
+            this.progressElement.style.strokeDasharray = `${circumference} ${circumference}`;
+            this.progressElement.style.strokeDashoffset = circumference * (1 - progress);
+        }
     }
 
     updateSettings(workDuration, breakDuration) {
-        this.settings.workDuration = workDuration * 60;
-        this.settings.breakDuration = breakDuration * 60;
-        if (this.settings.isWorkTime) {
-            this.settings.remainingTime = this.settings.workDuration;
+        this.workDuration = workDuration * 60;
+        this.breakDuration = breakDuration * 60;
+        if (this.isWorkTime) {
+            this.remainingTime = this.workDuration;
         } else {
-            this.settings.remainingTime = this.settings.breakDuration;
+            this.remainingTime = this.breakDuration;
         }
         this.updateDisplay();
     }

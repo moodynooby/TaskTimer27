@@ -1,17 +1,15 @@
-// Create a new file for the Timer class
 class Timer {
-    constructor(displayElement, mode = 'stopwatch') {
-        this.currentMode = mode;
+    constructor(displayElement) {
+        this.displayElement = displayElement;
         this.isRunning = false;
         this.time = 0;
-        this.displayElement = displayElement;
-        this.timerInterval = null;
+        this.interval = null;
     }
 
     start() {
         if (!this.isRunning) {
             this.isRunning = true;
-            this.timerInterval = setInterval(() => {
+            this.interval = setInterval(() => {
                 this.time++;
                 this.updateDisplay();
             }, 1000);
@@ -19,18 +17,16 @@ class Timer {
     }
 
     pause() {
-        this.isRunning = false;
-        clearInterval(this.timerInterval);
+        if (this.isRunning) {
+            this.isRunning = false;
+            clearInterval(this.interval);
+        }
     }
 
     reset() {
         this.pause();
         this.time = 0;
         this.updateDisplay();
-    }
-
-    getTime() {
-        return this.time;
     }
 
     formatTime(seconds) {
