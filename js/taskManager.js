@@ -136,16 +136,13 @@ class TaskManager {
         if (timer.isRunning) {
             timer.pause();
             this.elements.startBtn.innerHTML = `
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="5 3 19 12 5 21 5 3"/>
-                </svg>`;
+                                       <img class=play-icon src="https://www.svgrepo.com/download/526104/play-circle.svg">
+`;
         } else {
             timer.start();
             this.elements.startBtn.innerHTML = `
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="6" y="4" width="4" height="16"/>
-                    <rect x="14" y="4" width="4" height="16"/>
-                </svg>`;
+                                       <img class=play-icon src="https://www.svgrepo.com/download/526076/pause-circle.svg">
+`;
         }
     }
 
@@ -153,18 +150,15 @@ class TaskManager {
         const timer = this.currentMode === 'stopwatch' ? this.currentTimer : this.pomodoroTimer;
         timer.reset();
         this.elements.startBtn.innerHTML = `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="5 3 19 12 5 21 5 3"/>
-            </svg>`;
+                                              <img class=play-icon src="https://www.svgrepo.com/download/526104/play-circle.svg">
+`;
     }
 
     toggleMode() {
         const timer = this.currentMode === 'stopwatch' ? this.currentTimer : this.pomodoroTimer;
         timer.pause();
         this.elements.startBtn.innerHTML = `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="5 3 19 12 5 21 5 3"/>
-            </svg>`;
+                                   <img class=play-icon src="https://www.svgrepo.com/download/526104/play-circle.svg">`;
         
         if (this.currentMode === 'stopwatch') {
             this.currentMode = 'pomodoro';
@@ -217,12 +211,12 @@ class TaskManager {
                 <div class="task-header">
                     <div class="task-title">
                         <button onclick="taskManager.toggleTaskComplete('${task.id}')">
-                            ${task.completed ? '✅' : '⭕'}
+                            ${task.completed ? '<img class="themes-icon" src="https://www.svgrepo.com/download/525259/broom.svg">' : '<img src="https://www.svgrepo.com/download/525281/close-circle.svg " class="themes-icon">'}
                         </button>
                         ${task.title}
                     </div>
                     <button class="delete-btn" onclick="taskManager.deleteTask('${task.id}')">
-                        🗑️
+                        <img src="https://www.svgrepo.com/download/525280/clipboard-remove.svg" alt="remove" class="themes-icon">
                     </button>
                 </div>
             </div>
