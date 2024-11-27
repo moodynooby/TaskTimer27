@@ -113,21 +113,37 @@
 
                         <button type="button" class="button is-primary" onclick="saveInputs()">Generate</button>
                         <button type="button" class="button is-danger" onclick="clearAll()">Clear All</button>
+                        <button class="button is-info" id="showTableBtn">Show History</button>
+
                     </form>
-                    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                        <thead>
-                        <tr>
-                            <th>Starting Value</th>
-                            <th>Ending Value</th>
-                            <th>Random Number</th>
-                        </tr>
-                        </thead>
-                        <tbody id="resultsTable">
-                        </tbody>
-                    </table>
-                </div>
-                <script>
-                    function saveInputs() {
+                    <!-- Replace the existing dropdown with this code -->
+                    <div class="table-container" id="tableContainer" style="display: none;">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead>
+                            <tr>
+                                <th>Starting Value</th>
+                                <th>Ending Value</th>
+                                <th>Random Number</th>
+                            </tr>
+                            </thead>
+                            <tbody id="resultsTable">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <script>
+                        document.getElementById('showTableBtn').addEventListener('click', function() {
+                            const tableContainer = document.getElementById('tableContainer');
+                            if (tableContainer.style.display === 'none') {
+                                tableContainer.style.display = 'block';
+                                this.textContent = 'Hide History';
+                            } else {
+                                tableContainer.style.display = 'none';
+                                this.textContent = 'Show History';
+                            }
+                        });
+
+                        function saveInputs() {
                         const startValue = parseInt(document.getElementById('startInput').value);
                         const endValue = parseInt(document.getElementById('endInput').value);
                         const randomNumber = Math.floor(Math.random() * (endValue - startValue + 1)) + startValue;
