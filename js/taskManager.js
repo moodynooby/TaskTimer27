@@ -136,12 +136,12 @@ class TaskManager {
         if (timer.isRunning) {
             timer.pause();
             this.elements.startBtn.innerHTML = `
-                                       <img class=play-icon src="https://www.svgrepo.com/download/526104/play-circle.svg">
+                                       <img class=play-icon src="https://www.svgrepo.com/download/469502/play.svg">
 `;
         } else {
             timer.start();
             this.elements.startBtn.innerHTML = `
-                                       <img class=play-icon src="https://www.svgrepo.com/download/526076/pause-circle.svg">
+                                       <img class=play-icon src="https://www.svgrepo.com/download/469441/pause-circle.svg">
 `;
         }
     }
@@ -150,7 +150,7 @@ class TaskManager {
         const timer = this.currentMode === 'stopwatch' ? this.currentTimer : this.pomodoroTimer;
         timer.reset();
         this.elements.startBtn.innerHTML = `
-                                              <img class=play-icon src="https://www.svgrepo.com/download/526104/play-circle.svg">
+                                              <img class=play-icon src="https://www.svgrepo.com/download/469502/play.svg">
 `;
     }
 
@@ -158,7 +158,7 @@ class TaskManager {
         const timer = this.currentMode === 'stopwatch' ? this.currentTimer : this.pomodoroTimer;
         timer.pause();
         this.elements.startBtn.innerHTML = `
-                                   <img class=play-icon src="https://www.svgrepo.com/download/526104/play-circle.svg">`;
+                                   <img class=play-icon src="https://www.svgrepo.com/download/469502/play.svg">`;
         
         if (this.currentMode === 'stopwatch') {
             this.currentMode = 'pomodoro';
@@ -211,12 +211,12 @@ class TaskManager {
                 <div class="task-header">
                     <div class="task-title">
                         <button onclick="taskManager.toggleTaskComplete('${task.id}')">
-                            ${task.completed ? '<img class="themes-icon" src="https://www.svgrepo.com/download/525259/broom.svg">' : '<img src="https://www.svgrepo.com/download/525281/close-circle.svg " class="themes-icon">'}
+                            ${task.completed ? '<img class="themes-icon" src="https://www.svgrepo.com/download/468260/check-circle.svg">' : '<img src="https://www.svgrepo.com/download/468388/cross-circle.svg " class="themes-icon">'}
                         </button>
                         ${task.title}
                     </div>
                     <button class="delete-btn" onclick="taskManager.deleteTask('${task.id}')">
-                        <img src="https://www.svgrepo.com/download/525280/clipboard-remove.svg" alt="remove" class="themes-icon">
+                        <img src="https://www.svgrepo.com/download/468537/delete-file.svg" alt="remove" class="themes-icon">
                     </button>
                 </div>
             </div>

@@ -12,11 +12,11 @@ function updateThemeIcon(theme) {
     const themeToggle = document.querySelector('.theme-toggle');
     if (theme === 'light') {
         themeToggle.innerHTML = `
-                        <img class="themes-icon"  src="https://www.svgrepo.com/download/513568/globe-2.svg">
+                        <img class="themes-icon"  src="https://www.svgrepo.com/download/467152/moon-alt-1.svg">
 `;
     } else {
         themeToggle.innerHTML = `
-            <img class="themes-icon"  src="https://www.svgrepo.com/download/513508/sun.svg">
+            <img class="themes-icon"  src="https://www.svgrepo.com/download/467329/sunlight.svg">
             `;
     }
 }
