@@ -22,7 +22,7 @@
 }
 
 :root {
-    --primary-color: #4f46e5;
+    --primary-color: #000000;
     --bg-color: #f3f4f6;
     --text-color: #1f2937;
     --border-color: #e5e7eb;
@@ -33,7 +33,7 @@
 }
 
 [data-theme="dark"] {
-    --primary-color: #818cf8;
+    --primary-color: #2ca9bc;
     --bg-color: #1f2937;
     --text-color: #f3f4f6;
     --border-color: #374151;
