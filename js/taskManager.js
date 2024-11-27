@@ -238,4 +238,6 @@ class TaskManager {
         
         this.pomodoroTimer.updateSettings(workDuration, breakDuration);
     }
+
 }
+
