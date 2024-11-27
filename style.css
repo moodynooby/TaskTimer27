@@ -1,3 +1,26 @@
+.app-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.columns {
+    display: flex;
+    gap: 20px;
+    margin: 0;
+}
+
+.column {
+    padding: 20px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+}
+
+.utility {
+    height: 100%;
+}
+
 :root {
     --primary-color: #4f46e5;
     --bg-color: #f3f4f6;
