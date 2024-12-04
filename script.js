@@ -21,17 +21,3 @@ function updateThemeIcon(theme) {
     }
 }
 
-    document.querySelector('md-tabs').addEventListener('click', (event) => {
-    const tabs = document.querySelectorAll('md-primary-tab');
-    const panels = document.querySelectorAll('.tab-panel');
-
-    // Get the index of the clicked tab
-    const activeIndex = [...tabs].indexOf(event.target);
-
-    // Update active tab and panel
-    tabs.forEach((tab, index) => {
-    tab.setAttribute('selected', index === activeIndex);
-    panels[index].style.display = index === activeIndex ? 'block' : 'none';
-});
-});
-
