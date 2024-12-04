@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,18 +8,43 @@
     <link rel="icon" href="/public/tasktimer-logo.png" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+
 </head>
-<body>
+<body bgcolor="theme.palette.primary.main">
+<div class="tabs-container">
+    <md-tabs active-index="0">
+        <md-primary-tab> <md-icon slot="icon"><img src="dist/assets/task.svg"> </md-icon>Timer</md-primary-tab>
+        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg"></md-icon>  Random Generator</md-primary-tab>
+        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/coin.svg"></md-icon> Coin Toss</md-primary-tab>
+    </md-tabs>
     <div class="app-container">
+
+        <div class="tab-panels">
         <div class="col">
-        <div class="header-controls">
-            <button class="theme-toggle">
-                <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-            </button>
-            <button class="settings-toggle">
-            <img src="https://www.svgrepo.com/download/469754/settings-alt.svg" class="themes-icon">            </button>
+            <div class="tab-panel" id="timerPanel">
+                <div class="timer-container">
+
+                <div class="header-controls">
+            <md-filled-tonal-icon-button class="theme-toggle" ><md-icon></md-icon>
+            </md-filled-tonal-icon-button>
+
+            <md-filled-tonal-icon-button class="settings-toggle" ><md-icon><img src="dist/assets/Setting.svg" alt="Settings"></md-icon>
+            </md-filled-tonal-icon-button>
         </div>
 
         <div class="settings-panel">
@@ -50,13 +75,9 @@
 
             <div class="add-task">
                 <input type="text" id="taskInput" placeholder="Add a new task...">
-                <button id="addTaskBtn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="5" x2="12" y2="19"/>
-                        <line x1="5" y1="12" x2="19" y2="12"/>
-                    </svg>
+                <md-filled-button id="addTaskBtn">
                     Add Task
-                </button>
+                </md-filled-button>
             </div>
 
             <div class="timer-container">
@@ -80,23 +101,27 @@
 
                 <div class="timer-controls">
                     <button id="startBtn" class="control-btn">
-                       <img class=play-icon src="https://www.svgrepo.com/download/469502/play.svg">
+                       <img class=play-icon src="/dist/assets/play.svg">
                     </button>
                     <button id="resetBtn" class="control-btn">
-                        <img class=play-icon src="https://www.svgrepo.com/download/468537/delete-file.svg">
+                        <img class=play-icon src="/dist/assets/Stop.svg">
 
                     </button>
-                    <button id="modeToggleBtn" class="mode-toggle">Switch to Pomodoro</button>
+                    <md-filled-button id="modeToggleBtn" class="mode-toggle">Switch to Pomodoro</md-filled-button>
                 </div>
             </div>
 
             <div id="taskList" class="task-list"></div>
         </div>
-            <div class="utlity">
-                <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold ">Random Number Generator</h1>
+                </div>
+        </div>
+            <div class="tab-panel" id="randomGeneratorPanel" style="display: none;">
+                <!-- Random Number Generator Section -->
+                <div >
+                    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold ">Random Number Generator</h1>
                 <div>
-                    <form >
-                        <div class="field">
+                    <form id="randomNumberForm" onsubmit="event.preventDefault();">
+                    <div class="field">
                             <label class="label">Starting</label>
                             <div class="control">
                                 <input class="input" id="startInput">
@@ -109,13 +134,13 @@
                                 <input class="input" id="endInput">
                             </div>
                         </div>
+                        <md-filled-button  type="button" onclick="saveInputs()">Generate</md-filled-button>
+                        <md-elevated-button onclick="clearAll()">Clear All</md-elevated-button>
+                        <md-filled-tonal-button id="showTableBtn">Show Result</md-filled-tonal-button>
 
-                        <button type="button" class="button is-primary" onclick="saveInputs()">Generate</button>
-                        <button type="button" class="button is-danger" onclick="clearAll()">Clear All</button>
-                        <button type="button" class="button is-info" id="showTableBtn">Show Results</button>
 
                     </form>
-                    <!-- Replace the existing dropdown with this code -->
+
                     <div class="table-container" id="tableContainer" style="display: none;">
                         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                             <thead>
@@ -162,6 +187,7 @@
                         randomCell.textContent = randomNumber;
                         // Save data to cookies
                         saveDataToCookies(startValue, endValue, randomNumber);
+
                     }
 
                     function saveDataToCookies(start, end, random) {
@@ -206,10 +232,12 @@
                 </script>
                 </script>
 
-            </div>
-
-            <div>
-                <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold">Coin Toss</h1>
+                </div>
+                </div>
+                <div class="tab-panel" id="coinTossPanel" style="display: none;">
+                    <!-- Coin Toss Section -->
+                    <div>
+                        <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold">Coin Toss</h1>
                 <div id="coin">
                     <img src="https://www.svgrepo.com/download/468102/bitcoin-circle.svg"
                          alt="Coin" width="150" height="150">
@@ -261,7 +289,69 @@
     <script src="js/taskManager.js"></script>
     <script src="script.js"></script>
         </div>
+<script>// Add this to the existing tab click handler in your HTML
+    document.querySelector('md-tabs').addEventListener('click', (event) => {
+    const tabs = document.querySelectorAll('md-tab');
+    const panels = document.querySelectorAll('.tab-panel');
 
+    const activeIndex = [...tabs].indexOf(event.target);
+
+    tabs.forEach((tab, index) => {
+    tab.setAttribute('selected', index === activeIndex);
+    panels[index].style.display = index === activeIndex ? 'block' : 'none';
+
+    // Initialize coin toss when switching to that tab
+    if (index === 2 && index === activeIndex) {
+    initializeCoinToss();
+    }
+    });
+    });
+
+    function initializeCoinToss() {
+    const coin = document.getElementById('coin');
+    const result = document.getElementById('coinResult');
+    const tossButton = document.getElementById('tossButton');
+    const historyButton = document.getElementById('showCoinHistory');
+    const historyTable = document.getElementById('coinHistoryTable');
+
+    // Remove any existing event listeners
+    tossButton.replaceWith(tossButton.cloneNode(true));
+    historyButton.replaceWith(historyButton.cloneNode(true));
+
+    // Get fresh references after cloning
+    const newTossButton = document.getElementById('tossButton');
+    const newHistoryButton = document.getElementById('showCoinHistory');
+
+    newTossButton.addEventListener('click', () => {
+    coin.style.pointerEvents = 'none';
+    newTossButton.disabled = true;
+
+    coin.classList.add('flipping');
+
+    setTimeout(() => {
+    const outcome = Math.random() < 0.5 ? 'Heads' : 'Tails';
+    result.textContent = `It's ${outcome}!`;
+    saveCoinToss(outcome);
+
+    coin.classList.remove('flipping');
+    coin.style.pointerEvents = 'auto';
+    newTossButton.disabled = false;
+    }, 2000);
+    });
+
+    newHistoryButton.addEventListener('click', () => {
+    if (historyTable.style.display === 'none') {
+    historyTable.style.display = 'block';
+    newHistoryButton.textContent = 'Hide History';
+    } else {
+    historyTable.style.display = 'none';
+    newHistoryButton.textContent = 'Show History';
+    }
+    });
+    }
+</script>
         </div>
-</div></body>
+
+</div>
+   </body>
 </html>
