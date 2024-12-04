@@ -35,17 +35,17 @@
     <div class="app-container">
 
         <div class="tab-panels">
-        <div class="col">
+            <div class="header-controls">
+                <md-filled-tonal-icon-button class="theme-toggle" ><md-icon></md-icon>
+                </md-filled-tonal-icon-button>
+
+                <md-filled-tonal-icon-button class="settings-toggle" ><md-icon><img src="dist/assets/Setting.svg" alt="Settings"></md-icon>
+                </md-filled-tonal-icon-button>
+            </div>
+
             <div class="tab-panel" id="timerPanel">
                 <div class="timer-container">
 
-                <div class="header-controls">
-            <md-filled-tonal-icon-button class="theme-toggle" ><md-icon></md-icon>
-            </md-filled-tonal-icon-button>
-
-            <md-filled-tonal-icon-button class="settings-toggle" ><md-icon><img src="dist/assets/Setting.svg" alt="Settings"></md-icon>
-            </md-filled-tonal-icon-button>
-        </div>
 
         <div class="settings-panel">
             <h3>   Settings</h3>
@@ -117,36 +117,180 @@
         </div>
             <div class="tab-panel" id="randomGeneratorPanel" style="display: none;">
                 <!-- Random Number Generator Section -->
-            </div>
+                <div >
+                    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold ">Random Number Generator</h1>
+                <div>
+                    <form id="randomNumberForm" onsubmit="event.preventDefault();">
+                    <div class="field">
+                            <label class="label">Starting</label>
+                            <div class="control">
+                                <input class="input" id="startInput">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Ending</label>
+                            <div class="control">
+                                <input class="input" id="endInput">
+                            </div>
+                        </div>
+                        <md-filled-button  type="button" onclick="saveInputs()">Generate</md-filled-button>
+                        <md-elevated-button onclick="clearAll()">Clear All</md-elevated-button>
+                        <md-filled-tonal-button id="showTableBtn">Show Result</md-filled-tonal-button>
+
+
+                    </form>
+
+                    <div class="table-container" id="tableContainer" style="display: none;">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead>
+                            <tr>
+                                <th>Starting Value</th>
+                                <th>Ending Value</th>
+                                <th>Random Number</th>
+                            </tr>
+                            </thead>
+                            <tbody id="resultsTable">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <script>
+
+                        function saveInputs() {
+                        const startValue = parseInt(document.getElementById('startInput').value);
+                        const endValue = parseInt(document.getElementById('endInput').value);
+                        const randomNumber = Math.floor(Math.random() * (endValue - startValue + 1)) + startValue;
+
+                        // Get the table body element
+                        const tableBody = document.getElementById('resultsTable');
+
+
+                        // Remove 'is-selected' from any previously selected row
+                        const selectedRow = tableBody.querySelector('.is-selected');
+                        if (selectedRow) {
+                            selectedRow.classList.remove('is-selected');
+                        }
+
+                        // Create a new table row
+                        const newRow = tableBody.insertRow();
+                        newRow.classList.add('is-selected'); // Add the 'is-selected' class
+
+                        // Create table cells for each value
+                        const startCell = newRow.insertCell();
+                        const endCell = newRow.insertCell();
+                        const randomCell = newRow.insertCell();
+
+                        // Set the content of the cells
+                        startCell.textContent = startValue;
+                        endCell.textContent = endValue;
+                        randomCell.textContent = randomNumber;
+                        // Save data to cookies
+                        saveDataToCookies(startValue, endValue, randomNumber);
+
+                    }
+
+                    function saveDataToCookies(start, end, random) {
+                        // Get existing cookie data or initialize an empty array
+                        let storedData = getCookieData();
+
+                        // Add new data as an object
+                        storedData.push({ start, end, random });
+
+                        // Convert data to JSON string and store in cookie
+                        document.cookie = `randomData=${JSON.stringify(storedData)}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
+                    }
+
+                    function getCookieData() {
+                        // Get the cookie value
+                        const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)randomData\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+                        // Parse and return the data, or an empty array if no cookie exists
+                        return cookieValue ? JSON.parse(cookieValue) : [];
+                    }
+
+                    // Load data from cookies on page load (optional)
+                    window.onload = () => {
+                        const storedData = getCookieData();
+                        const tableBody = document.getElementById('resultsTable');
+
+                        storedData.forEach(data => {
+                            const newRow = tableBody.insertRow();
+                            newRow.insertCell().textContent = data.start;
+                            newRow.insertCell().textContent = data.end;
+                            newRow.insertCell().textContent = data.random;
+                        });
+                    };
+                    function clearAll() {
+                        // Clear the cookie
+                        document.cookie = "randomData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+                        // Clear the table
+                        const tableBody = document.getElementById('resultsTable');
+                        tableBody.innerHTML = ''; // This removes all rows from the table body
+                    }
+                </script>
+                </script>
+
+                </div>
+                </div>
                 <div class="tab-panel" id="coinTossPanel" style="display: none;">
                     <!-- Coin Toss Section -->
+                    <div>
+                        <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold">Coin Toss</h1>
+                <div id="coin">
+                    <img src="https://www.svgrepo.com/download/468102/bitcoin-circle.svg"
+                         alt="Coin" width="150" height="150">
+                </div>
+                <p id="result">Click the button to toss the coin!</p>
+                <button onclick="tossCoin()" class="button is-black">Toss Coin</button>
 
+                <script>
+                    function tossCoin() {
+                        const coin = document.getElementById('coin');
+                        const result = document.getElementById('result');
 
+                        // Remove flip class to reset animation
+                        coin.classList.remove('flip');
 
-                 </div>
-<script>
-    document.querySelector('md-primary-tabs').addEventListener('click', (event) => {
-    const tabs = document.querySelectorAll('md-tab');
-    const panels = document.querySelectorAll('.tab-panel');
+                        // Trigger reflow to restart animation
+                        void coin.offsetWidth;
 
-    // Get the index of the clicked tab
-    const activeIndex = [...tabs].indexOf(event.target);
+                        // Add flip class
+                        coin.classList.add('flip');
 
-    // Update active tab and panel
-    tabs.forEach((tab, index) => {
-    tab.setAttribute('selected', index === activeIndex);
-    panels[index].style.display = index === activeIndex ? 'block' : 'none';
-});
-});
-</script>
+                        // Generate random result
+                        const random = Math.random();
+
+                        // Show result after animation
+                        setTimeout(() => {
+                            const outcome = random < 0.5 ? 'Heads' : 'Tails';
+                            result.textContent = `It's ${outcome}!`;
+                        }, 1000);
+                    }
+
+                    document.getElementById('showTableBtn').addEventListener('click', function() {
+                        const tableContainer = document.getElementById('tableContainer');
+                        if (tableContainer.style.display === 'none') {
+                            tableContainer.style.display = 'block';
+                            this.textContent = 'Hide History';
+                        } else {
+                            tableContainer.style.display = 'none';
+                            this.textContent = 'Show History';
+                        }
+                    });
+
+                </script>
+            </div>
+
+    <audio id="notificationSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" volume="1.0"></audio>
+    <script src="js/timer.js"></script>
+    <script src="js/pomodoro.js"></script>
+    <script src="js/taskManager.js"></script>
+    <script src="script.js"></script>
         </div>
-        <audio id="notificationSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" volume="1.0"></audio>
-        <script src="js/timer.js"></script>
-        <script src="js/pomodoro.js"></script>
-        <script src="js/taskManager.js"></script>
-        <script src="script.js"></script>
-</div>
-    </div>
-</div>
-   </body>
+            </div>
+
+        </div>
+</body>
 </html>
