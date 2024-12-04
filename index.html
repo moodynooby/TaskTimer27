@@ -35,6 +35,8 @@
     <md-tabs active-index="0">
         <md-primary-tab> <md-icon slot="icon"><img src="dist/assets/task.svg"> </md-icon>Tasks Timer</md-primary-tab>
         <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg"></md-icon>  Random Generator</md-primary-tab>
+        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg"></md-icon>  Coin Toss</md-primary-tab>
+
     </md-tabs>
     <div class="app-container">
 
@@ -163,6 +165,41 @@
 
             </div>
 
+        </div>
+        <div class="tab-panel" id="CoinFlipperPanel" style="display: none;">
+            <div class="coin-flipper">    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold">Coin Toss</h1>
+                <div id="coin">
+                    <img src="/dist/assets/coin.svg"
+                         alt="Coin" width="150" height="150">
+                </div>
+                <p id="result" style="padding: 1rem">Click the button to toss the coin!</p>
+                <md-filled-button onclick="tossCoin()" class="button is-black">Toss Coin</md-filled-button>
+
+                <script>
+                    function tossCoin() {
+                        const coin = document.getElementById('coin');
+                        const result = document.getElementById('result');
+
+                        // Remove flip class to reset animation
+                        coin.classList.remove('flip');
+
+                        // Trigger reflow to restart animation
+                        void coin.offsetWidth;
+
+                        // Add flip class
+                        coin.classList.add('flip');
+
+                        // Generate random result
+                        const random = Math.random();
+
+                        // Show result after animation
+                        setTimeout(() => {
+                            const outcome = random < 0.5 ? 'Heads' : 'Tails';
+                            result.textContent = `It's ${outcome}!`;
+                        }, 1000);
+                    }
+                </script>
+            </div>
         </div>
         <script>
             document.getElementById('showTableBtn').addEventListener('click', function() {
