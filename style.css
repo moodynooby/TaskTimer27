@@ -3,7 +3,7 @@
     --bg-color: #f3f4f6;
     --text-color: #1f2937;
     --border-color: #e5e7eb;
-    --card-bg: #ffffff;
+    --card-bg: #f3f4f6;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --select-bg: #ffffff;
     --select-border: #e5e7eb;
@@ -14,7 +14,7 @@
     --bg-color: #191e29;
     --text-color: #f3f4f6;
     --border-color: #374151;
-    --card-bg: #111827;
+    --card-bg: #191e29;
     --shadow-color: rgba(0, 0, 0, 0.3);
     --select-bg: #111827;
     --select-border: #374151;
@@ -36,31 +36,43 @@ body {
 }
 
 .header-controls {
-    position: fixed;
+    position: sticky;
     top: 1rem;
     right: 1rem;
     display: flex;
     gap: 0.5rem;
 }
 
-.theme-toggle, .settings-toggle {
-    width: 3rem;
+.theme-toggle{
+    width: 4rem;
     height: 3rem;
     cursor: pointer;
+    top: 0.2rem;
     display: flex;
-    align-items: center;
+    align-items: right;
     justify-content: center;
     font-size: 1rem;
     transition: all 0.3s;
 }
 
+settings-toggle {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: right;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
 .theme-toggle:hover, .settings-toggle:hover {
     transform: scale(1.1);
 }
 
 .settings-panel {
-    position: fixed;
+    position: sticky;
     top: 5rem;
+    width: 300px;
     right: 1rem;
     background: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -364,7 +376,7 @@ md-tabs {
     height: 150px;
     margin: 20px;
     border-radius: 50%;
-    background: #gold;
+    background: gold;
     cursor: pointer;
     transition: transform 0.3s;
 }
@@ -375,3 +387,4 @@ md-tabs {
     0% { transform: rotateY(0); }
     100% { transform: rotateY(720deg); }
 }
+

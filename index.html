@@ -35,39 +35,43 @@
     <md-tabs active-index="0">
         <md-primary-tab> <md-icon slot="icon"><img src="dist/assets/task.svg"> </md-icon>Tasks Timer</md-primary-tab>
         <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg"></md-icon>  Random Generator</md-primary-tab>
-        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg"></md-icon>  Coin Toss</md-primary-tab>
+        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Coin2.svg"></md-icon>  Coin Toss</md-primary-tab>
+        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/timer.svg"></md-icon>  Timer</md-primary-tab>
+
 
     </md-tabs>
-    <div class="app-container">
+    <div class="tab-panels">
+        <div class="header-controls">
+            <md-filled-button class="theme-toggle">
+                <md-icon slot="icon" class="theme-toggle"></md-icon>
+            </md-filled-button>
+            <md-fab  class="settings-toggle">
+                <md-icon slot="icon"><img src="dist/assets/Setting.svg" alt="Settings"></md-icon>
+            </md-fab>
 
-        <div class="tab-panels">
-            <div class="header-controls">
-                <md-filled-tonal-icon-button class="theme-toggle" ><md-icon></md-icon>
-                </md-filled-tonal-icon-button>
-
-                <md-filled-tonal-icon-button class="settings-toggle" ><md-icon><img src="dist/assets/Setting.svg" alt="Settings"></md-icon>
-                </md-filled-tonal-icon-button>
-            </div>
-
-            <div class="tab-panel" id="timerPanel">
-                <div class="timer-container">
-
-
-        <div class="settings-panel">
-            <h3>   Settings</h3>
-            <div class="setting-group">
-                <label>
-                    Work Duration (min)
-                    <input type="number" id="workDuration" value="50" min="1" max="120">
-                </label>
-                <label>
-                    Break Duration (min)
-                    <input type="number" id="breakDuration" value="10" min="1" max="30">
-                </label>
-            </div>
         </div>
 
-        <div class="container">
+        <div class="tab-panel" id="timerPanel">
+            <div class="timer-container">
+
+                <div class="settings-panel">
+                    <h3>   Settings</h3>
+                    <div class="setting-group">
+                        <label>
+                            Work Duration (min)
+                            <input type="number" id="workDuration" value="50" min="1" max="120">
+                        </label>
+                        <label>
+                            Break Duration (min)
+                            <input type="number" id="breakDuration" value="10" min="1" max="30">
+                        </label>
+                    </div>
+                </div>
+            <div class="app-container">
+
+
+
+
             <header>
                 <h1>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="timer-icon">
@@ -201,6 +205,7 @@
                 </script>
             </div>
         </div>
+WIP            </div>
         <script>
             document.getElementById('showTableBtn').addEventListener('click', function() {
                 const tableContainer = document.getElementById('tableContainer');
