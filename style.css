@@ -54,7 +54,6 @@ body {
     cursor: pointer;
     top: 0.2rem;
     display: flex;
-    align-items: right;
     justify-content: center;
     font-size: 1rem;
     transition: all 0.3s;
@@ -65,7 +64,6 @@ settings-toggle {
     height: 3rem;
     cursor: pointer;
     display: flex;
-    align-items: right;
     justify-content: center;
     font-size: 1rem;
     transition: all 0.3s;
@@ -129,14 +127,7 @@ header h1 {
     margin-bottom: 2rem;
 }
 
-.add-task input {
-    flex: 1;
-    padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    background: var(--card-bg);
-    color: var(--text-color);
-}
+
 
 .add-task button {
     padding: 0.75rem 1.5rem;
@@ -402,6 +393,10 @@ md-tabs {
     font-size: 1rem;
 }
 
-.md-outlined-select {
-
+.RNDinput {
+    width: 75%;
+    padding: 0.75rem;
+    border: 1px solid var(--select-border);
+    border-radius: 0.2rem;
+    font-size: 1rem;
 }
