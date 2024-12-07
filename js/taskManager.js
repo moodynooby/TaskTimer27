@@ -90,13 +90,13 @@ class TaskManager {
     // Rest of the TaskManager class implementation remains the same
     addTask() {
         const title = this.elements.taskInput.value.trim();
-        const description = "Enter task description (optional):" // Add description prompt
-
+        const description = document.getElementById('descriptionInput').value.trim(); // Get description
         if (!title) return;
 
         const task = {
             id: Date.now().toString(),
             title,
+            description: description || "", // Store description, or empty string if not provided
             completed: false,
             elapsedTime: 0
         };
@@ -209,22 +209,29 @@ class TaskManager {
 
     renderTasks() {
         this.elements.taskList.innerHTML = this.tasks.map(task => `
-            <div class="task-item ${task.completed ? 'completed' : ''} ${task.id === this.selectedTaskId ? 'selected' : ''}">
-                <div class="task-header">
-                    <div class="task-title">
-                        <button onclick="taskManager.toggleTaskComplete('${task.id}')">
-                            ${task.completed ? '<img class="themes-icon" src="/dist/assets/Check.svg">' : '<img src="/dist/assets/cancel.svg" alt="remove" class="themes-icon">'}
-                        </button>
-                        ${task.title}
-                    </div>
-                    <button class="delete-btn" onclick="taskManager.deleteTask('${task.id}')">
-                        <img src="/dist/assets/Delete.svg" alt="remove" class="themes-icon">
-                    </button>
+        <div class="task-item ${task.completed ? 'completed' : ''} ${task.id === this.selectedTaskId ? 'selected' : ''}">
+            <div class="task-header">
+                <div class="task-title">
+                     </div>
+                <div class="task-body">
+                    <p class="task-description">${task.description}</p> </div>
                 </div>
-            </div>
-        `).join('');
-    }
+                   <div class="task-title">
+                       <button onclick="taskManager.toggleTaskComplete('${task.id}')">
+                           ${task.completed ? '<img class="themes-icon" src="/dist/assets/Check.svg">' : '<img src="/dist/assets/cancel.svg" alt="remove" class="themes-icon">'}
+                       </button>
+                       <button class="delete-btn" onclick="taskManager.deleteTask('${task.id}')">
+                           <img src="/dist/assets/Delete.svg" alt="remove" class="themes-icon">
+                       </button>
 
+
+                       ${task.title}
+
+                   </div>
+
+            </div>
+    `).join('');
+    }
     saveTasks() {
         localStorage.setItem('tasks', JSON.stringify(this.tasks));
     }

@@ -8,20 +8,18 @@
     --select-bg: #ffffff;
     --select-border: #e5e7eb;
     --md-sys-color-primary: #294a9d;
-    --md-ripple-hover-color: var(--md-sys-color-primary);
-    --md-ripple-pressed-color: var(--md-sys-color-primary);
-
 }
 
 [data-theme="dark"] {
     --primary-color: theme.palette.primary.main;
     --bg-color: #191e29;
-    --text-color: #f3f4f6;
+    --text-color: #ffffff;
     --border-color: #374151;
     --card-bg: #191e29;
     --shadow-color: rgba(0, 0, 0, 0.3);
     --select-bg: #111827;
     --select-border: #374151;
+
 }
 
 body {
@@ -54,7 +52,6 @@ body {
     cursor: pointer;
     top: 0.2rem;
     display: flex;
-    align-items: right;
     justify-content: center;
     font-size: 1rem;
     transition: all 0.3s;
@@ -65,7 +62,6 @@ settings-toggle {
     height: 3rem;
     cursor: pointer;
     display: flex;
-    align-items: right;
     justify-content: center;
     font-size: 1rem;
     transition: all 0.3s;
@@ -129,14 +125,7 @@ header h1 {
     margin-bottom: 2rem;
 }
 
-.add-task input {
-    flex: 1;
-    padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    background: var(--card-bg);
-    color: var(--text-color);
-}
+
 
 .add-task button {
     padding: 0.75rem 1.5rem;
@@ -402,6 +391,21 @@ md-tabs {
     font-size: 1rem;
 }
 
-.md-outlined-select {
+.RNDinput {
+    width: 75%;
+    padding: 0.75rem;
+    border: 1px solid var(--select-border);
+    border-radius: 0.2rem;
+    font-size: 1rem;
+}
+/* Target the text field's container when hovering over any element inside */
+md-outlined-text-field:hover {
+    /* Styles you want to apply on hover */
+    border-color: var(--md-sys-color-primary); /* Example: Change border color */
+    box-shadow: 0 0 5px var(--md-sys-color-primary); /* Example: Add a subtle glow */
+    background-color: var(--md-sys-color-surface-variant); /* Slightly change bg */
+}
 
+{
+    --text-color: var(--text-color);
 }
