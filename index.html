@@ -23,7 +23,6 @@
 
         document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
     </script>
-    <audio id="notificationSound" src="/dist/countdown_30_second.mp3" volume="1.0"></audio>
     <script src="js/timer.js"></script>
     <script src="js/pomodoro.js"></script>
     <script src="js/taskManager.js"></script>
@@ -36,7 +35,6 @@
         <md-primary-tab> <md-icon slot="icon"><img src="dist/assets/task.svg"> </md-icon>Tasks Timer</md-primary-tab>
         <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg"></md-icon>  Random Generator</md-primary-tab>
         <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Coin2.svg"></md-icon>  Coin Toss</md-primary-tab>
-        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/timer.svg"></md-icon>  Timer</md-primary-tab>
 
 
     </md-tabs>
@@ -97,11 +95,10 @@
             <div class="timer-container">
                 <div class="task-select-container">
 
-                    <md-outlined-select id="taskSelect" class="task-select" label="Select a task";
-                    >
-                    </<md-outlined-select>
+                           <md-outlined-select id="taskSelect" class="task-select" label="Select a task";></md-outlined-select>
+
                 </div>
-                
+
                 <div class="timer-display">
                     <div class="progress-ring">
                         <svg width="200" height="200">
@@ -116,11 +113,9 @@
 
                 <div class="timer-controls">
                     <button id="startBtn" class="control-btn">
-                        <md-ripple></md-ripple>
                        <img class=play-icon src="/dist/assets/play.svg">
                     </button>
                     <button id="resetBtn" class="control-btn">
-                        <md-ripple></md-ripple>
                         <img class=play-icon src="/dist/assets/Stop.svg">
 
                     </button>
@@ -177,66 +172,64 @@
             </div>
 
         </div>
-        <div class="tab-panel" id="CoinFlipperPanel" style="display: none;">
-            <div class="coin-flipper">    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold">Coin Toss</h1>
-                <div id="coin">
-                    <img src="/dist/assets/coin.svg"
-                         alt="Coin" width="150" height="150">
-                </div>
-                <p id="result" style="padding: 1rem">Click the button to toss the coin!</p>
-                <md-filled-button onclick="tossCoin()" class="button is-black">Toss Coin</md-filled-button>
-
-                <script>
-                    function tossCoin() {
-                        const coin = document.getElementById('coin');
-                        const result = document.getElementById('result');
-
-                        // Remove flip class to reset animation
-                        coin.classList.remove('flip');
-
-                        // Trigger reflow to restart animation
-                        void coin.offsetWidth;
-
-                        // Add flip class
-                        coin.classList.add('flip');
-
-                        // Generate random result
-                        const random = Math.random();
-
-                        // Show result after animation
-                        setTimeout(() => {
-                            const outcome = random < 0.5 ? 'Heads' : 'Tails';
-                            result.textContent = `It's ${outcome}!`;
-                        }, 1000);
-                    }
-                </script>
+    <div class="tab-panel" id="CoinFlipperPanel" style="display: none;">
+        <div class="coin-flipper">    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold">Coin Toss</h1>
+            <div id="coin">
+                <img src="/dist/assets/coin.svg"
+                     alt="Coin" width="150" height="150">
             </div>
-        </div>
-WIP            </div>
-        <script>
-            const savedColor = localStorage.getItem('primaryColor');
-            if (savedColor) {
-                primaryColorPicker.value = savedColor;
-                document.documentElement.style.setProperty('--md-sys-color-primary', savedColor);
-            }
-            const primaryColorPicker = document.getElementById('primaryColorPicker');
-            primaryColorPicker.addEventListener('input', (event) => {
-                const newColor = event.target.value;
-                // Update the CSS variable
-                document.documentElement.style.setProperty('--md-sys-color-primary', newColor);
-                // Store the selected color (optional)
-                localStorage.setItem('primaryColor', newColor);
-            });
-            document.getElementById('showTableBtn').addEventListener('click', function() {
-                const tableContainer = document.getElementById('tableContainer');
-                if (tableContainer.style.display === 'none') {
-                    tableContainer.style.display = 'block';
-                    this.textContent = 'Hide History';
-                } else {
-                    tableContainer.style.display = 'none';
-                    this.textContent = 'Show History';
+            <p id="result" style="padding: 1rem">Click the button to toss the coin!</p>
+            <md-filled-button onclick="tossCoin()" class="button is-black">Toss Coin</md-filled-button>
+
+            <script>
+                function tossCoin() {
+                    const coin = document.getElementById('coin');
+                    const result = document.getElementById('result');
+
+                    // Remove flip class to reset animation
+                    coin.classList.remove('flip');
+
+                    // Trigger reflow to restart animation
+                    void coin.offsetWidth;
+
+                    // Add flip class
+                    coin.classList.add('flip');
+
+                    // Generate random result
+                    const random = Math.random();
+
+                    // Show result after animation
+                    setTimeout(() => {
+                        const outcome = random < 0.5 ? 'Heads' : 'Tails';
+                        result.textContent = `It's ${outcome}!`;
+                    }, 1000);
                 }
-            });
+            </script>
+    <script>const savedColor = localStorage.getItem('primaryColor');
+    if (savedColor) {
+        primaryColorPicker.value = savedColor;
+        document.documentElement.style.setProperty('--md-sys-color-primary', savedColor);
+    }
+    const primaryColorPicker = document.getElementById('primaryColorPicker');
+    primaryColorPicker.addEventListener('input', (event) => {
+        const newColor = event.target.value;
+        // Update the CSS variable
+        document.documentElement.style.setProperty('--md-sys-color-primary', newColor);
+        // Store the selected color (optional)
+        localStorage.setItem('primaryColor', newColor);
+    });
+    document.getElementById('showTableBtn').addEventListener('click', function() {
+        const tableContainer = document.getElementById('tableContainer');
+        if (tableContainer.style.display === 'none') {
+            tableContainer.style.display = 'block';
+            this.textContent = 'Hide History';
+        } else {
+            tableContainer.style.display = 'none';
+            this.textContent = 'Show History';
+        }
+    });</script>
+        <script>
+
             function saveInputs() {
                 const startValue = parseInt(document.getElementById('startInput').value);
                 const endValue = parseInt(document.getElementById('endInput').value);
@@ -309,22 +302,35 @@ WIP            </div>
                 const tableBody = document.getElementById('resultsTable');
                 tableBody.innerHTML = ''; // This removes all rows from the table body
             }
-        document.querySelector('md-tabs').addEventListener('click', (event) => {
-        const tabs = document.querySelectorAll('md-primary-tab');
-        const panels = document.querySelectorAll('.tab-panel');
 
-        // Get the index of the clicked tab
-        const activeIndex = [...tabs].indexOf(event.target);
-
-        // Update active tab and panel
-        tabs.forEach((tab, index) => {
-        tab.setAttribute('selected', index === activeIndex);
-
-        panels[index].style.display = index === activeIndex ? 'block' : 'none';
-        });
-        });
 
         </script>
+    <script>   const tabs = document.querySelector('md-tabs');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    const primaryTabs = document.querySelectorAll('md-primary-tab');
+
+    tabs.addEventListener('click', (event) => {
+        const index = [...primaryTabs].indexOf(event.target);
+        if (index !== -1) {
+            primaryTabs.forEach((tab, i) => {
+                tab.setAttribute('selected', i === index);
+                tabPanels[i].style.display = i === index ? 'block' : 'none';
+            });
+        }
+    });
+    // Show/hide table functionality
+    document.getElementById('showTableBtn').addEventListener('click', function() {
+        const tableContainer = document.getElementById('tableContainer');
+        if (tableContainer.style.display === 'none') {
+            tableContainer.style.display = 'block';
+            this.textContent = 'Hide History';
+        } else {
+            tableContainer.style.display = 'none';
+            this.textContent = 'Show History';
+        }
+    });
+    </script>
+<audio id="notificationSound" src="/dist/countdown_30_second.mp3" volume="1.0"></audio>
 
 </body>
 </html>
