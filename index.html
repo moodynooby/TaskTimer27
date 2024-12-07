@@ -23,7 +23,7 @@
 
         document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
     </script>
-    <audio id="notificationSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" volume="1.0"></audio>
+    <audio id="notificationSound" src="/dist/countdown_30_second.mp3" volume="1.0"></audio>
     <script src="js/timer.js"></script>
     <script src="js/pomodoro.js"></script>
     <script src="js/taskManager.js"></script>
@@ -65,6 +65,8 @@
                             Break Duration (min)
                             <input type="number" id="breakDuration" value="10" min="1" max="30">
                         </label>
+                        <label>Choose your primary color</label>
+                        <input type="color" id="primaryColorPicker" value="#294a9d">
                     </div>
                 </div>
             <div class="app-container">
@@ -80,11 +82,13 @@
                     </svg>
                     TaskTimer
                 </h1>
-                <p>Manage your tasks and time efficiently</p>
+                <p>Manage your tasks and time efficiently </p>
             </header>
 
             <div class="add-task">
-                <input type="text" id="taskInput" placeholder="Add a new task...">
+                <md-outlined-text-field  type="text" id="taskInput" label="Add a new task..."> </md-outlined-text-field>
+                <md-outlined-text-field  type="text" id="descriptionInput" label="Add a Description..."> </md-outlined-text-field>
+
                 <md-filled-button id="addTaskBtn">
                     Add Task
                 </md-filled-button>
@@ -92,9 +96,10 @@
 
             <div class="timer-container">
                 <div class="task-select-container">
-                    <select id="taskSelect">
-                        <option value="">Select a task...</option>
-                    </select>
+
+                    <md-outlined-select id="taskSelect" class="task-select" label="Select a task";
+                    >
+                    </<md-outlined-select>
                 </div>
                 
                 <div class="timer-display">
@@ -111,9 +116,11 @@
 
                 <div class="timer-controls">
                     <button id="startBtn" class="control-btn">
+                        <md-ripple></md-ripple>
                        <img class=play-icon src="/dist/assets/play.svg">
                     </button>
                     <button id="resetBtn" class="control-btn">
+                        <md-ripple></md-ripple>
                         <img class=play-icon src="/dist/assets/Stop.svg">
 
                     </button>
@@ -207,6 +214,19 @@
         </div>
 WIP            </div>
         <script>
+            const savedColor = localStorage.getItem('primaryColor');
+            if (savedColor) {
+                primaryColorPicker.value = savedColor;
+                document.documentElement.style.setProperty('--md-sys-color-primary', savedColor);
+            }
+            const primaryColorPicker = document.getElementById('primaryColorPicker');
+            primaryColorPicker.addEventListener('input', (event) => {
+                const newColor = event.target.value;
+                // Update the CSS variable
+                document.documentElement.style.setProperty('--md-sys-color-primary', newColor);
+                // Store the selected color (optional)
+                localStorage.setItem('primaryColor', newColor);
+            });
             document.getElementById('showTableBtn').addEventListener('click', function() {
                 const tableContainer = document.getElementById('tableContainer');
                 if (tableContainer.style.display === 'none') {
@@ -303,6 +323,7 @@ WIP            </div>
         panels[index].style.display = index === activeIndex ? 'block' : 'none';
         });
         });
+
         </script>
 
 </body>

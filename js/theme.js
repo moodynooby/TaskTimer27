@@ -7,7 +7,7 @@ class ThemeManager {
 
     init() {
         document.documentElement.setAttribute('data-theme', this.theme);
-        document.querySelector('.theme-toggle').innerHTML = this.theme === 'light' ? '🌙' : '☀️';
+        document.querySelector('.theme-toggle').innerHTML = this.theme === 'dark' ? '🌙' : '☀️';
     }
 
     toggle() {

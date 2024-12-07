@@ -7,6 +7,10 @@
     --shadow-color: rgba(0, 0, 0, 0.1);
     --select-bg: #ffffff;
     --select-border: #e5e7eb;
+    --md-sys-color-primary: #294a9d;
+    --md-ripple-hover-color: var(--md-sys-color-primary);
+    --md-ripple-pressed-color: var(--md-sys-color-primary);
+
 }
 
 [data-theme="dark"] {
@@ -33,6 +37,7 @@ body {
 .app-container {
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
 }
 
 .header-controls {
@@ -388,3 +393,15 @@ md-tabs {
     100% { transform: rotateY(720deg); }
 }
 
+
+.task-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--select-border);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.md-outlined-select {
+
+}

@@ -90,6 +90,8 @@ class TaskManager {
     // Rest of the TaskManager class implementation remains the same
     addTask() {
         const title = this.elements.taskInput.value.trim();
+        const description = "Enter task description (optional):" // Add description prompt
+
         if (!title) return;
 
         const task = {
