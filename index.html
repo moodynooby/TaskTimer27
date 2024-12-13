@@ -1,27 +1,14 @@
 <!DOCTYPE html><html lang="en" data-theme="dark">
 <head>
+    <title>TaskTimer</title>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskTimer</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="/public/tasktimer-logo.png" type="image/x-icon">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script type="importmap">
-        {
-          "imports": {
-            "@material/web/": "https://esm.run/@material/web/"
-          }
-        }
-    </script>
-    <script type="module">
-        import '@material/web/all.js';
-        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-
-        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-    </script>
     <script src="js/timer.js"></script>
     <script src="js/pomodoro.js"></script>
     <script src="js/taskManager.js"></script>
@@ -29,43 +16,18 @@
 
 </head>
 <body>
-<div class="tabs-container">
-    <md-tabs active-index="0">
-        <md-primary-tab> <md-icon slot="icon"><img src="dist/assets/task.svg"> </md-icon>Tasks Timer</md-primary-tab>
-        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg"></md-icon>  Random Generator</md-primary-tab>
-        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Coin2.svg"></md-icon>  Coin Toss</md-primary-tab>
+      <div role="tablist" class="tabs tabs-boxed">
+        <a role="tab" class="tab tab-active"> <img slot="icon"><img src="dist/assets/task.svg"> Tasks Timer</a>
+        <a role="tab" class="tab" href="RNG.html"> <img slot="icon"><img src="dist/assets/Dice.svg"> Random Generator</a>
+        <a role="tab" class="tab" href="ct.html"> <img slot="icon"><img src="dist/assets/Coin2.svg"> Coin Toss</a>
+        <a role="tab" class="tab" href="Settings.html"> <img slot="icon"><img src="dist/assets/Settings.svg"> Settings</a>
 
-
-    </md-tabs>
-    <div class="tab-panels">
-        <div class="header-controls">
-            <md-filled-button class="theme-toggle">
-                <md-icon slot="icon" class="theme-toggle"></md-icon>
-            </md-filled-button>
-            <md-fab  class="settings-toggle">
-                <md-icon slot="icon"><img src="dist/assets/Setting.svg" alt="Settings"></md-icon>
-            </md-fab>
 
         </div>
 
-        <div class="tab-panel" id="timerPanel">
             <div class="timer-container">
 
-                <div class="settings-panel">
-                    <h3>   Settings</h3>
-                    <div class="setting-group">
-                        <label>
-                            Work Duration (min)
-                            <input type="number" id="workDuration" value="50" min="1" max="120">
-                        </label>
-                        <label>
-                            Break Duration (min)
-                            <input type="number" id="breakDuration" value="10" min="1" max="30">
-                        </label>
-                        <label>Choose your primary color</label>
-                        <input type="color" id="primaryColorPicker" value="#294a9d">
-                    </div>
-                </div>
+
             <div class="app-container">
 
 
@@ -73,10 +35,7 @@
 
             <header>
                 <h1>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="timer-icon">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
+
                     TaskTimer
                 </h1>
                 <p>Manage your tasks and time efficiently </p>
@@ -126,84 +85,10 @@
         </div>
                 </div>
         </div>
-            <div class="tab-panel " id="randomGeneratorPanel" style="display: none;">
                 <!-- Random Number Generator Section -->
-                <div >
-                    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold ">Random Number Generator</h1>
-                <div>
-                    <form id="randomNumberForm" onsubmit="event.preventDefault();">
-                    <div class="field">
-                            <label class="label">Starting</label>
-                            <div class="control">
-                                <md-outlined-text-field class="RNDinput" id="startInput"></md-outlined-text-field>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Ending</label>
-                            <div class="control">
-                                <md-outlined-text-field class="RNDinput" id="endInput"></md-outlined-text-field>
-                            </div>
-                        </div>
-                        <md-filled-button  type="button" onclick="saveInputs()">Generate</md-filled-button>
-                        <md-elevated-button onclick="clearAll()">Clear All</md-elevated-button>
-                        <md-filled-tonal-button id="showTableBtn">Show Result</md-filled-tonal-button>
-
-
-                    </form>
-
-                    <div class="table-container" id="tableContainer" style="display: none;">
-                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                            <thead>
-                            <tr>
-                                <th>Starting Value</th>
-                                <th>Ending Value</th>
-                                <th>Random Number</th>
-                            </tr>
-                            </thead>
-                            <tbody id="resultsTable">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                </div>
-
-            </div>
 
         </div>
-    <div class="tab-panel" id="CoinFlipperPanel" style="display: none;">
-        <div class="coin-flipper">    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold">Coin Toss</h1>
-            <div id="coin">
-                <img src="/dist/assets/coin.svg"
-                     alt="Coin" width="150" height="150">
-            </div>
-            <p id="result" style="padding: 1rem">Click the button to toss the coin!</p>
-            <md-filled-button onclick="tossCoin()" class="button is-black">Toss Coin</md-filled-button>
 
-            <script>
-                function tossCoin() {
-                    const coin = document.getElementById('coin');
-                    const result = document.getElementById('result');
-
-                    // Remove flip class to reset animation
-                    coin.classList.remove('flip');
-
-                    // Trigger reflow to restart animation
-                    void coin.offsetWidth;
-
-                    // Add flip class
-                    coin.classList.add('flip');
-
-                    // Generate random result
-                    const random = Math.random();
-
-                    // Show result after animation
-                    setTimeout(() => {
-                        const outcome = random < 0.5 ? 'Heads' : 'Tails';
-                        result.textContent = `It's ${outcome}!`;
-                    }, 1000);
-                }
-            </script>
     <script>const savedColor = localStorage.getItem('primaryColor');
     if (savedColor) {
         primaryColorPicker.value = savedColor;
@@ -229,106 +114,37 @@
     });</script>
         <script>
 
-            function saveInputs() {
-                const startValue = parseInt(document.getElementById('startInput').value);
-                const endValue = parseInt(document.getElementById('endInput').value);
-                const randomNumber = Math.floor(Math.random() * (endValue - startValue + 1)) + startValue;
-
-                // Get the table body element
-                const tableBody = document.getElementById('resultsTable');
-
-
-                // Remove 'is-selected' from any previously selected row
-                const selectedRow = tableBody.querySelector('.is-selected');
-                if (selectedRow) {
-                    selectedRow.classList.remove('is-selected');
-                }
-
-                // Create a new table row
-                const newRow = tableBody.insertRow();
-                newRow.classList.add('is-selected'); // Add the 'is-selected' class
-
-                // Create table cells for each value
-                const startCell = newRow.insertCell();
-                const endCell = newRow.insertCell();
-                const randomCell = newRow.insertCell();
-
-                // Set the content of the cells
-                startCell.textContent = startValue;
-                endCell.textContent = endValue;
-                randomCell.textContent = randomNumber;
-                // Save data to cookies
-                saveDataToCookies(startValue, endValue, randomNumber);
-
-            }
-
-            function saveDataToCookies(start, end, random) {
-                // Get existing cookie data or initialize an empty array
-                let storedData = getCookieData();
-
-                // Add new data as an object
-                storedData.push({ start, end, random });
-
-                // Convert data to JSON string and store in cookie
-                document.cookie = `randomData=${JSON.stringify(storedData)}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
-            }
-
-            function getCookieData() {
-                // Get the cookie value
-                const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)randomData\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-
-                // Parse and return the data, or an empty array if no cookie exists
-                return cookieValue ? JSON.parse(cookieValue) : [];
-            }
-
-            // Load data from cookies on page load (optional)
-            window.onload = () => {
-                const storedData = getCookieData();
-                const tableBody = document.getElementById('resultsTable');
-
-                storedData.forEach(data => {
-                    const newRow = tableBody.insertRow();
-                    newRow.insertCell().textContent = data.start;
-                    newRow.insertCell().textContent = data.end;
-                    newRow.insertCell().textContent = data.random;
-                });
-            };
-            function clearAll() {
-                // Clear the cookie
-                document.cookie = "randomData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-                // Clear the table
-                const tableBody = document.getElementById('resultsTable');
-                tableBody.innerHTML = ''; // This removes all rows from the table body
-            }
-
 
         </script>
-    <script>   const tabs = document.querySelector('md-tabs');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-    const primaryTabs = document.querySelectorAll('md-primary-tab');
-
-    tabs.addEventListener('click', (event) => {
-        const index = [...primaryTabs].indexOf(event.target);
-        if (index !== -1) {
-            primaryTabs.forEach((tab, i) => {
-                tab.setAttribute('selected', i === index);
-                tabPanels[i].style.display = i === index ? 'block' : 'none';
-            });
-        }
-    });
+    <script>
     // Show/hide table functionality
-    document.getElementById('showTableBtn').addEventListener('click', function() {
-        const tableContainer = document.getElementById('tableContainer');
-        if (tableContainer.style.display === 'none') {
-            tableContainer.style.display = 'block';
-            this.textContent = 'Hide History';
-        } else {
-            tableContainer.style.display = 'none';
-            this.textContent = 'Show History';
-        }
-    });
+
     </script>
+      <div class="header-controls">
+          <label class="swap swap-rotate theme-toggle">
+              <!-- this hidden checkbox controls the state -->
+              <input type="checkbox" class="theme-controller" value="retro" />
+
+              <!-- sun icon -->
+              <svg
+                      class="swap-off h-10 w-10 fill-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24">
+                  <path
+                          d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+              </svg>
+
+              <!-- moon icon -->
+              <svg
+                      class="swap-on h-10 w-10 fill-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24">
+                  <path
+                          d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+              </svg>
+          </label>
+
+      </div>
 <audio id="notificationSound" src="/dist/countdown_30_second.mp3" volume="1.0"></audio>
 
 </body>
