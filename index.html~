@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en" data-theme="dark">
+<head>
+    <title>TaskTimer</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/public/tasktimer-logo.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+      <div role="tablist" class="tabs tabs-boxed">
+        <a role="tab" class="tab tab-active"> <img slot="icon"><img src="dist/assets/task.svg"> Tasks Timer</a>
+        <a role="tab" class="tab" href="RNG.html"> <img slot="icon"><img src="dist/assets/Dice.svg"> Random Generator</a>
+        <a role="tab" class="tab" href="ct.html"> <img slot="icon"><img src="dist/assets/Coin2.svg"> Coin Toss</a>
+        <a role="tab" class="tab" href="Settings.html"> <img slot="icon"><img src="dist/assets/Settings.svg"> Settings</a>
+
+
+        </div>
+
+            <div class="timer-container">
+
+
+            <div class="app-container">
+
+
+
+
+            <header>
+                <h1>
+
+                    TaskTimer
+                </h1>
+                <p>Manage your tasks and time efficiently </p>
+            </header>
+
+            <div class="add-task">
+                <input  type="text" id="taskInput" placeholder="Add a new task..." class="input input-bordered input-primary w-full max-w-xs" />
+                <input  type="text" id="descriptionInput" placeholder="Add a Description..." class="input input-bordered input-primary w-full max-w-xs" > </input>
+
+                <button class="btn btn-primary" id="addTaskBtn">
+                    Add Task
+                </button>
+            </div>
+
+            <div class="timer-container">
+                <div class="task-select-container">
+
+                        <select class="select select-primary w-full task-select"     id="taskSelect" placeholder="";>
+                    <option class="" "disabled selected">Select a task</option>
+                        </select>
+                    </div>
+
+                <div class="timer-display">
+                    <div class="progress-ring">
+                        <svg width="200" height="200">
+                            <circle class="progress-ring-circle-bg" cx="100" cy="100" r="90"/>
+                            <circle class="progress-ring-circle" cx="100" cy="100" r="90"/>
+                        </svg>
+                        <div class="time">00:00:00</div>
+                    </div>
+                    <div class="timer-mode">Stopwatch Mode</div>
+                    <div class="timer-label">No task selected</div>
+                </div>
+
+                <div class="timer-controls">
+                    <button id="startBtn" class="control-btn btn btn-primary btn-circle" >
+                       <img class=play-icon src="/dist/assets/play.svg">
+                    </button>
+                    <button id="resetBtn" class="control-btn btn btn-primary btn-circle">
+                        <img class=play-icon src="/dist/assets/Stop.svg">
+
+                    </button>
+                    <button id="modeToggleBtn" class="mode-toggle btn btn-primary">Switch to Pomodoro</button>
+                </div>
+            </div>
+
+            <div id="taskList" class="task-list"> </div>
+        </div>
+                </div>
+        </div>
+<audio id="notificationSound" src="/dist/countdown_30_second.mp3" volume="1.0"></audio>
+
+</body>
+</html>
