@@ -79,11 +79,12 @@
                 </div>
             </div>
 
-            <div id="taskList" class="task-list"> </div>
+                     <div id="taskList" class="task-list"> </div>
         </div>
                 </div>
         </div>
 <audio id="notificationSound" src="/dist/countdown_30_second.mp3" volume="1.0"></audio>
+      <div id="taskControls"></div><br>
       <div class="header-controls">
           <div class="dropdown mb-72">
               <div tabindex="0" role="button" class="btn m-1">
@@ -167,7 +168,32 @@
               </ul>
           </div></div>
       <script src="script.js"></script>
+      <script>
+          // Function to export tasks to CSV
+          function exportToCSV() {
+              const tasks = document.querySelectorAll('#task-list li');
+              let csvContent = 'data:text/csv;charset=utf-8,Task\n'; // Add header
 
+              // Add each task to the CSV content
+              tasks.forEach(task => {
+                  csvContent += task.textContent + '\n';
+              });
+
+              // Create a download link
+              const encodedUri = encodeURI(csvContent);
+              const link = document.createElement('a');
+              link.setAttribute('href', encodedUri);
+              link.setAttribute('download', 'tasks.csv');
+              document.body.appendChild(link);
+
+              // Trigger the download
+              link.click();
+              document.body.removeChild(link);
+          }
+
+          // Attach the function to the button
+          document.getElementById('export-btn').addEventListener('click', exportToCSV);
+      </script>
 </body>
 </html>
 
