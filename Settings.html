@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Coin Toss</title>
+    <title>Settings</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,16 +17,16 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="dark">
+<body >
 <div role="tablist" class="tabs tabs-boxed">
     <a role="tab" class="tab " href="index.html"> <img slot="icon"><img src="dist/assets/task.svg"> Tasks Timer</a>
     <a role="tab" class="tab" href="RNG.html"> <img slot="icon"><img src="dist/assets/Dice.svg"> Random Generator</a>
     <a role="tab" class="tab" href="ct.html"> <img slot="icon"><img src="dist/assets/Coin2.svg"> Coin Toss</a>
     <a role="tab" class="tab tab-active" href="Settings.html"> <img slot="icon"><img src="dist/assets/Settings.svg"> Settings</a>
 
-
-        <h3>   Settings</h3>
-        <div class="setting-group">
+</div>
+<div class="flex w-full flex-col">
+    <div class="card bg-base-300 rounded-box grid h-20 place-items-center ">
             <label>
                 Work Duration (min)
                 <input type="number" id="workDuration" value="50" min="1" max="120">
@@ -36,6 +36,8 @@
                 <input type="number" id="breakDuration" value="10" min="1" max="30">
             </label>
         </div>
+    <div class="divider"></div>
+    <div class="card bg-base-300 rounded-box grid h-20 place-items-center">
     <div class="form-control">
         <label class="label cursor-pointer gap-4">
             <span class="label-text">Default</span>
@@ -67,5 +69,12 @@
         </label>
     </div>
 
-
+        <div class="form-control">
+            <label class="label cursor-pointer gap-4">
+                <span class="label-text">Dark</span>
+                <input type="radio" name="theme-radios" class="radio theme-controller" value="dark" />
+            </label>
+        </div>
+    </div>
+</div>
 </html>
