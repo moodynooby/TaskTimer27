@@ -4,8 +4,8 @@ let isPomodoroMode = false;
 let startTime = 0;
 let elapsedTime = 0;
 let timerInterval;
-const pomodoroLength = 25 * 60; // 25 minutes in seconds
-const breakLength = 5 * 60; // 5 minutes in seconds
+let customPomodoroLength = 25 * 60; // Default 25 minutes in seconds
+let customBreakLength = 5 * 60; // Default 5 minutes in seconds
 
 // Task Management
 const tasks = [];
@@ -20,6 +20,15 @@ const resetBtn = document.getElementById('resetBtn');
 const modeToggleBtn = document.getElementById('modeToggleBtn');
 const timerDisplay = document.querySelector('.time');
 const taskList = document.getElementById('taskList');
+const pomodoroLengthInput = document.createElement('input');
+pomodoroLengthInput.type = 'number';
+pomodoroLengthInput.value = 25;
+pomodoroLengthInput.className = 'input input-bordered w-20';
+
+const breakLengthInput = document.createElement('input');
+breakLengthInput.type = 'number';
+breakLengthInput.value = 5;
+breakLengthInput.className = 'input input-bordered w-20';
 
 // Timer Controls
 function startTimer() {
@@ -34,35 +43,75 @@ function startTimer() {
         startBtn.querySelector('img').src = '/dist/assets/play.svg';
     }
 }
-function saveToCookies() {
-    document.cookie = `tasks=${JSON.stringify(tasks)}; expires=${new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString()}; path=/`;
-    document.cookie = `isPomodoroMode=${isPomodoroMode}; expires=${new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString()}; path=/`;
+
+function updateTimerSettings() {
+    customPomodoroLength = pomodoroLengthInput.value * 60;
+    customBreakLength = breakLengthInput.value * 60;
+    saveToCookies();
 }
 
-function loadFromCookies() {
-    const cookies = document.cookie.split(';').reduce((acc, cookie) => {
-        const [key, value] = cookie.trim().split('=');
-        acc[key] = value;
-        return acc;
-    }, {});
+function saveToStorage() {
+    // Save to localStorage
+    localStorage.setItem('timerSettings', JSON.stringify({
+        customPomodoroLength,
+        customBreakLength,
+        isPomodoroMode,
+        tasks
+    }));
 
-    if (cookies.tasks) {
-        tasks.push(...JSON.parse(cookies.tasks));
-        updateTaskSelect();
-        updateTaskList();
-    }
+    // Save to cookies
+    document.cookie = `timerSettings=${JSON.stringify({
+        customPomodoroLength,
+        customBreakLength,
+        isPomodoroMode,
+        tasks
+    })}; expires=${new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString()}; path=/`;
+}
 
-    if (cookies.isPomodoroMode) {
-        isPomodoroMode = cookies.isPomodoroMode === 'true';
-        modeToggleBtn.textContent = isPomodoroMode ? 'Switch to Stopwatch' : 'Switch to Pomodoro';
-        document.querySelector('.timer-mode').textContent = isPomodoroMode ? 'Pomodoro Mode' : 'Stopwatch Mode';
+function loadFromStorage() {
+    // Try localStorage first
+    const localData = localStorage.getItem('timerSettings');
+
+    // If no localStorage, try cookies
+    const cookieData = document.cookie.split(';')
+        .find(cookie => cookie.trim().startsWith('timerSettings='));
+
+    const settings = localData ? JSON.parse(localData) :
+                    cookieData ? JSON.parse(cookieData.split('=')[1]) : null;
+
+    if (settings) {
+        customPomodoroLength = settings.customPomodoroLength || 25 * 60;
+        customBreakLength = settings.customBreakLength || 5 * 60;
+        isPomodoroMode = settings.isPomodoroMode;
+        tasks.push(...(settings.tasks || []));
+
+        updateUI();
     }
 }
 
+function updateUI() {
+    if (document.getElementById('pomodoroLengthInput')) {
+        document.getElementById('pomodoroLengthInput').value = customPomodoroLength / 60;
+    }
+    if (document.getElementById('breakLengthInput')) {
+        document.getElementById('breakLengthInput').value = customBreakLength / 60;
+    }
+    updateTaskSelect();
+    updateTaskList();
+}
+
+// Update existing event listeners to use new storage functions
+document.addEventListener('DOMContentLoaded', loadFromStorage);
+
+function updateTimerSettings() {
+    customPomodoroLength = document.getElementById('pomodoroLengthInput').value * 60;
+    customBreakLength = document.getElementById('breakLengthInput').value * 60;
+    saveToStorage();
+}
 
 function updateTimer() {
     if (isPomodoroMode) {
-        const timeLeft = pomodoroLength - Math.floor((Date.now() - startTime) / 1000);
+        const timeLeft = customPomodoroLength - Math.floor((Date.now() - startTime) / 1000);
         if (timeLeft <= 0) {
             document.getElementById('notificationSound').play();
             resetTimer();
