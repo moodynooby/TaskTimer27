@@ -9,15 +9,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="/public/tasktimer-logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="js/timer.js"></script>
-    <script src="js/pomodoro.js"></script>
-    <script src="js/taskManager.js"></script>
-    <script src="script.js"></script>
-
 
     <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="dark">
+<body>
 <div role="tablist" class="tabs tabs-boxed">
     <a role="tab" class="tab " href="index.html"> <img slot="icon"><img src="dist/assets/task.svg"> Tasks Timer</a>
     <a role="tab" class="tab" href="RNG.html"> <img slot="icon"><img src="dist/assets/Dice.svg"> Random Generator</a>
@@ -27,13 +22,13 @@
 
 
 </div>
-<div class="coin-flipper">    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold">Coin Toss</h1>
+<div class="coin-flipper">    <h1 class="text-5xl font-bold">Coin Toss</h1>
     <div id="coin">
         <img src="/dist/assets/coin.svg"
              alt="Coin" width="150" height="150">
     </div>
-    <p id="result" style="padding: 1rem">Click the button to toss the coin!</p>
-    <md-filled-button onclick="tossCoin()" class="button is-black">Toss Coin</md-filled-button>
+    <p id="result" class="py-6">Click the button to toss the coin!</p>
+    <button onclick="tossCoin()" class=" btn btn-primary ">Toss Coin</button>
 
     <script>
         function tossCoin() {
@@ -83,4 +78,4 @@
             </svg>
         </label>
     </div>
-</html>
+</div> </body></html>
