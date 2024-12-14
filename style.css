@@ -18,39 +18,8 @@ body {
     right: 10rem;
     display: flex;
     gap: 0.5rem;
-    justify-content: right
-;
-
-}
-
-.theme-toggle{
-    width: 4rem;
-    height: 3rem;
-    cursor: pointer;
-    top: 0.2rem;
-    display: flex;
-
-    justify-content: right  ;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
-
-settings-toggle {
-    width: 3rem;
-    height: 3rem;
-    cursor: pointer;
-    display: flex;
     justify-content: right;
-    font-size: 1rem;
-    transition: all 0.3s;
 }
-.theme-toggle:hover, .settings-toggle:hover {
-    transform: scale(1.1);
-}
-
-
-
-
 header {
     text-align: center;
     margin-bottom: 2rem;
@@ -74,9 +43,6 @@ header {
     transition: opacity 0.3s;
 }
 
-.add-task button:hover {
-    opacity: 0.9;
-}
 
 .timer-container {
     border-radius: 1rem;
@@ -218,19 +184,6 @@ header {
     justify-content: center;
 }
 
-.delete-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    padding: 0.25rem;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-}
-
-.delete-btn:hover {
-    opacity: 1;
-}
 
 .task-timer {
     display: flex;
@@ -249,21 +202,6 @@ header {
     padding: 0.25rem;
 }
 
-.themes-icon    {
-    height: 2rem;
-    width:2rem;
-}
-.play-icon {
-    height: 3rem;
-    width: 3rem;
-}
-
-
-button {
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-}
 .coin-flipper {
     display: flex;
     flex-direction: column;
@@ -297,11 +235,7 @@ button {
     font-size: 1rem;
 }
 
-.RNDinput {
-    width: 75%;
-    padding: 0.75rem;
-    border: 1px solid oklch(var(--pc));
-    border-radius: 0.2rem;
-    font-size: 1rem;
+.Rctrl {
+ margin-top: 1rem;
+    margin-left: 1rem;
 }
-
