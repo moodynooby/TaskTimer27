@@ -25,6 +25,87 @@
     <a role="tab" class="tab tab-active" href="Settings.html"> <img slot="icon"><img src="dist/assets/Settings.svg"> Settings</a>
 
 </div>
+<div class="dropdown mb-72">
+    <div tabindex="0" role="button" class="btn m-1">
+        Theme
+        <svg
+                width="12px"
+                height="12px"
+                class="inline-block h-2 w-2 fill-current opacity-60"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 2048 2048">
+            <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+        </svg>
+    </div>
+    <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Default"
+                    value="default" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Retro"
+                    value="retro" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Cyberpunk"
+                    value="cyberpunk" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Valentine"
+                    value="valentine" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Forest"
+                    value="forest" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Corporate"
+                    value="corporate" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Business"
+                    value="business" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Dim"
+                    value="dim" />
+        </li>
+
+
+    </ul>
+</div>
 <div class="flex w-full flex-col">
     <div class="card bg-base-300 rounded-box grid h-20 place-items-center ">
             <label>
@@ -38,43 +119,6 @@
         </div>
     <div class="divider"></div>
     <div class="card bg-base-300 rounded-box grid h-20 place-items-center">
-    <div class="form-control">
-        <label class="label cursor-pointer gap-4">
-            <span class="label-text">Default</span>
-            <input type="radio" name="theme-radios" class="radio theme-controller" value="default" />
-        </label>
-    </div>
-    <div class="form-control">
-        <label class="label cursor-pointer gap-4">
-            <span class="label-text">Retro</span>
-            <input type="radio" name="theme-radios" class="radio theme-controller" value="retro" />
-        </label>
-    </div>
-    <div class="form-control">
-        <label class="label cursor-pointer gap-4">
-            <span class="label-text">Cyberpunk</span>
-            <input type="radio" name="theme-radios" class="radio theme-controller" value="cyberpunk" />
-        </label>
-    </div>
-    <div class="form-control">
-        <label class="label cursor-pointer gap-4">
-            <span class="label-text">Valentine</span>
-            <input type="radio" name="theme-radios" class="radio theme-controller" value="valentine" />
-        </label>
-    </div>
-    <div class="form-control">
-        <label class="label cursor-pointer gap-4">
-            <span class="label-text">Forest</span>
-            <input type="radio" name="theme-radios" class="radio theme-controller" value="forest" />
-        </label>
-    </div>
 
-        <div class="form-control">
-            <label class="label cursor-pointer gap-4">
-                <span class="label-text">Dark</span>
-                <input type="radio" name="theme-radios" class="radio theme-controller" value="dark" />
-            </label>
-        </div>
-    </div>
 </div>
 </html>
