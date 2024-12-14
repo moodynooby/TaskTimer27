@@ -183,11 +183,11 @@ function updateTaskList() {
         const taskElement = document.createElement('div');
         taskElement.className = 'task-item';
         taskElement.innerHTML = `
+             <button onclick="deleteTask(${task.id})" class="btn btn-error btn-sm btn-circle delete" ><img src="/dist/assets/delete.svg"></button>
 
-            <h3>${task.name}</h3>
-            <p>${task.description}</p>
+            <h3>${task.name}</h3>            <p>${task.description}</p>
+
             <p>Time spent: ${Math.floor(task.timeSpent / 3600)}h ${Math.floor((task.timeSpent % 3600) / 60)}m             
-             <button onclick="deleteTask(${task.id})" class="btn btn-error btn-sm btn-circle delete"><img src="/dist/assets/delete.svg"></button>
 </p>
         `;
         taskList.appendChild(taskElement);
