@@ -52,8 +52,8 @@
 
         </form>
 
-        <div class="table-container" id="tableContainer" style="display: none;">
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <div class="table-container overflow-x-auto" id="tableContainer" style="display: none;">
+            <table class="table table-zebra ">
                 <thead>
                 <tr>
                     <th>Starting Value</th>
@@ -76,15 +76,15 @@
     const tableBody = document.getElementById('resultsTable');
 
 
-    // Remove 'is-selected' from any previously selected row
-    const selectedRow = tableBody.querySelector('.is-selected');
+    // Remove 'bg-base-200' from any previously selected row
+    const selectedRow = tableBody.querySelector('.bg-base-200');
     if (selectedRow) {
-        selectedRow.classList.remove('is-selected');
+        selectedRow.classList.remove('bg-base-200');
     }
 
     // Create a new table row
     const newRow = tableBody.insertRow();
-    newRow.classList.add('is-selected'); // Add the 'is-selected' class
+    newRow.classList.add('bg-base-200'); // Add the 'bg-base-200' class
 
     // Create table cells for each value
     const startCell = newRow.insertCell();
