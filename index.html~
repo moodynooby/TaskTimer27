@@ -7,16 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="/public/tasktimer-logo.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
+    <link rel="icon" href="/dist/assets/tasktimer-logo.png  " type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
       <div role="tablist" class="tabs tabs-boxed">
-        <a role="tab" class="tab tab-active"> <img slot="icon"><img src="dist/assets/task.svg"> Tasks Timer</a>
-        <a role="tab" class="tab" href="RNG.html"> <img slot="icon"><img src="dist/assets/Dice.svg"> Random Generator</a>
-        <a role="tab" class="tab" href="ct.html"> <img slot="icon"><img src="dist/assets/Coin2.svg"> Coin Toss</a>
-        <a role="tab" class="tab" href="Settings.html"> <img slot="icon"><img src="dist/assets/Settings.svg"> Settings</a>
+        <a role="tab" class="tab tab-active"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
+        <a role="tab" class="tab" href="RNG.html"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
+        <a role="tab" class="tab" href="ct.html"> <img src="dist/assets/Coin2.svg" class="icon"> Coin Toss</a>
+        <a role="tab" class="tab" href="Settings.html"> <img src="dist/assets/Settings.svg" class="icon"> Settings</a>
 
 
         </div>
@@ -30,16 +31,16 @@
 
 
             <header>
-                <h1>
-
+                <h1 class="text-5xl font-bold">
                     TaskTimer
                 </h1>
-                <p>Manage your tasks and time efficiently </p>
+
+                <p class="py-6">Manage your tasks and time efficiently </p>
             </header>
 
             <div class="add-task">
                 <input  type="text" id="taskInput" placeholder="Add a new task..." class="input input-bordered input-primary w-full max-w-xs" />
-                <input  type="text" id="descriptionInput" placeholder="Add a Description..." class="input input-bordered input-primary w-full max-w-xs" > </input>
+                <input  type="text" id="descriptionInput" placeholder="Add a Description..." class="input input-bordered input-primary w-full max-w-xs" >
 
                 <button class="btn btn-primary" id="addTaskBtn">
                     Add Task
@@ -50,7 +51,7 @@
                 <div class="task-select-container">
 
                         <select class="select select-primary w-full task-select"     id="taskSelect" placeholder="";>
-                    <option class="" "disabled selected">Select a task</option>
+                    <option class= "disabled selected">Select a task</option>
                         </select>
                     </div>
 
@@ -67,22 +68,131 @@
                 </div>
 
                 <div class="timer-controls">
-                    <button id="startBtn" class="control-btn btn btn-primary btn-circle" >
+                    <button id="startBtn" class="control-btn btn btn-primary btn-circle btn-outline " >
                        <img class=play-icon src="/dist/assets/play.svg">
                     </button>
-                    <button id="resetBtn" class="control-btn btn btn-primary btn-circle">
+                    <button id="resetBtn" class="control-btn btn btn-primary btn-circle btn-outline ">
                         <img class=play-icon src="/dist/assets/Stop.svg">
 
                     </button>
-                    <button id="modeToggleBtn" class="mode-toggle btn btn-primary">Switch to Pomodoro</button>
+                    <button id="modeToggleBtn" class="mode-toggle btn btn-primary btn-outline ">Switch to Timer</button>
                 </div>
             </div>
-
-            <div id="taskList" class="task-list"> </div>
         </div>
                 </div>
         </div>
 <audio id="notificationSound" src="/dist/countdown_30_second.mp3" volume="1.0"></audio>
+      <div class="header-controls">
+          <div id="taskControls"></div>            <div id="taskList" class="task-list"> </div>
 
+          <div class="dropdown mb-72">
+              <div tabindex="0" role="button" class="btn m-1">
+                  Theme
+                  <svg
+                          width="12px"
+                          height="12px"
+                          class="inline-block h-2 w-2 fill-current opacity-60"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 2048 2048">
+                      <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+                  </svg>
+              </div>
+              <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
+                  <li>
+                      <input
+                              type="radio"
+                              name="theme-dropdown"
+                              class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                              aria-label="Default"
+                              value="default" />
+                  </li>
+                  <li>
+                      <input
+                              type="radio"
+                              name="theme-dropdown"
+                              class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                              aria-label="Retro"
+                              value="retro" />
+                  </li>
+                  <li>
+                      <input
+                              type="radio"
+                              name="theme-dropdown"
+                              class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                              aria-label="Cyberpunk"
+                              value="cyberpunk" />
+                  </li>
+                  <li>
+                      <input
+                              type="radio"
+                              name="theme-dropdown"
+                              class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                              aria-label="Valentine"
+                              value="valentine" />
+                  </li>
+                  <li>
+                      <input
+                              type="radio"
+                              name="theme-dropdown"
+                              class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                              aria-label="Forest"
+                              value="forest" />
+                  </li>
+                  <li>
+                      <input
+                              type="radio"
+                              name="theme-dropdown"
+                              class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                              aria-label="Corporate"
+                              value="corporate" />
+                  </li>
+                  <li>
+                      <input
+                              type="radio"
+                              name="theme-dropdown"
+                              class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                              aria-label="Business"
+                              value="business" />
+                  </li>
+                  <li>
+                      <input
+                              type="radio"
+                              name="theme-dropdown"
+                              class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                              aria-label="Dim"
+                              value="dim" />
+                  </li>
+
+
+              </ul>
+          </div></div>
+      <script src="script.js"></script>
+      <script>
+          // Function to export tasks to CSV
+          function exportToCSV() {
+              const tasks = document.querySelectorAll('#task-list li');
+              let csvContent = 'data:text/csv;charset=utf-8,Task\n'; // Add header
+
+              // Add each task to the CSV content
+              tasks.forEach(task => {
+                  csvContent += task.textContent + '\n';
+              });
+
+              // Create a download link
+              const encodedUri = encodeURI(csvContent);
+              const link = document.createElement('a');
+              link.setAttribute('href', encodedUri);
+              link.setAttribute('download', 'tasks.csv');
+              document.body.appendChild(link);
+
+              // Trigger the download
+              link.click();
+              document.body.removeChild(link);
+          }
+
+          // Attach the function to the button
+          document.getElementById('export-btn').addEventListener('click', exportToCSV);
+      </script>
 </body>
 </html>
+
