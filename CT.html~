@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en" data-theme="dark">
+<html>
 <head>
-    <title>TaskTimer</title>
+    <title>Coin Toss</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,81 +11,51 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div role="tablist" class="tabs tabs-boxed">
-    <a role="tab" class="tab tab-active"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
-    <a role="tab" class="tab" href="RNG.html"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
-    <a role="tab" class="tab" href="ct.html"> <img src="dist/assets/Coin2.svg" class="icon"> Coin Toss</a>
-    <a role="tab" class="tab" href="Settings.html"> <img src="dist/assets/Settings.svg" class="icon"> Settings</a>
+    <a role="tab" class="tab " href="index.html"> <img slot="icon"><img src="dist/assets/task.svg"> Tasks Timer</a>
+    <a role="tab" class="tab" href="RNG.html"> <img slot="icon"><img src="dist/assets/Dice.svg"> Random Generator</a>
+    <a role="tab" class="tab tab-active" href="ct.html"> <img slot="icon"><img src="dist/assets/Coin2.svg"> Coin Toss</a>
+    <a role="tab" class="tab" href="Settings.html"> <img slot="icon"><img src="dist/assets/Settings.svg"> Settings</a>
+
 
 
 </div>
-
-<div class="timer-container">
-
-
-    <div class="app-container">
-
-
-
-
-        <header>
-            <h1 class="text-5xl font-bold">
-                TaskTimer
-            </h1>
-
-            <p class="py-6">Manage your tasks and time efficiently </p>
-        </header>
-
-        <div class="add-task">
-            <input  type="text" id="taskInput" placeholder="Add a new task..." class="input input-bordered input-primary w-full max-w-xs" />
-            <input  type="text" id="descriptionInput" placeholder="Add a Description..." class="input input-bordered input-primary w-full max-w-xs" >
-
-            <button class="btn btn-primary" id="addTaskBtn">
-                Add Task
-            </button>
-        </div>
-
-        <div class="timer-container">
-            <div class="task-select-container">
-
-                <select class="select select-primary w-full task-select"     id="taskSelect" placeholder="";>
-                    <option class= "disabled selected">Select a task</option>
-                </select>
-            </div>
-
-            <div class="timer-display">
-                <div class="progress-ring">
-                    <svg width="200" height="200">
-                        <circle class="progress-ring-circle-bg" cx="100" cy="100" r="90"/>
-                        <circle class="progress-ring-circle" cx="100" cy="100" r="90"/>
-                    </svg>
-                    <div class="time">00:00:00</div>
-                </div>
-                <div class="timer-mode">Stopwatch Mode</div>
-                <div class="timer-label">No task selected</div>
-            </div>
-
-            <div class="timer-controls">
-                <button id="startBtn" class="control-btn btn btn-primary btn-circle btn-outline " >
-                    <img class=play-icon src="/dist/assets/play.svg">
-                </button>
-                <button id="resetBtn" class="control-btn btn btn-primary btn-circle btn-outline ">
-                    <img class=play-icon src="/dist/assets/Stop.svg">
-
-                </button>
-                <button id="modeToggleBtn" class="mode-toggle btn btn-primary btn-outline ">Switch to Timer</button>
-            </div>
-        </div>
-
-        <div id="taskList" class="task-list"> </div>
+<div class="coin-flipper">    <h1 class="text-5xl font-bold">Coin Toss</h1>
+    <div id="coin">
+        <img src="/dist/assets/coin.svg"
+             alt="Coin" width="150" height="150">
     </div>
-</div>
-</div>
-<audio id="notificationSound" src="/dist/countdown_30_second.mp3" volume="1.0"></audio>
-<div class="header-controls">
-    <div class="dropdown mb-72">
+    <p id="result" class="py-6">Click the button to toss the coin!</p>
+    <button onclick="tossCoin()" class=" btn btn-primary ">Toss Coin</button>
+
+    <script>
+        function tossCoin() {
+            const coin = document.getElementById('coin');
+            const result = document.getElementById('result');
+
+            // Remove flip class to reset animation
+            coin.classList.remove('flip');
+
+            // Trigger reflow to restart animation
+            void coin.offsetWidth;
+
+            // Add flip class
+            coin.classList.add('flip');
+
+            // Generate random result
+            const random = Math.random();
+
+            // Show result after animation
+            setTimeout(() => {
+                const outcome = random < 0.5 ? 'Heads' : 'Tails';
+                result.textContent = `It's ${outcome}!`;
+            }, 1000);
+        }
+    </script>
+    <div class="header-controls">     <div class="dropdown mb-72">
         <div tabindex="0" role="button" class="btn m-1">
             Theme
             <svg
@@ -165,8 +135,5 @@
 
 
         </ul>
-    </div></div>
-<script src="script.js"></script>
-
-</body>
-</html>
+    </div>
+</div> </body></html>
