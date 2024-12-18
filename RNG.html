@@ -17,14 +17,93 @@
 <div role="tablist" class="tabs tabs-boxed">
     <a role="tab" class="tab" href="index.html"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
     <a role="tab" class="tab tab-active" href="RNG.html"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
-    <a role="tab" class="tab" href="ct.html"> <img src="dist/assets/Coin2.svg" class="icon"> Coin Toss</a>
-    <a role="tab" class="tab" href="Settings.html"> <img src="dist/assets/Settings.svg" class="icon"> Settings</a>
+    <a role="tab" class="tab" href="https://hp27.netlify.app/"> <img src="dist/assets/link.svg" class="icon"> HomePage</a>
+
+    <a role="tab" class="tab" href="Settings.html"> <img slot="icon" src="dist/assets/Settings.svg" class="icon"> Settings</a>
+</div>
+<div class="dropdown mb-72">
+    <div tabindex="0" role="button" class="btn m-1">
+        Theme
+        <svg
+                width="12px"
+                height="12px"
+                class="inline-block h-2 w-2 fill-current opacity-60"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 2048 2048">
+            <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+        </svg>
+    </div>
+    <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Default"
+                    value="default" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Retro"
+                    value="retro" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Cyberpunk"
+                    value="cyberpunk" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Valentine"
+                    value="valentine" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Forest"
+                    value="forest" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Corporate"
+                    value="corporate" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Business"
+                    value="business" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Dim"
+                    value="dim" />
+        </li>
 
 
-
+    </ul>
 </div>
 
-<div >
+<div class="app-container" >
     <h1 class="text-5xl font-bold text-center py-6">Random Number Generator</h1>
     <div>
         <form id="randomNumberForm" onsubmit="event.preventDefault();">
@@ -41,7 +120,7 @@
                     <input class=" input input-bordered input-primary w-full" id="endInput"></input>
                 </div>
             </div>
-            <div class="Rctrl">
+            <div >
             <button class="btn btn-primary"  type="button" onclick="saveInputs()">Generate</button>
             <button class="btn btn-primary" onclick="clearAll()">Clear All</button>
             <button class="btn btn-primary" id="showTableBtn">Show Result</button>
@@ -64,7 +143,42 @@
         </div>
     </div>
 </div>
-<script>function saveInputs() {
+<div class="coin-flipper">    <h1 class="text-5xl font-bold">Coin Toss</h1>
+    <div id="coin">
+        <img src="/dist/assets/coin.svg"
+             alt="Coin" width="150" height="150">
+    </div>
+    <p id="result" class="py-6">Click the button to toss the coin!</p>
+    <button onclick="tossCoin()" class=" btn btn-primary ">Toss Coin</button>
+
+    <script>
+        function tossCoin() {
+            const coin = document.getElementById('coin');
+            const result = document.getElementById('result');
+
+            // Remove flip class to reset animation
+            coin.classList.remove('flip');
+
+            // Trigger reflow to restart animation
+            void coin.offsetWidth;
+
+            // Add flip class
+            coin.classList.add('flip');
+
+            // Generate random result
+            const random = Math.random();
+
+            // Show result after animation
+            setTimeout(() => {
+                const outcome = random < 0.5 ? 'Heads' : 'Tails';
+                result.textContent = `It's ${outcome}!`;
+            }, 1000);
+        }
+    </script>
+    </div>
+<script>
+
+    function saveInputs() {
     const startValue = parseInt(document.getElementById('startInput').value);
     const endValue = parseInt(document.getElementById('endInput').value);
     const randomNumber = Math.floor(Math.random() * (endValue - startValue + 1)) + startValue;
@@ -146,90 +260,9 @@ document.getElementById('showTableBtn').addEventListener('click', function() {
         tableContainer.style.display = 'none';
         this.textContent = 'Show History';
     }
-});</script>
+});
+</script>
 
-</div>
-<div class="header-controls">
-    <div class="dropdown mb-72">
-        <div tabindex="0" role="button" class="btn m-1">
-            Theme
-            <svg
-                    width="12px"
-                    height="12px"
-                    class="inline-block h-2 w-2 fill-current opacity-60"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 2048 2048">
-                <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
-            </svg>
-        </div>
-        <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Default"
-                        value="default" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Retro"
-                        value="retro" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Cyberpunk"
-                        value="cyberpunk" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Valentine"
-                        value="valentine" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Forest"
-                        value="forest" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Corporate"
-                        value="corporate" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Business"
-                        value="business" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Dim"
-                        value="dim" />
-            </li>
-
-
-        </ul>
-    </div></div>
+</div> </div></div>
 </body>
 </html>
