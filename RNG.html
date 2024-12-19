@@ -1,268 +1,174 @@
-<html >
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title >Random Number Gen</title>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="/dist/assets/tasktimer-logo.png  " type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-
+    <title>Random Number Generator with History</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css"></script>
 </head>
-<body>
+<body class="min-h-screen bg-base-200 p-4">
 <div role="tablist" class="tabs tabs-boxed">
-    <a role="tab" class="tab" href="index.html"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
+    <a role="tab" class="tab"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
     <a role="tab" class="tab tab-active" href="RNG.html"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
     <a role="tab" class="tab" href="https://hp27.netlify.app/"> <img src="dist/assets/link.svg" class="icon"> HomePage</a>
-
-    <a role="tab" class="tab" href="Settings.html"> <img slot="icon" src="dist/assets/Settings.svg" class="icon"> Settings</a>
 </div>
-<div class="dropdown mb-72">
-    <div tabindex="0" role="button" class="btn m-1">
-        Theme
-        <svg
-                width="12px"
-                height="12px"
-                class="inline-block h-2 w-2 fill-current opacity-60"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 2048 2048">
-            <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
-        </svg>
+
+<div class="max-w-4xl mx-auto">
+    <div class="card bg-base-100 shadow-xl mb-4">
+        <div class="card-body">
+            <h2 class="card-title text-5xl font-bold ">True Random Number Generator</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Minimum Value</span>
+                    </label>
+                    <input type="number" id="minValue" value="1" class="input input-bordered w-full" />
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Maximum Value</span>
+                    </label>
+                    <input type="number" id="maxValue" value="100" class="input input-bordered w-full" />
+                </div>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">How Many Numbers?</span>
+                </label>
+                <input type="number" id="quantity" value="1" min="1" max="1000" class="input input-bordered w-full" />
+            </div>
+
+            <div class="card-actions justify-end mt-4">
+                <button id="generateBtn" class="btn btn-primary w-full">
+                    Generate!
+                </button>
+                <button id="clearHistoryBtn" class="btn  btn-error">Clear History</button>
+
+            </div>
+
+            <div id="resultContainer" class="mt-4 hidden">
+                <h3 class="font-bold mb-2">Generated Numbers:</h3>
+                <div id="numbers" class="bg-base-200 p-4 rounded-lg flex flex-wrap gap-2"></div>
+            </div>
+        </div>
     </div>
-    <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
-        <li>
-            <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                    aria-label="Default"
-                    value="default" />
-        </li>
-        <li>
-            <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                    aria-label="Retro"
-                    value="retro" />
-        </li>
-        <li>
-            <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                    aria-label="Cyberpunk"
-                    value="cyberpunk" />
-        </li>
-        <li>
-            <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                    aria-label="Valentine"
-                    value="valentine" />
-        </li>
-        <li>
-            <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                    aria-label="Forest"
-                    value="forest" />
-        </li>
-        <li>
-            <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                    aria-label="Corporate"
-                    value="corporate" />
-        </li>
-        <li>
-            <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                    aria-label="Business"
-                    value="business" />
-        </li>
-        <li>
-            <input
-                    type="radio"
-                    name="theme-dropdown"
-                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                    aria-label="Dim"
-                    value="dim" />
-        </li>
 
-
-    </ul>
-</div>
-
-<div class="app-container" >
-    <h1 class="text-5xl font-bold text-center py-6">Random Number Generator</h1>
-    <div>
-        <form id="randomNumberForm" onsubmit="event.preventDefault();">
-            <div class="field">
-                <label class="label py-6">Starting</label>
-                <div class="control">
-                    <input class=" input input-bordered input-primary w-full"id="startInput"></input>
-                </div>
+    <!-- History Table -->
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <div class="flex justify-between items-center">
+                <h2 class="card-title">Generation History</h2>
             </div>
-
-            <div class="field">
-                <label class="label py-6">Ending</label>
-                <div class="control">
-                    <input class=" input input-bordered input-primary w-full" id="endInput"></input>
-                </div>
+            <div class="overflow-x-auto">
+                <table class="table table-zebra">
+                    <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Range</th>
+                        <th>Quantity</th>
+                        <th>Generated Numbers</th>
+                    </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                    </tbody>
+                </table>
             </div>
-            <div >
-            <button class="btn btn-primary"  type="button" onclick="saveInputs()">Generate</button>
-            <button class="btn btn-primary" onclick="clearAll()">Clear All</button>
-            <button class="btn btn-primary" id="showTableBtn">Show Result</button>
-                </div>
-
-        </form>
-
-        <div class="table-container overflow-x-auto" id="tableContainer" style="display: none;">
-            <table class="table table-zebra ">
-                <thead>
-                <tr>
-                    <th>Starting Value</th>
-                    <th>Ending Value</th>
-                    <th>Random Number</th>
-                </tr>
-                </thead>
-                <tbody id="resultsTable">
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
-<div class="coin-flipper">    <h1 class="text-5xl font-bold">Coin Toss</h1>
-    <div id="coin">
-        <img src="/dist/assets/coin.svg"
-             alt="Coin" width="150" height="150">
-    </div>
-    <p id="result" class="py-6">Click the button to toss the coin!</p>
-    <button onclick="tossCoin()" class=" btn btn-primary ">Toss Coin</button>
 
-    <script>
-        function tossCoin() {
-            const coin = document.getElementById('coin');
-            const result = document.getElementById('result');
-
-            // Remove flip class to reset animation
-            coin.classList.remove('flip');
-
-            // Trigger reflow to restart animation
-            void coin.offsetWidth;
-
-            // Add flip class
-            coin.classList.add('flip');
-
-            // Generate random result
-            const random = Math.random();
-
-            // Show result after animation
-            setTimeout(() => {
-                const outcome = random < 0.5 ? 'Heads' : 'Tails';
-                result.textContent = `It's ${outcome}!`;
-            }, 1000);
-        }
-    </script>
-    </div>
 <script>
+    // Initialize history from localStorage or empty array
+    let history = JSON.parse(localStorage.getItem('rngHistory') || '[]');
+    updateHistoryTable();
 
-    function saveInputs() {
-    const startValue = parseInt(document.getElementById('startInput').value);
-    const endValue = parseInt(document.getElementById('endInput').value);
-    const randomNumber = Math.floor(Math.random() * (endValue - startValue + 1)) + startValue;
+    document.getElementById('generateBtn').addEventListener('click', generateNumbers);
+    document.getElementById('clearHistoryBtn').addEventListener('click', clearHistory);
 
-    // Get the table body element
-    const tableBody = document.getElementById('resultsTable');
+    function generateNumbers() {
+        const minValue = parseInt(document.getElementById('minValue').value);
+        const maxValue = parseInt(document.getElementById('maxValue').value);
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const resultContainer = document.getElementById('resultContainer');
+        const numbersDiv = document.getElementById('numbers');
 
+        // Hide results initially
+        resultContainer.classList.add('hidden');
 
-    // Remove 'bg-base-200' from any previously selected row
-    const selectedRow = tableBody.querySelector('.bg-base-200');
-    if (selectedRow) {
-        selectedRow.classList.remove('bg-base-200');
+        // Generate random numbers using crypto
+        const array = new Uint32Array(quantity);
+        crypto.getRandomValues(array);
+
+        const randomNumbers = Array.from(array).map(num =>
+            Math.floor(num / (0xFFFFFFFF + 1) * (maxValue - minValue + 1) + minValue)
+        );
+
+        // Display results
+        numbersDiv.innerHTML = '';
+        randomNumbers.forEach(num => {
+            const span = document.createElement('span');
+            span.className = 'badge badge-lg';
+            span.textContent = num;
+            numbersDiv.appendChild(span);
+        });
+
+        // Show results
+        resultContainer.classList.remove('hidden');
+
+        // Save to history
+        saveToHistory(minValue, maxValue, quantity, randomNumbers);
     }
 
-    // Create a new table row
-    const newRow = tableBody.insertRow();
-    newRow.classList.add('bg-base-200'); // Add the 'bg-base-200' class
+    function saveToHistory(min, max, quantity, numbers) {
+        const historyEntry = {
+            timestamp: new Date().toISOString(),
+            min: min,
+            max: max,
+            quantity: quantity,
+            numbers: numbers
+        };
 
-    // Create table cells for each value
-    const startCell = newRow.insertCell();
-    const endCell = newRow.insertCell();
-    const randomCell = newRow.insertCell();
+        history.unshift(historyEntry); // Add to beginning of array
+        if (history.length > 10) { // Keep only last 10 entries
+            history.pop();
+        }
 
-    // Set the content of the cells
-    startCell.textContent = startValue;
-    endCell.textContent = endValue;
-    randomCell.textContent = randomNumber;
-    // Save data to cookies
-    saveDataToCookies(startValue, endValue, randomNumber);
-
-}
-
-function saveDataToCookies(start, end, random) {
-    // Get existing cookie data or initialize an empty array
-    let storedData = getCookieData();
-
-    // Add new data as an object
-    storedData.push({ start, end, random });
-
-    // Convert data to JSON string and store in cookie
-    document.cookie = `randomData=${JSON.stringify(storedData)}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
-}
-
-function getCookieData() {
-    // Get the cookie value
-    const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)randomData\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-
-    // Parse and return the data, or an empty array if no cookie exists
-    return cookieValue ? JSON.parse(cookieValue) : [];
-}
-
-// Load data from cookies on page load (optional)
-window.onload = () => {
-    const storedData = getCookieData();
-    const tableBody = document.getElementById('resultsTable');
-
-    storedData.forEach(data => {
-        const newRow = tableBody.insertRow();
-        newRow.insertCell().textContent = data.start;
-        newRow.insertCell().textContent = data.end;
-        newRow.insertCell().textContent = data.random;
-    });
-};
-function clearAll() {
-    // Clear the cookie
-    document.cookie = "randomData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-    // Clear the table
-    const tableBody = document.getElementById('resultsTable');
-    tableBody.innerHTML = ''; // This removes all rows from the table body
-}
-
-document.getElementById('showTableBtn').addEventListener('click', function() {
-    const tableContainer = document.getElementById('tableContainer');
-    if (tableContainer.style.display === 'none') {
-        tableContainer.style.display = 'block';
-        this.textContent = 'Hide History';
-    } else {
-        tableContainer.style.display = 'none';
-        this.textContent = 'Show History';
+        localStorage.setItem('rngHistory', JSON.stringify(history));
+        updateHistoryTable();
     }
-});
+
+    function updateHistoryTable() {
+        const tbody = document.getElementById('historyTableBody');
+        tbody.innerHTML = '';
+
+        history.forEach(entry => {
+            const row = document.createElement('tr');
+
+            // Format timestamp
+            const date = new Date(entry.timestamp);
+            const timeStr = date.toLocaleTimeString();
+
+            row.innerHTML = `
+                <td>${timeStr}</td>
+                <td>${entry.min} - ${entry.max}</td>
+                <td>${entry.quantity}</td>
+                <td class="flex flex-wrap gap-1">
+                    ${entry.numbers.map(n => `<span class="badge badge-sm">${n}</span>`).join('')}
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    function clearHistory() {
+        history = [];
+        localStorage.removeItem('rngHistory');
+        updateHistoryTable();
+    }
 </script>
-
-</div> </div></div>
 </body>
 </html>

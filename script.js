@@ -30,6 +30,12 @@ breakLengthInput.type = 'number';
 breakLengthInput.value = 5;
 breakLengthInput.className = 'input input-bordered w-20';
 
+const settingsToggle = document.querySelector('.settings-toggle');
+const settingsPanel = document.querySelector('.settings-panel');
+
+settingsToggle.addEventListener('click', () => {
+    settingsPanel.style.display = settingsPanel.style.display === 'block' ? 'none' : 'block';
+});
 // Timer Controls
 function startTimer() {
     if (!isRunning) {
@@ -215,3 +221,4 @@ function deleteTask(taskId) {
 
 }
 document.addEventListener('DOMContentLoaded', loadFromCookies);
+

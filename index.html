@@ -17,13 +17,26 @@
     <a role="tab" class="tab tab-active"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
     <a role="tab" class="tab" href="RNG.html"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
     <a role="tab" class="tab" href="https://hp27.netlify.app/"> <img src="dist/assets/link.svg" class="icon"> HomePage</a>
-    <a role="tab" class="tab" href="Settings.html"> <img src="dist/assets/Settings.svg" class="icon"> Settings</a>
 
 
 </div>
 
 <div class="timer-container">
 
+    <div class="settings-panel">
+        <div class="timer-settings">
+        <label>Pomodoro Length(minutes):
+            <input id="pomodoroLengthInput" type="number" value="25" class="input input-bordered w-20">
+        </label>
+            <br>
+        <label>Break Length(minutes):
+            <input id="breakLengthInput" type="number" value="5" class="input input-bordered w-20">
+        </label> <br>
+        <button onclick="updateTimerSettings()" class="btn btn-primary">Save Settings</button>
+    </div>
+        <div><p>Check out material ui for mobiles</p>
+            <a href="https://tasktime-m27.netlify.app/" class="btn btn-primary">Material UI</a></div>
+    </div>
 
     <div class="app-container">
 
@@ -75,7 +88,7 @@
                     <img class=play-icon src="/dist/assets/Stop.svg">
 
                 </button>
-                <button id="modeToggleBtn" class="mode-toggle btn btn-primary btn-outline ">Switch to Timer</button>
+                <button id="modeToggleBtn" class="mode-toggle btn btn-primary btn-outline ">Switch to Pomodromo</button>
             </div>
         </div>
 
@@ -165,8 +178,11 @@
 
 
         </ul>
-    </div></div>
+    </div>
+<button  class="settings-toggle btn btn-circle btn-ghost">
+ <img src="dist/assets/Settings.svg" alt="Settings">
+</button>
+</div>
 <script src="script.js"></script>
-
 </body>
 </html>
