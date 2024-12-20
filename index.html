@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="/dist/assets/tasktimer-logo.png  " type="image/x-icon">
+    <link rel="icon" href="/dist/assets/TaskTimerLogo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
@@ -23,19 +23,20 @@
 
 <div class="timer-container">
 
-    <div class="settings-panel">
+    <div class="settings-panel" >
+        <h1 class="text-2xl font-bold text-center">Settings</h1>
         <div class="timer-settings">
-        <label>Pomodoro Length(minutes):
+        <label class="py-6">Pomodoro Length(minutes):
             <input id="pomodoroLengthInput" type="number" value="25" class="input input-bordered w-20">
         </label>
             <br>
-        <label>Break Length(minutes):
+        <label class="py-6">Break Length(minutes):
             <input id="breakLengthInput" type="number" value="5" class="input input-bordered w-20">
         </label> <br>
-        <button onclick="updateTimerSettings()" class="btn btn-primary">Save Settings</button>
+        <button onclick="updateTimerSettings()" class="btn btn-accent">Save Settings</button>
     </div>
-        <div><p>Check out material ui for mobiles</p>
-            <a href="https://tasktime-m27.netlify.app/" class="btn btn-primary">Material UI</a></div>
+        <div><p class="py-6">Check out material ui for mobiles</p>
+            <a href="https://tasktime-m27.netlify.app/" class="btn btn-link">Material UI</a></div>
     </div>
 
     <div class="app-container">
@@ -45,7 +46,7 @@
 
         <header>
             <h1 class="text-5xl font-bold">
-                TaskTimer
+             <img src="dist/assets/TaskTimerLogo.png" class="hicon">   TaskTimer
             </h1>
 
             <p class="py-6">Manage your tasks and time efficiently </p>
@@ -55,17 +56,15 @@
             <input  type="text" id="taskInput" placeholder="Add a new task..." class="input input-bordered input-primary w-full max-w-xs" />
             <input  type="text" id="descriptionInput" placeholder="Add a Description..." class="input input-bordered input-primary w-full max-w-xs" >
 
-            <button class="btn btn-primary" id="addTaskBtn">
+            <button class="btn btn-primary btn-outline" id="addTaskBtn">
                 Add Task
             </button>
         </div>
 
         <div class="timer-container">
             <div class="task-select-container">
-
-                <select class="select select-primary w-full task-select"     id="taskSelect" placeholder="";>
-                    <option class= "disabled selected">Select a task</option>
-                </select>
+                    <select class="select select-primary select-bordered  w-full task-select"    id="taskSelect" >
+                            </select>
             </div>
 
             <div class="timer-display">

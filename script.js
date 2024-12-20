@@ -109,12 +109,6 @@ function updateUI() {
 // Update existing event listeners to use new storage functions
 document.addEventListener('DOMContentLoaded', loadFromStorage);
 
-function updateTimerSettings() {
-    customPomodoroLength = document.getElementById('pomodoroLengthInput').value * 60;
-    customBreakLength = document.getElementById('breakLengthInput').value * 60;
-    saveToStorage();
-}
-
 function updateTimer() {
     if (isPomodoroMode) {
         const timeLeft = customPomodoroLength - Math.floor((Date.now() - startTime) / 1000);
