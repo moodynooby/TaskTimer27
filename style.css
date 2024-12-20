@@ -38,9 +38,9 @@ header {
 
 
 .timer-container {
-    border-radius: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 2rem;
     padding: 2rem;
-    box-shadow: 0 1px 1px oklch(var(--p));
     z-index: 100;
 
 }
@@ -99,24 +99,6 @@ header {
     align-items: center;
 }
 
-.control-btn {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: none;
-    box-shadow: 0 2px 4px oklch(var(--pc));
-    cursor: pointer;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-}
-
-.control-btn:hover {
-    transform: scale(1.1);
-}
-
 
 .task-list {
     display: flex;
@@ -126,7 +108,7 @@ header {
 
 .task-item {
     background: oklch(var(--pc));
-    border-radius: 0.5rem;
+    border-radius: 2rem;
     padding: 1rem;
     box-shadow: 0 2px 4px oklch(var(--pc));
     transition: all 0.3s;
