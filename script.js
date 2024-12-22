@@ -53,7 +53,7 @@ function startTimer() {
 function updateTimerSettings() {
     customPomodoroLength = pomodoroLengthInput.value * 60;
     customBreakLength = breakLengthInput.value * 60;
-    saveToCookies();
+    saveToStorage();
 }
 
 function saveToStorage() {
@@ -163,7 +163,7 @@ function addTask() {
         taskInput.value = '';
         descriptionInput.value = '';
     }
-    saveToCookies();
+    saveToStorage();
 
 }
 
@@ -211,7 +211,7 @@ function deleteTask(taskId) {
         updateTaskSelect();
         updateTaskList();
     }
-    saveToCookies();
+    saveToStorage();
 
 }
 document.addEventListener('DOMContentLoaded', loadFromCookies);
