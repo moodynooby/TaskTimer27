@@ -123,6 +123,7 @@ header {
 
 .task-item {
     background: oklch(var(--pc));
+    margin: 1rem;
     border-radius: 2rem;
     padding: 1rem;
     box-shadow: 0 2px 4px oklch(var(--pc));
