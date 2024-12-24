@@ -17,7 +17,6 @@
     <a role="tab" class="tab tab-active" href="index.html"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
     <a role="tab" class="tab" href="RNG.html" target="_blank"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
     <a role="tab" class="tab " href="timer.html" target="_blank"> <img src="dist/assets/Timer.svg" class="icon"> Timer</a>
-
     <a role="tab" class="tab" href="https://hp27.netlify.app/" target="_blank"> <img src="dist/assets/link.svg" class="icon"> HomePage</a>
 
 
@@ -25,92 +24,348 @@
 <button  class="settings-toggle btn btn-circle btn-ghost" onclick="settings.showModal()">
     <img src="dist/assets/Settings.svg" alt="Settings">
 </button>
-
-<div class="header-controls">
-    <div class="dropdown mb-72">
-        <div tabindex="0" role="button" class="btn m-1">
-            Theme
-            <svg
-                    width="12px"
-                    height="12px"
-                    class="inline-block h-2 w-2 fill-current opacity-60"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 2048 2048">
-                <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
-            </svg>
-        </div>
-        <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Default"
-                        value="default" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Retro"
-                        value="retro" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Cyberpunk"
-                        value="cyberpunk" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Valentine"
-                        value="valentine" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Forest"
-                        value="forest" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Corporate"
-                        value="corporate" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Business"
-                        value="business" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Dim"
-                        value="dim" />
-            </li>
-
-
-        </ul>
+<div class="dropdown mb-72 Theme">
+    <div tabindex="0" role="button" class="btn m-1">
+        Theme
+        <svg
+                width="12px"
+                height="12px"
+                class="inline-block h-2 w-2 fill-current opacity-60"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 2048 2048">
+            <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+        </svg>
     </div>
+    <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Default"
+                    value="default" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Retro"
+                    value="retro" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Cyberpunk"
+                    value="cyberpunk" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Valentine"
+                    value="valentine" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Forest"
+                    value="forest" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Corporate"
+                    value="corporate" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Business"
+                    value="business" />
+        </li>
+        <li>
+            <input
+                    type="radio"
+                    name="theme-dropdown"
+                    class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label="Dim"
+                    value="dim" />
+        </li>
+
+
+    </ul>
 </div>
+<script>
+    function updateCountdown() {
+    // Generate random numbers
+    const hours = Math.floor(Math.random() * 24);    // 0-23 hours
+    const minutes = Math.floor(Math.random() * 60);  // 0-59 minutes
+    const seconds = Math.floor(Math.random() * 60);  // 0-59 seconds
 
+    // Get all span elements inside countdown
+    const spans = document.querySelectorAll('.countdown > span[data-value]');
 
+    // Update values
+    spans[0].style.setProperty('--value', hours);
+    spans[1].style.setProperty('--value', minutes);
+    spans[2].style.setProperty('--value', seconds);
+}
+
+// Update every 2 seconds
+setInterval(updateCountdown, 1500);
+
+// Initial update
+updateCountdown();</script>
+<dialog class="RNG-container" id="RNG">
+    <div class="modal-box">
+        <header>
+            <h1 class="card-title text-5xl font-bold ">Random Number Generator</h1>
+            <p class="py-6">The True Random Number Generator</p>
+        </header>
+
+        <div class="card bg-neutral text-neutral-content w-96">
+            <div class="card-body">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Minimum Value</span>
+                        </label>
+                        <input type="number" id="minValue" value="1" class="input input-bordered w-full" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Maximum Value</span>
+                        </label>
+                        <input type="number" id="maxValue" value="100" class="input input-bordered w-full" />
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">How Many Numbers?</span>
+                    </label>
+                    <input type="number" id="quantity" value="1" min="1" max="1000" class="input input-bordered w-full" />
+                </div>
+
+                <div class="card-actions justify-end mt-4">
+                    <button id="generateBtn" class="btn btn-primary w-full">
+                        Generate!
+                    </button>
+                    <button id="clearHistoryBtn" class="btn  btn-error">Clear History</button>
+
+                </div>
+
+                <div id="resultContainer" class="mt-4 hidden">
+                    <h3 class="font-bold mb-2">Generated Numbers:</h3>
+                    <div id="numbers" class="bg-base-200 p-4 rounded-lg flex flex-wrap gap-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Table -->
+        <div class="HT card bg-neutral text-neutral-content w-96 shadow-xl ">
+            <div class="card-body">
+                <div class="flex justify-between items-center">
+                    <h2 class="card-title">Generation History</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
+                        <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Range</th>
+                            <th>Quantity</th>
+                            <th>Generated Numbers</th>
+                        </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script>
+                // Initialize history from localStorage or empty array
+                let history = JSON.parse(localStorage.getItem('rngHistory') || '[]');
+                updateHistoryTable();
+
+                document.getElementById('generateBtn').addEventListener('click', generateNumbers);
+                document.getElementById('clearHistoryBtn').addEventListener('click', clearHistory);
+
+                function generateNumbers() {
+                    const minValue = parseInt(document.getElementById('minValue').value);
+                    const maxValue = parseInt(document.getElementById('maxValue').value);
+                    const quantity = parseInt(document.getElementById('quantity').value);
+                    const resultContainer = document.getElementById('resultContainer');
+                    const numbersDiv = document.getElementById('numbers');
+
+                    // Hide results initially
+                    resultContainer.classList.add('hidden');
+
+                    // Generate random numbers using crypto
+                    const array = new Uint32Array(quantity);
+                    crypto.getRandomValues(array);
+
+                    const randomNumbers = Array.from(array).map(num =>
+                        Math.floor(num / (0xFFFFFFFF + 1) * (maxValue - minValue + 1) + minValue)
+                    );
+
+                    // Display results
+                    numbersDiv.innerHTML = '';
+                    randomNumbers.forEach(num => {
+                        const span = document.createElement('span');
+                        span.className = 'badge badge-lg';
+                        span.textContent = num;
+                        numbersDiv.appendChild(span);
+                    });
+
+                    // Show results
+                    resultContainer.classList.remove('hidden');
+
+                    // Save to history
+                    saveToHistory(minValue, maxValue, quantity, randomNumbers);
+                }
+
+                function saveToHistory(min, max, quantity, numbers) {
+                    const historyEntry = {
+                        timestamp: new Date().toISOString(),
+                        min: min,
+                        max: max,
+                        quantity: quantity,
+                        numbers: numbers
+                    };
+
+                    history.unshift(historyEntry); // Add to beginning of array
+                    if (history.length > 10) { // Keep only last 10 entries
+                        history.pop();
+                    }
+
+                    localStorage.setItem('rngHistory', JSON.stringify(history));
+                    updateHistoryTable();
+                }
+
+                function updateHistoryTable() {
+                    const tbody = document.getElementById('historyTableBody');
+                    tbody.innerHTML = '';
+
+                    history.forEach(entry => {
+                        const row = document.createElement('tr');
+
+                        // Format timestamp
+                        const date = new Date(entry.timestamp);
+                        const timeStr = date.toLocaleTimeString();
+
+                        row.innerHTML = `
+                <td>${timeStr}</td>
+                <td>${entry.min} - ${entry.max}</td>
+                <td>${entry.quantity}</td>
+                <td class="flex flex-wrap gap-1">
+                    ${entry.numbers.map(n => `<span class="badge badge-sm">${n}</span>`).join('')}
+                </td>
+                `;
+                        tbody.appendChild(row);
+                    });
+                }
+
+                function clearHistory() {
+                    history = [];
+                    localStorage.removeItem('rngHistory');
+                    updateHistoryTable();
+                }
+            </script>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn btn-primary ">Done</button>
+                </form>
+            </div>
+
+        </div>
+
+</dialog>
+<dialog class="F1" id="F1">
+    <button class="btn btn-outline btn-primary">ME! </button> <textarea class="textarea textarea-bordered" placeholder="Yahoo!"></textarea>
+    <div class="form-control">
+    <label class="label cursor-pointer">
+        <span class="label-text">Remember me - FireFox</span>
+        <input type="checkbox" checked="checked" class="checkbox checkbox-primary" />
+    </label>
+    </div>
+    <div class="diff aspect-[16/9]">
+        <div class="diff-item-1">
+            <img alt="daisy" src="https://img.daisyui.com/images/stock/photo-1560717789-0ac7c58ac90a.webp" />
+        </div>
+        <div class="diff-item-2">
+            <img
+                    alt="daisy"
+                    src="https://img.daisyui.com/images/stock/photo-1560717789-0ac7c58ac90a-blur.webp" />
+        </div>
+        <div class="diff-resizer"></div>
+    </div>
+    <input type="checkbox" class="toggle toggle-info" checked="checked" />
+    <label class="swap swap-flip text-9xl">
+        <!-- this hidden checkbox controls the state -->
+        <input type="checkbox" />
+
+        <div class="swap-on">😈</div>
+        <div class="swap-off">😇</div>
+    </label>
+    <div class="rating gap-1">
+        <input type="radio" name="rating-3" class="mask mask-heart bg-red-400" />
+        <input type="radio" name="rating-3" class="mask mask-heart bg-orange-400" checked="checked" />
+        <input type="radio" name="rating-3" class="mask mask-heart bg-yellow-400" />
+        <input type="radio" name="rating-3" class="mask mask-heart bg-lime-400" />
+        <input type="radio" name="rating-3" class="mask mask-heart bg-green-400" />
+    </div>
+    <label class="swap swap-rotate">
+        <!-- this hidden checkbox controls the state -->
+        <input type="checkbox" />
+
+        <!-- sun icon -->
+        <svg
+                class="swap-on h-10 w-10 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24">
+            <path
+                    d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+        </svg>
+
+        <!-- moon icon -->
+        <svg
+                class="swap-off h-10 w-10 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24">
+            <path
+                    d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+        </svg>
+    </label>
+</dialog>
+<dialog class="F2" id="F2">
+        <span class="countdown font-mono text-2xl">
+            <span data-value="0"></span>
+            :
+            <span data-value="0"></span>
+            :
+            <span data-value="0"></span>
+        </span>    <progress class="progress w-56"></progress><br>
+    <span class="loading loading-dots loading-lg"></span>
+    <span class="loading loading-spinner loading-lg"></span>
+    <span class="loading loading-ring loading-lg"></span>
+    <span class="loading loading-ball loading-lg"></span>
+    <span class="loading loading-bars loading-lg"></span>
+    <span class="loading loading-infinity loading-lg"></span>
+
+</dialog>
     <dialog class="settings "  id="settings">
         <div class="modal-box">
         <h1 class="text-2xl font-bold text-center"> Settings</h1>
@@ -136,7 +391,6 @@
     </dialog>
     <div class="app-container">
         <div id="taskList" class="task-list"> </div>
-
         <div class="timer-container">
         <header>
             <h1 class="text-5xl font-bold">
@@ -187,171 +441,34 @@
 
     </div>
         <div class="divider divider-horizontal">    </div>
+        <div class="max-w-4xl mx-auto">
+            <header> <h1 class="text-5xl font-bold">HDHA</h1><p class="py-6">Hyper Deficiency Hy...</p></header>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" checked="checked" />
+                <div class="collapse-title text-xl font-medium">Procrastinating?... Click Here..</div>
+                <div class="collapse-content">
+                    <button  class="btn  btn-primary" onclick="RNG.showModal()">
+                        Random Number Generator
+                    </button>
 
-        <div class="max-w-4xl mx-auto RNG-container">
-            <header>
-            <h1 class="card-title text-5xl font-bold ">Random Generator</h1>
-                <p class="py-6">The True Random Number Generator</p>
+                </div>
+            </div>
+            <div class="collapse collapse-plus bg-base-200">
+                <input type="radio" name="my-accordion-3" checked="checked" />
+                <div class="collapse-title text-xl font-medium">Feeling Figety?... Click Here..</div>
+                <div class="collapse-content">
+                    <button  class="btn  btn-primary" onclick="F1.showModal()">1</button>
+                    <button  class="btn  btn-primary" onclick="F2.showModal()" onclick="F2">2</button>
 
-            </header>
-            <div class="card bg-neutral text-neutral-content w-96">
-                <div class="card-body">
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Minimum Value</span>
-                            </label>
-                            <input type="number" id="minValue" value="1" class="input input-bordered w-full" />
-                        </div>
-
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Maximum Value</span>
-                            </label>
-                            <input type="number" id="maxValue" value="100" class="input input-bordered w-full" />
-                        </div>
-                    </div>
-
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">How Many Numbers?</span>
-                        </label>
-                        <input type="number" id="quantity" value="1" min="1" max="1000" class="input input-bordered w-full" />
-                    </div>
-
-                    <div class="card-actions justify-end mt-4">
-                        <button id="generateBtn" class="btn btn-primary w-full">
-                            Generate!
-                        </button>
-                        <button id="clearHistoryBtn" class="btn  btn-error">Clear History</button>
-
-                    </div>
-
-                    <div id="resultContainer" class="mt-4 hidden">
-                        <h3 class="font-bold mb-2">Generated Numbers:</h3>
-                        <div id="numbers" class="bg-base-200 p-4 rounded-lg flex flex-wrap gap-2"></div>
-                    </div>
                 </div>
             </div>
 
-            <!-- History Table -->
-            <div class="HT card bg-neutral text-neutral-content w-96 shadow-xl ">
-                <div class="card-body">
-                    <div class="flex justify-between items-center">
-                        <h2 class="card-title">Generation History</h2>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="table table-zebra">
-                            <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Range</th>
-                                <th>Quantity</th>
-                                <th>Generated Numbers</th>
-                            </tr>
-                            </thead>
-                            <tbody id="historyTableBody">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-<script>
-                // Initialize history from localStorage or empty array
-                let history = JSON.parse(localStorage.getItem('rngHistory') || '[]');
-                updateHistoryTable();
-
-                document.getElementById('generateBtn').addEventListener('click', generateNumbers);
-                document.getElementById('clearHistoryBtn').addEventListener('click', clearHistory);
-
-                function generateNumbers() {
-                const minValue = parseInt(document.getElementById('minValue').value);
-                const maxValue = parseInt(document.getElementById('maxValue').value);
-                const quantity = parseInt(document.getElementById('quantity').value);
-                const resultContainer = document.getElementById('resultContainer');
-                const numbersDiv = document.getElementById('numbers');
-
-                // Hide results initially
-                resultContainer.classList.add('hidden');
-
-                // Generate random numbers using crypto
-                const array = new Uint32Array(quantity);
-                crypto.getRandomValues(array);
-
-                const randomNumbers = Array.from(array).map(num =>
-                Math.floor(num / (0xFFFFFFFF + 1) * (maxValue - minValue + 1) + minValue)
-                );
-
-                // Display results
-                numbersDiv.innerHTML = '';
-                randomNumbers.forEach(num => {
-                const span = document.createElement('span');
-                span.className = 'badge badge-lg';
-                span.textContent = num;
-                numbersDiv.appendChild(span);
-                });
-
-                // Show results
-                resultContainer.classList.remove('hidden');
-
-                // Save to history
-                saveToHistory(minValue, maxValue, quantity, randomNumbers);
-                }
-
-                function saveToHistory(min, max, quantity, numbers) {
-                const historyEntry = {
-                timestamp: new Date().toISOString(),
-                min: min,
-                max: max,
-                quantity: quantity,
-                numbers: numbers
-                };
-
-                history.unshift(historyEntry); // Add to beginning of array
-                if (history.length > 10) { // Keep only last 10 entries
-                history.pop();
-                }
-
-                localStorage.setItem('rngHistory', JSON.stringify(history));
-                updateHistoryTable();
-                }
-
-                function updateHistoryTable() {
-                const tbody = document.getElementById('historyTableBody');
-                tbody.innerHTML = '';
-
-                history.forEach(entry => {
-                const row = document.createElement('tr');
-
-                // Format timestamp
-                const date = new Date(entry.timestamp);
-                const timeStr = date.toLocaleTimeString();
-
-                row.innerHTML = `
-                <td>${timeStr}</td>
-                <td>${entry.min} - ${entry.max}</td>
-                <td>${entry.quantity}</td>
-                <td class="flex flex-wrap gap-1">
-                    ${entry.numbers.map(n => `<span class="badge badge-sm">${n}</span>`).join('')}
-                </td>
-                `;
-                tbody.appendChild(row);
-                });
-                }
-
-                function clearHistory() {
-                history = [];
-                localStorage.removeItem('rngHistory');
-                updateHistoryTable();
-                }
-                </script>
-            </
-            </div>
-
+        </div>
         </div>
 
     </div>
 
+    </div>
 <audio id="notificationSound" src="/dist/audio-editor-output.mp3" volume="1.0"></audio>
 <script src="script.js"></script>
 </body>

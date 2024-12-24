@@ -209,3 +209,12 @@ function deleteTask(taskId) {
 }
 document.addEventListener('DOMContentLoaded', loadFromCookies);
 
+// HTML Structure
+// <span class="countdown font-mono text-2xl">
+//   <span data-value="0"></span>
+//   :
+//   <span data-value="0"></span>
+//   :
+//   <span data-value="0"></span>
+// </span>
+

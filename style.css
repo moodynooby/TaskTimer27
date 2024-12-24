@@ -18,12 +18,12 @@ body {
 
 }
 
-.header-controls {
-    position: absolute;
-    right: 0.1rem;
+.Theme {
     display: flex;
     gap: 0.5rem;
-    justify-content: right;
+    position: absolute;
+    top: 4rem;
+    right: 22rem;
 }
 header {
     text-align: center;
@@ -225,3 +225,22 @@ settings-toggle {
 .HT {
     top : 1rem
 }
+.F1 {
+    border-radius: 1rem;
+    border: 1px solid oklch(var(--p));
+    padding: 1rem;
+    align-items: flex-start;
+    align-content: space-evenly;
+    transform: scale(1.1);
+
+
+}
+.F2  {
+    border-radius: 1rem;
+    border: 1px solid oklch(var(--p));
+    padding: 1rem;
+    align-items: flex-start;
+    align-content: space-evenly;
+    transform: scale(2);
+}
+
