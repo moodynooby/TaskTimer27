@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="en" data-theme="dark">
+<head>
+    <title>TaskTimer</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/dist/assets/TaskTimerLogo2.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div role="tablist" class="tabs tabs-boxed">
+    <a role="tab" class="tab" href="index.html" target="_blank"> <img src="dist/assets/Task.svg" class="icon"> Tasks Timer</a>
+    <a role="tab" class="tab" href="RNG.html" target="_blank"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
+    <a role="tab" class="tab tab-active" href="timer.html"> <img src="dist/assets/Timer.svg" class="icon"> Timer</a>
+    <a role="tab" class="tab" href="https://hp27.netlify.app/" target="_blank"> <img src="dist/assets/link.svg" class="icon"> HomePage</a>
+
+
+</div>
+
+<dialog class="settings "  id="settings">
+    <div class="modal-box">
+        <h1 class="text-2xl font-bold text-center"> Settings</h1>
+        <div class="timer-settings">
+            <label class="py-6">Pomodoro Length(minutes):
+                <input id="pomodoroLengthInput" type="number" value="25" class="input input-bordered w-20">
+            </label>
+            <br>
+            <label class="py-6">Break Length(minutes):
+                <input id="breakLengthInput" type="number" value="5" class="input input-bordered w-20">
+            </label> <br>
+        </div>
+        <div><p class="py-6">Check out material ui for mobiles</p>
+            <a href="https://tasktime-m27.netlify.app/" class="btn btn-link">Material UI</a></div>
+
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn btn-error ">Cancel</button>
+                <button onclick="updateTimerSettings()" class="btn btn-primary">Save Settings </button>
+            </form>
+        </div>
+    </div>
+</dialog>
+
+<div class="app-container">
+
+    <div class="timer-container">
+        <header>
+            <h1 class="text-5xl font-bold">
+                Timer
+            </h1>
+
+            <p class="py-6">Manage  time efficiently </p>
+        </header>
+            <div class="timer-display">
+                <div class="progress-ring">
+                    <svg width="200" height="200">
+                        <circle class="progress-ring-circle-bg" cx="100" cy="100" r="90"/>
+                        <circle class="progress-ring-circle" cx="100" cy="100" r="90"/>
+                    </svg>
+                    <div class="time">00:00:00</div>
+                </div>
+                <div class="timer-mode">Stopwatch Mode</div>
+            </div>
+
+            <div class="timer-controls">
+                <button id="startBtn" class="control-btn btn btn-primary btn-circle btn-outline " >
+                    <img class=play-icon src="/dist/assets/play.svg">
+                </button>
+                <button id="resetBtn" class="control-btn btn btn-primary btn-circle btn-outline ">
+                    <img class=play-icon src="/dist/assets/Stop.svg">
+
+                </button>
+                <button id="modeToggleBtn" class="mode-toggle btn btn-primary btn-outline ">Switch to Pomodromo</button>
+            </div>
+
+        </div>
+
+    </div>
+
+<div class="header-controls">
+    <div class="dropdown mb-72">
+        <div tabindex="0" role="button" class="btn m-1">
+            Theme
+            <svg
+                    width="12px"
+                    height="12px"
+                    class="inline-block h-2 w-2 fill-current opacity-60"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 2048 2048">
+                <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+            </svg>
+        </div>
+        <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Default"
+                        value="default" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Retro"
+                        value="retro" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Cyberpunk"
+                        value="cyberpunk" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Valentine"
+                        value="valentine" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Forest"
+                        value="forest" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Corporate"
+                        value="corporate" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Business"
+                        value="business" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Dim"
+                        value="dim" />
+            </li>
+
+
+        </ul>
+    </div>
+    <button  class="settings-toggle btn btn-circle btn-ghost" onclick="settings.showModal()">
+        <img src="dist/assets/Settings.svg" alt="Settings">
+    </button>
+</div>
+
+
+<audio id="notificationSound" src="/dist/audio-editor-output.mp3" volume="1.0"></audio>
+<script src="script.js"></script>
+</body>
+</html>

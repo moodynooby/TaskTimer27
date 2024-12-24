@@ -15,14 +15,17 @@
 <body>
 <div role="tablist" class="tabs tabs-boxed">
     <a role="tab" class="tab tab-active" href="index.html"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
-    <a role="tab" class="tab" href="RNG.html"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
-    <a role="tab" class="tab" href="https://hp27.netlify.app/"> <img src="dist/assets/link.svg" class="icon"> HomePage</a>
+    <a role="tab" class="tab" href="RNG.html" target="_blank"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
+    <a role="tab" class="tab " href="timer.html"> <img src="dist/assets/Timer.svg" class="icon"> Timer</a>
+
+    <a role="tab" class="tab" href="https://hp27.netlify.app/" target="_blank"> <img src="dist/assets/link.svg" class="icon"> HomePage</a>
 
 
 </div>
 
-    <div class="settings-panel" >
-        <h1 class="text-2xl font-bold text-center">Settings</h1>
+    <dialog class="settings "  id="settings">
+        <div class="modal-box">
+        <h1 class="text-2xl font-bold text-center"> Settings</h1>
         <div class="timer-settings">
         <label class="py-6">Pomodoro Length(minutes):
             <input id="pomodoroLengthInput" type="number" value="25" class="input input-bordered w-20">
@@ -31,20 +34,25 @@
         <label class="py-6">Break Length(minutes):
             <input id="breakLengthInput" type="number" value="5" class="input input-bordered w-20">
         </label> <br>
-        <button onclick="updateTimerSettings()" class="btn btn-accent">Save Settings</button>
     </div>
         <div><p class="py-6">Check out material ui for mobiles</p>
             <a href="https://tasktime-m27.netlify.app/" class="btn btn-link">Material UI</a></div>
-    </div>
 
+          <div class="modal-action">
+            <form method="dialog">
+            <button class="btn btn-error ">Cancel</button>
+                <button onclick="updateTimerSettings()" class="btn btn-primary">Save Settings </button>
+            </form>
+            </div>
+        </div>
+    </dialog>
     <div class="app-container">
+        <div id="taskList" class="task-list"> </div>
 
-
-
-
+        <div class="timer-container">
         <header>
             <h1 class="text-5xl font-bold">
-             <img src="dist/assets/TaskTimerLogo.png" class="hicon">   TaskTimer
+               TaskTimer
             </h1>
 
             <p class="py-6">Manage your tasks and time efficiently </p>
@@ -59,7 +67,7 @@
             </button>
         </div>
 
-        <div class="timer-container">
+        <div class="timer-container card bg-neutral text-neutral-content">
             <div class="task-select-container">
                     <select class="select select-primary select-bordered  w-full task-select"    id="taskSelect" >
                             </select>
@@ -89,10 +97,172 @@
             </div>
         </div>
 
-        <div id="taskList" class="task-list"> </div>
     </div>
-</div>
-</div>
+
+        <div class="max-w-4xl mx-auto RNG-container">
+            <header>
+            <h1 class="card-title text-5xl font-bold ">Random Generator</h1>
+                <p class="py-6">The True Random Number Generator</p>
+
+            </header>
+            <div class="card bg-neutral text-neutral-content w-96">
+                <div class="card-body">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Minimum Value</span>
+                            </label>
+                            <input type="number" id="minValue" value="1" class="input input-bordered w-full" />
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Maximum Value</span>
+                            </label>
+                            <input type="number" id="maxValue" value="100" class="input input-bordered w-full" />
+                        </div>
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">How Many Numbers?</span>
+                        </label>
+                        <input type="number" id="quantity" value="1" min="1" max="1000" class="input input-bordered w-full" />
+                    </div>
+
+                    <div class="card-actions justify-end mt-4">
+                        <button id="generateBtn" class="btn btn-primary w-full">
+                            Generate!
+                        </button>
+                        <button id="clearHistoryBtn" class="btn  btn-error">Clear History</button>
+
+                    </div>
+
+                    <div id="resultContainer" class="mt-4 hidden">
+                        <h3 class="font-bold mb-2">Generated Numbers:</h3>
+                        <div id="numbers" class="bg-base-200 p-4 rounded-lg flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="HT card bg-neutral text-neutral-content w-96 shadow-xl ">
+                <div class="card-body">
+                    <div class="flex justify-between items-center">
+                        <h2 class="card-title">Generation History</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="table table-zebra">
+                            <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Range</th>
+                                <th>Quantity</th>
+                                <th>Generated Numbers</th>
+                            </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+<script>
+                // Initialize history from localStorage or empty array
+                let history = JSON.parse(localStorage.getItem('rngHistory') || '[]');
+                updateHistoryTable();
+
+                document.getElementById('generateBtn').addEventListener('click', generateNumbers);
+                document.getElementById('clearHistoryBtn').addEventListener('click', clearHistory);
+
+                function generateNumbers() {
+                const minValue = parseInt(document.getElementById('minValue').value);
+                const maxValue = parseInt(document.getElementById('maxValue').value);
+                const quantity = parseInt(document.getElementById('quantity').value);
+                const resultContainer = document.getElementById('resultContainer');
+                const numbersDiv = document.getElementById('numbers');
+
+                // Hide results initially
+                resultContainer.classList.add('hidden');
+
+                // Generate random numbers using crypto
+                const array = new Uint32Array(quantity);
+                crypto.getRandomValues(array);
+
+                const randomNumbers = Array.from(array).map(num =>
+                Math.floor(num / (0xFFFFFFFF + 1) * (maxValue - minValue + 1) + minValue)
+                );
+
+                // Display results
+                numbersDiv.innerHTML = '';
+                randomNumbers.forEach(num => {
+                const span = document.createElement('span');
+                span.className = 'badge badge-lg';
+                span.textContent = num;
+                numbersDiv.appendChild(span);
+                });
+
+                // Show results
+                resultContainer.classList.remove('hidden');
+
+                // Save to history
+                saveToHistory(minValue, maxValue, quantity, randomNumbers);
+                }
+
+                function saveToHistory(min, max, quantity, numbers) {
+                const historyEntry = {
+                timestamp: new Date().toISOString(),
+                min: min,
+                max: max,
+                quantity: quantity,
+                numbers: numbers
+                };
+
+                history.unshift(historyEntry); // Add to beginning of array
+                if (history.length > 10) { // Keep only last 10 entries
+                history.pop();
+                }
+
+                localStorage.setItem('rngHistory', JSON.stringify(history));
+                updateHistoryTable();
+                }
+
+                function updateHistoryTable() {
+                const tbody = document.getElementById('historyTableBody');
+                tbody.innerHTML = '';
+
+                history.forEach(entry => {
+                const row = document.createElement('tr');
+
+                // Format timestamp
+                const date = new Date(entry.timestamp);
+                const timeStr = date.toLocaleTimeString();
+
+                row.innerHTML = `
+                <td>${timeStr}</td>
+                <td>${entry.min} - ${entry.max}</td>
+                <td>${entry.quantity}</td>
+                <td class="flex flex-wrap gap-1">
+                    ${entry.numbers.map(n => `<span class="badge badge-sm">${n}</span>`).join('')}
+                </td>
+                `;
+                tbody.appendChild(row);
+                });
+                }
+
+                function clearHistory() {
+                history = [];
+                localStorage.removeItem('rngHistory');
+                updateHistoryTable();
+                }
+                </script>
+            </
+            </div>
+
+        </div>
+
+    </div>
+
 <audio id="notificationSound" src="/dist/audio-editor-output.mp3" volume="1.0"></audio>
 <div class="header-controls">
     <div class="dropdown mb-72">
@@ -176,7 +346,7 @@
 
         </ul>
     </div>
-<button  class="settings-toggle btn btn-circle btn-ghost">
+<button  class="settings-toggle btn btn-circle btn-ghost" onclick="settings.showModal()">
  <img src="dist/assets/Settings.svg" alt="Settings">
 </button>
 </div>
