@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-RNG.html<html lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@ RNG.html<html lang="en">
 <div role="tablist" class="tabs tabs-boxed">
     <a role="tab" class="tab" href="index.html" target="_blank"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
     <a role="tab" class="tab tab-active" href="RNG.html"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
-    <a role="tab" class="tab " href="timer.html"> <img src="dist/assets/Timer.svg" class="icon"> Timer</a>
+    <a role="tab" class="tab " href="timer.html" target="_blank"> <img src="dist/assets/Timer.svg" class="icon"> Timer</a>
 
     <a role="tab" class="tab" href="https://hp27.netlify.app/" target="_blank"> <img src="dist/assets/link.svg" class="icon"> HomePage</a>
 </div>
@@ -178,5 +178,89 @@ RNG.html<html lang="en">
         updateHistoryTable();
     }
 </script>
+<div class="header-controls">
+    <div class="dropdown mb-72">
+        <div tabindex="0" role="button" class="btn m-1">
+            Theme
+            <svg
+                    width="12px"
+                    height="12px"
+                    class="inline-block h-2 w-2 fill-current opacity-60"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 2048 2048">
+                <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+            </svg>
+        </div>
+        <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Default"
+                        value="default" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Retro"
+                        value="retro" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Cyberpunk"
+                        value="cyberpunk" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Valentine"
+                        value="valentine" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Forest"
+                        value="forest" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Corporate"
+                        value="corporate" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Business"
+                        value="business" />
+            </li>
+            <li>
+                <input
+                        type="radio"
+                        name="theme-dropdown"
+                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                        aria-label="Dim"
+                        value="dim" />
+            </li>
+
+
+        </ul>
+    </div>
+</div>
+
 </body>
 </html>

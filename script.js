@@ -176,12 +176,12 @@ function updateTaskList() {
         const taskElement = document.createElement('div');
         taskElement.className = 'task-item';
         taskElement.innerHTML = `
-             <button onclick="deleteTask(${task.id})" class="btn btn-error btn-sm btn-circle delete" ><img src="/dist/assets/delete.svg"></button>
+<div class="form-control">
+  <label class="label cursor-pointer">             <h3>${task.name}</h3>
+            Time spent: ${Math.floor(task.timeSpent / 3600)}h ${Math.floor((task.timeSpent % 3600) / 60)}m             
 
-            <h3>${task.name}</h3>            <p>${task.description}</p>
-
-            <p>Time spent: ${Math.floor(task.timeSpent / 3600)}h ${Math.floor((task.timeSpent % 3600) / 60)}m             
-</p>
+    <input type="checkbox"  class="checkbox checkbox-error" onclick="deleteTask(${task.id})"/>  </label>         <p> ${task.description}</p>
+</div>
         `;
         taskList.appendChild(taskElement);
     });
