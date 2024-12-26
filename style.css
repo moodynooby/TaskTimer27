@@ -196,15 +196,14 @@ header {
 .settings-panel {
     position: sticky;
     top: 3rem;
-    width: 20rem;
+    width: 25rem;
     left: 35rem;
     border: 0.5px solid oklch(var(--p));
     border-radius: 0.5rem;
     padding: 2rem;
+    height: 50rem;
     box-shadow: 0 2px 2px oklch(var(--p));
     display: none;
-
-
     z-index: 10;
 }
 settings-toggle {
