@@ -1,335 +1,43 @@
-<!DOCTYPE html><html lang="en" data-theme="dark">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskTimer</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="/public/tasktimer-logo.png" type="image/x-icon">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script type="importmap">
-        {
-          "imports": {
-            "@material/web/": "https://esm.run/@material/web/"
-          }
-        }
-    </script>
-    <script type="module">
-        import '@material/web/all.js';
-        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-
-        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-    </script>
-    <script src="js/timer.js"></script>
-    <script src="js/pomodoro.js"></script>
-    <script src="js/taskManager.js"></script>
-    <script src="script.js"></script>
-
+    <title>Task Timer</title>
+    <link href="https://cdn.jsdelivr.net/npm/beercss@3.4.13/dist/cdn/beer.min.css" rel="stylesheet">
+  <link rel="icon" href="/public/tasktimer-logo.png" type="image/x-icon">
+    <link rel="stylesheet href=New/style.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.4.13/dist/cdn/beer.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.0/dist/cdn/material-dynamic-colors.min.js"></script>
 </head>
-<body>
-<div class="tabs-container">
-    <md-tabs active-index="0">
-        <md-primary-tab> <md-icon slot="icon"><img src="dist/assets/task.svg"> </md-icon>Tasks Timer</md-primary-tab>
-        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg"></md-icon>  Random Generator</md-primary-tab>
-        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Coin2.svg"></md-icon>  Coin Toss</md-primary-tab>
+<body class="dark">
 
+    <nav class="blur">
+        <button class="circle transparent" onclick="WIP()">
+            <i class="primary-text">menu</i>
+        </button>
+        <h5 class="max center-align">TaskTimer Mobile</h5>
+        <button class="circle transparent settings-toggle primary-text" onclick="WIP()">
+            <i class="primary-text">Settings</i>
+        </button>
+    </nav>
+<div id="WIP" class="large-blur" style="display: none">We Are Working on it</div>
 
-    </md-tabs>
-    <div class="tab-panels">
-        <div class="header-controls">
-            <md-filled-button class="theme-toggle">
-                <md-icon slot="icon" class="theme-toggle"></md-icon>
-            </md-filled-button>
-            <md-fab  class="settings-toggle">
-                <md-icon slot="icon"><img src="dist/assets/Setting.svg" alt="Settings"></md-icon>
-            </md-fab>
-
-        </div>
-
-        <div class="tab-panel" id="timerPanel">
-            <div class="timer-container">
-
-                <div class="settings-panel">
-                    <h3>   Settings</h3>
-                    <div class="setting-group">
-                        <label>
-                            Work Duration (min)
-                            <input type="number" id="workDuration" value="50" min="1" max="120">
-                        </label>
-                        <label>
-                            Break Duration (min)
-                            <input type="number" id="breakDuration" value="10" min="1" max="30">
-                        </label>
-                        <label>Choose your primary color</label>
-                        <input type="color" id="primaryColorPicker" value="#294a9d">
-                    </div>
+<main class="responsive">
+        <div class="card m-m">
+            <div class="p-m ">
+                <h6 class=" small-padding">Add New Task -</h6>
+                <div class="field label border">
+                    <input type="text" id="taskInput" required class="round">
+                    <label>Task Name</label>
                 </div>
-            <div class="app-container">
-
-
-
-
-            <header>
-                <h1>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="timer-icon">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                    TaskTimer
-                </h1>
-                <p>Manage your tasks and time efficiently </p>
-            </header>
-
-            <div class="add-task">
-                <md-outlined-text-field  type="text" id="taskInput" label="Add a new task..."> </md-outlined-text-field>
-                <md-outlined-text-field  type="text" id="descriptionInput" label="Add a Description..."> </md-outlined-text-field>
-
-                <md-filled-button id="addTaskBtn">
-                    Add Task
-                </md-filled-button>
+                <button class="button primary" onclick="addTask()">Add Task</button>
             </div>
-
-            <div class="timer-container">
-                <div class="task-select-container">
-
-                        <select    id="taskSelect" class="task-select" label="Select a task";></select>
-
-                </div>
-
-                <div class="timer-display">
-                    <div class="progress-ring">
-                        <svg width="200" height="200">
-                            <circle class="progress-ring-circle-bg" cx="100" cy="100" r="90"/>
-                            <circle class="progress-ring-circle" cx="100" cy="100" r="90"/>
-                        </svg>
-                        <div class="time">00:00:00</div>
-                    </div>
-                    <div class="timer-mode">Stopwatch Mode</div>
-                    <div class="timer-label">No task selected</div>
-                </div>
-
-                <div class="timer-controls">
-                    <button id="startBtn" class="control-btn">
-                       <img class=play-icon src="/dist/assets/play.svg">
-                    </button>
-                    <button id="resetBtn" class="control-btn">
-                        <img class=play-icon src="/dist/assets/Stop.svg">
-
-                    </button>
-                    <md-filled-button id="modeToggleBtn" class="mode-toggle">Switch to Pomodoro</md-filled-button>
-                </div>
-            </div>
-
-            <div id="taskList" class="task-list"> </div>
         </div>
-                </div>
-        </div>
-            <div class="tab-panel " id="randomGeneratorPanel" style="display: none;">
-                <!-- Random Number Generator Section -->
-                <div >
-                    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold ">Random Number Generator</h1>
-                <div>
-                    <form id="randomNumberForm" onsubmit="event.preventDefault();">
-                    <div class="field">
-                            <label class="label">Starting</label>
-                            <div class="control">
-                                <md-outlined-text-field class="RNDinput" id="startInput"></md-outlined-text-field>
-                            </div>
-                        </div>
+<br>
+        <div id="taskList" class="m-m"></div>
+    </main>
 
-                        <div class="field">
-                            <label class="label">Ending</label>
-                            <div class="control">
-                                <md-outlined-text-field class="RNDinput" id="endInput"></md-outlined-text-field>
-                            </div>
-                        </div>
-                        <md-filled-button  type="button" onclick="saveInputs()">Generate</md-filled-button>
-                        <md-elevated-button onclick="clearAll()">Clear All</md-elevated-button>
-                        <md-filled-tonal-button id="showTableBtn">Show Result</md-filled-tonal-button>
-
-
-                    </form>
-
-                    <div class="table-container" id="tableContainer" style="display: none;">
-                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                            <thead>
-                            <tr>
-                                <th>Starting Value</th>
-                                <th>Ending Value</th>
-                                <th>Random Number</th>
-                            </tr>
-                            </thead>
-                            <tbody id="resultsTable">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-
-        </div>
-    <div class="tab-panel" id="CoinFlipperPanel" style="display: none;">
-        <div class="coin-flipper">    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold">Coin Toss</h1>
-            <div id="coin">
-                <img src="/dist/assets/coin.svg"
-                     alt="Coin" width="150" height="150">
-            </div>
-            <p id="result" style="padding: 1rem">Click the button to toss the coin!</p>
-            <md-filled-button onclick="tossCoin()" class="button is-black">Toss Coin</md-filled-button>
-
-            <script>
-                function tossCoin() {
-                    const coin = document.getElementById('coin');
-                    const result = document.getElementById('result');
-
-                    // Remove flip class to reset animation
-                    coin.classList.remove('flip');
-
-                    // Trigger reflow to restart animation
-                    void coin.offsetWidth;
-
-                    // Add flip class
-                    coin.classList.add('flip');
-
-                    // Generate random result
-                    const random = Math.random();
-
-                    // Show result after animation
-                    setTimeout(() => {
-                        const outcome = random < 0.5 ? 'Heads' : 'Tails';
-                        result.textContent = `It's ${outcome}!`;
-                    }, 1000);
-                }
-            </script>
-    <script>const savedColor = localStorage.getItem('primaryColor');
-    if (savedColor) {
-        primaryColorPicker.value = savedColor;
-        document.documentElement.style.setProperty('--md-sys-color-primary', savedColor);
-    }
-    const primaryColorPicker = document.getElementById('primaryColorPicker');
-    primaryColorPicker.addEventListener('input', (event) => {
-        const newColor = event.target.value;
-        // Update the CSS variable
-        document.documentElement.style.setProperty('--md-sys-color-primary', newColor);
-        // Store the selected color (optional)
-        localStorage.setItem('primaryColor', newColor);
-    });
-    document.getElementById('showTableBtn').addEventListener('click', function() {
-        const tableContainer = document.getElementById('tableContainer');
-        if (tableContainer.style.display === 'none') {
-            tableContainer.style.display = 'block';
-            this.textContent = 'Hide History';
-        } else {
-            tableContainer.style.display = 'none';
-            this.textContent = 'Show History';
-        }
-    });</script>
-        <script>
-
-            function saveInputs() {
-                const startValue = parseInt(document.getElementById('startInput').value);
-                const endValue = parseInt(document.getElementById('endInput').value);
-                const randomNumber = Math.floor(Math.random() * (endValue - startValue + 1)) + startValue;
-
-                // Get the table body element
-                const tableBody = document.getElementById('resultsTable');
-
-
-                // Remove 'is-selected' from any previously selected row
-                const selectedRow = tableBody.querySelector('.is-selected');
-                if (selectedRow) {
-                    selectedRow.classList.remove('is-selected');
-                }
-
-                // Create a new table row
-                const newRow = tableBody.insertRow();
-                newRow.classList.add('is-selected'); // Add the 'is-selected' class
-
-                // Create table cells for each value
-                const startCell = newRow.insertCell();
-                const endCell = newRow.insertCell();
-                const randomCell = newRow.insertCell();
-
-                // Set the content of the cells
-                startCell.textContent = startValue;
-                endCell.textContent = endValue;
-                randomCell.textContent = randomNumber;
-                // Save data to cookies
-                saveDataToCookies(startValue, endValue, randomNumber);
-
-            }
-
-            function saveDataToCookies(start, end, random) {
-                // Get existing cookie data or initialize an empty array
-                let storedData = getCookieData();
-
-                // Add new data as an object
-                storedData.push({ start, end, random });
-
-                // Convert data to JSON string and store in cookie
-                document.cookie = `randomData=${JSON.stringify(storedData)}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
-            }
-
-            function getCookieData() {
-                // Get the cookie value
-                const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)randomData\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-
-                // Parse and return the data, or an empty array if no cookie exists
-                return cookieValue ? JSON.parse(cookieValue) : [];
-            }
-
-            // Load data from cookies on page load (optional)
-            window.onload = () => {
-                const storedData = getCookieData();
-                const tableBody = document.getElementById('resultsTable');
-
-                storedData.forEach(data => {
-                    const newRow = tableBody.insertRow();
-                    newRow.insertCell().textContent = data.start;
-                    newRow.insertCell().textContent = data.end;
-                    newRow.insertCell().textContent = data.random;
-                });
-            };
-            function clearAll() {
-                // Clear the cookie
-                document.cookie = "randomData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-                // Clear the table
-                const tableBody = document.getElementById('resultsTable');
-                tableBody.innerHTML = ''; // This removes all rows from the table body
-            }
-
-
-        </script>
-    <script>   const tabs = document.querySelector('md-tabs');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-    const primaryTabs = document.querySelectorAll('md-primary-tab');
-
-    tabs.addEventListener('click', (event) => {
-        const index = [...primaryTabs].indexOf(event.target);
-        if (index !== -1) {
-            primaryTabs.forEach((tab, i) => {
-                tab.setAttribute('selected', i === index);
-                tabPanels[i].style.display = i === index ? 'block' : 'none';
-            });
-        }
-    });
-    // Show/hide table functionality
-    document.getElementById('showTableBtn').addEventListener('click', function() {
-        const tableContainer = document.getElementById('tableContainer');
-        if (tableContainer.style.display === 'none') {
-            tableContainer.style.display = 'block';
-            this.textContent = 'Hide History';
-        } else {
-            tableContainer.style.display = 'none';
-            this.textContent = 'Show History';
-        }
-    });
-    </script>
-<audio id="notificationSound" src="/dist/countdown_30_second.mp3" volume="1.0"></audio>
-
+    <script src="app.js"></script>
 </body>
 </html>
