@@ -50,7 +50,7 @@ header {
 
 
 }
-.RNG-container {
+.   RNG-container {
     margin-bottom: 2rem;
     border-radius: 2rem;
     padding: 2rem;
@@ -224,22 +224,11 @@ settings-toggle {
 .HT {
     top : 1rem
 }
-.F1 {
-    border-radius: 1rem;
-    border: 1px solid oklch(var(--p));
-    padding: 1rem;
-    align-items: flex-start;
-    align-content: space-evenly;
-    transform: scale(1.1);
+.tools {
+    max-width: 20%;
+display: grid;
+    grid-template-rows: auto;
+    margin: 01rem;
 
 
 }
-.F2  {
-    border-radius: 1rem;
-    border: 1px solid oklch(var(--p));
-    padding: 1rem;
-    align-items: flex-start;
-    align-content: space-evenly;
-    transform: scale(2);
-}
-

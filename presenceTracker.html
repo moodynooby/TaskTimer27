@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <title>Presence Checker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/dist/assets/TaskTimerLogo2.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .pulse-ring {
+            position: relative;
+        }
+
+        .pulse-ring::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            border: 2px solid currentColor;
+            border-radius: 999px;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .spinner {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 9px solid #f1f1f1;
+            animation: spinner-bulqg1 0.8s infinite linear alternate,
+            spinner-oaa3wk 1.6s infinite linear;
+        }
+
+        @keyframes spinner-bulqg1 {
+            0% { clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%) }
+            12.5% { clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%) }
+            25% { clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%) }
+            50% { clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 50% 100%) }
+            62.5% { clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 0 100%) }
+            75% { clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 0 0) }
+            100% { clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 0 0) }
+        }
+
+        @keyframes spinner-oaa3wk {
+            0% { transform: scaleY(1) rotate(0deg) }
+            49.99% { transform: scaleY(1) rotate(135deg) }
+            50% { transform: scaleY(-1) rotate(0deg) }
+            100% { transform: scaleY(-1) rotate(-135deg) }
+        }
+
+        .water-wave {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .water-wave::before,
+        .water-wave::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            left: 50%;
+            background-color: rgba(255, 255, 255, .4);
+            border-radius: 45%;
+            transform: translate(-50%, -70%) rotate(0);
+            animation: rotate 6s linear infinite;
+            z-index: 10;
+        }
+
+        .water-wave::after {
+            border-radius: 47%;
+            background-color: rgba(255, 255, 255, .9);
+            transform: translate(-50%, -70%) rotate(0);
+            animation: rotate 10s linear -5s infinite;
+            z-index: 20;
+        }
+
+        @keyframes rotate {
+            50% {
+                transform: translate(-50%, -73%) rotate(180deg);
+            }
+            100% {
+                transform: translate(-50%, -70%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg">
+<div class="min-h-screen flex items-center justify-center">
+    <div class="card lg:card-side bg-base-100 shadow-2xl backdrop-blur-md bg-white/30">
+        <div class="card-body items-center text-center p-8">
+            <h2 class="card-title text-3xl mb-6 floating">Presence Checker</h2>
+
+            <!-- Animated Timer Container -->
+            <div class="water-wave bg-primary mb-8">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-4xl font-bold text-white" id="timer">5:00</div>
+                </div>
+            </div>
+
+            <!-- Lives Display -->
+            <div class="flex gap-3 mb-6">
+                <div id="lives" class="flex gap-2 text-2xl floating"></div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div class="spinner mb-6"></div>
+
+            <!-- Total Time -->
+            <div class="stats shadow mb-6">
+                <div class="stat">
+                    <div class="stat-title">Total Time Active</div>
+                    <div class="stat-value" id="totalTime">0:00</div>
+                </div>
+            </div>
+
+            <!-- Check-in Button -->
+            <button id="checkInBtn" class="btn btn-primary btn-lg hidden pulse-ring">
+                I'm Here!
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const checkInBtn = document.getElementById('checkInBtn');
+    const timerDisplay = document.getElementById('timer');
+    const totalTimeDisplay = document.getElementById('totalTime');
+    const livesDisplay = document.getElementById('lives');
+
+    let lives = 5;
+    let checkTimer = 300;
+    let totalSeconds = 0;
+    let isWaiting = false;
+    let timer;
+
+    function updateLives() {
+        const hearts = Array(5).fill(null).map((_, i) => {
+            const heart = document.createElement('div');
+            heart.className = 'floating';
+            heart.style.animationDelay = `${i * 0.2}s`;
+            heart.textContent = i < lives ? '❤️' : '🖤';
+            return heart;
+        });
+        livesDisplay.innerHTML = '';
+        hearts.forEach(heart => livesDisplay.appendChild(heart));
+    }
+
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function updateTimer() {
+        timerDisplay.textContent = formatTime(checkTimer);
+        totalTimeDisplay.textContent = formatTime(totalSeconds);
+    }
+
+    function startCycle() {
+        checkTimer = 300;
+        isWaiting = false;
+        checkInBtn.classList.add('hidden');
+        updateTimer();
+
+        timer = setInterval(() => {
+            checkTimer--;
+            totalSeconds++;
+            updateTimer();
+
+            if (checkTimer <= 0) {
+                if (!isWaiting) {
+                    isWaiting = true;
+                    checkInBtn.classList.remove('hidden');
+                    setTimeout(() => {
+                        if (isWaiting) {
+                            lives--;
+                            updateLives();
+                            if (lives <= 0) {
+                                endSession();
+                            } else {
+                                startCycle();
+                            }
+                        }
+                    }, 10000);
+                }
+            }
+        }, 1000);
+    }
+
+    function endSession() {
+        clearInterval(timer);
+        timerDisplay.textContent = 'Session Ended';
+        checkInBtn.classList.add('hidden');
+
+        // Create end session alert with DaisyUI
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-info shadow-lg absolute top-4 right-4';
+        alert.innerHTML = `
+                <div>
+                    <span>Session ended! Total time: ${formatTime(totalSeconds)}</span>
+                </div>
+                <div class="flex-none">
+                    <button class="btn btn-sm btn-primary">Restart</button>
+                </div>
+            `;
+        document.body.appendChild(alert);
+
+        alert.querySelector('button').onclick = () => {
+            lives = 5;
+            totalSeconds = 0;
+            updateLives();
+            startCycle();
+            alert.remove();
+        };
+    }
+
+    checkInBtn.addEventListener('click', () => {
+        if (isWaiting) {
+            isWaiting = false;
+            checkInBtn.classList.add('hidden');
+            startCycle();
+        }
+    });
+
+    updateLives();
+    startCycle();
+</script>
+</body>
+</html> make this work as a dialog on button click
