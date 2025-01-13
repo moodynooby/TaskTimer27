@@ -52,13 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
             startTime = Date.now() - elapsedTime;
             timerInterval = setInterval(updateTimer, 1000);
             if (startBtn.querySelector('img')) {
-                startBtn.querySelector('img').src = '/dist/assets/pause.svg';
+                startBtn.querySelector('img').src = '../ assets/pause.svg';
             }
         } else {
             isRunning = false;
             clearInterval(timerInterval);
             if (startBtn.querySelector('img')) {
-                startBtn.querySelector('img').src = '/dist/assets/play.svg';
+                startBtn.querySelector('img').src = ' ../assets/play.svg';
             }
         }
     }
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayTime(0);
         const playButton = startBtn?.querySelector('img');
         if (playButton) {
-            playButton.src = '/dist/assets/play.svg';
+            playButton.src = '../assets/play.svg';
         }
     }
 
