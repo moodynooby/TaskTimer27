@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" style="font-family: "Zilla Slab , serif">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditation App</title>
+    <link rel="icon" href="../dist/assets/md.svg" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .breathing-circle {
+            animation: breathe 4s infinite ease-in-out;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .particle {
+            position: absolute;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-100px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .timer-circle {
+            transition: stroke-dashoffset 1s linear;
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-base-200">
+<div class="container mx-auto px-4 py-8">
+    <div class="text-center space-y-8 ">
+        <h1 class="text-4xl font-bold text-primary">Meditation App</h1>
+
+        <!-- Mode Selection -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <select id="meditation-mode" class="select select-primary w-full max-w-xs">
+                <option value="breathing">Breathing Meditation</option>
+                <option value="loving-kindness">Loving Kindness</option>
+                <option value="body-scan">Body Scan</option>
+                <option value="mindfulness">Mindfulness</option>
+            </select>
+            <select id="duration" class="select select-primary w-full max-w-xs">
+                <option value="180">3 Minutes</option>
+                <option value="300">5 Minutes</option>
+                <option value="600">10 Minutes</option>
+            </select>
+        </div>
+
+        <!-- Timer Display -->
+        <div class="relative w-64 h-64 mx-auto">
+            <svg class="w-full h-full" viewBox="0 0 100 100">
+                <circle
+                        class="timer-circle"
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="5"
+                        stroke-dasharray="283"
+                        stroke-dashoffset="0"
+                />
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div id="timer" class="text-4xl font-bold">0:00</div>
+            </div>
+        </div>
+
+        <!-- Control Button -->
+        <button id="start-button" class="btn btn-primary btn-lg">
+            Start Meditation
+        </button>
+
+        <!-- Guidance Text -->
+        <div id="guidance-text" class="text-xl mt-4 h-16">
+            Select a meditation mode to begin
+        </div>
+    </div>
+</div>
+
+<script>
+    let isActive = false;
+    let timer;
+    let remainingTime;
+    let particles = [];
+
+    const startButton = document.getElementById('start-button');
+    const timerDisplay = document.getElementById('timer');
+    const guidanceText = document.getElementById('guidance-text');
+    const modeSelect = document.getElementById('meditation-mode');
+    const durationSelect = document.getElementById('duration');
+    const timerCircle = document.querySelector('.timer-circle');
+
+    const guidanceTexts = {
+        'breathing': [
+            "Breathe in deeply...",
+            "Hold your breath...",
+            "Breathe out slowly...",
+            "Rest..."
+        ],
+        'loving-kindness': [
+            "Send love to yourself...",
+            "Send love to your loved ones...",
+            "Send love to all beings...",
+            "Feel the loving energy..."
+        ],
+        'body-scan': [
+            "Focus on your feet...",
+            "Move up to your legs...",
+            "Notice your torso...",
+            "Relax your head..."
+        ],
+        'mindfulness': [
+            "Notice your thoughts...",
+            "Let them pass by...",
+            "Stay in the present...",
+            "Be aware..."
+        ]
+    };
+
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle w-4 h-4 rounded-full bg-primary opacity-60';
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random()}s`;
+        document.querySelector('.relative').appendChild(particle);
+        return particle;
+    }
+
+    function updateTimer(duration) {
+        const minutes = Math.floor(duration / 60);
+        const seconds = duration % 60;
+        timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+        // Update circle
+        const progress = duration / remainingTime;
+        timerCircle.style.strokeDashoffset = 283 * (1 - progress);
+    }
+
+    function updateGuidance() {
+        const mode = modeSelect.value;
+        const texts = guidanceTexts[mode];
+        const index = Math.floor(Date.now() / 4000) % texts.length;
+        guidanceText.textContent = texts[index];
+    }
+
+    startButton.addEventListener('click', () => {
+        if (isActive) {
+            // Stop meditation
+            clearInterval(timer);
+            isActive = false;
+            startButton.textContent = 'Start Meditation';
+            guidanceText.textContent = 'Select a meditation mode to begin';
+            particles.forEach(p => p.remove());
+            particles = [];
+            timerCircle.style.strokeDashoffset = 0;
+        } else {
+            // Start meditation
+            isActive = true;
+            startButton.textContent = 'Stop Meditation';
+            remainingTime = parseInt(durationSelect.value);
+
+            // Create particles
+            for (let i = 0; i < 6; i++) {
+                particles.push(createParticle());
+            }
+
+            timer = setInterval(() => {
+                remainingTime--;
+                updateTimer(remainingTime);
+                updateGuidance();
+
+                if (remainingTime <= 0) {
+                    clearInterval(timer);
+                    isActive = false;
+                    startButton.textContent = 'Start Meditation';
+                    guidanceText.textContent = 'Meditation completed';
+                    particles.forEach(p => p.remove());
+                    particles = [];
+                }
+            }, 1000);
+        }
+    });
+</script>
+</body>
+</html>

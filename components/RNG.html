@@ -1,32 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" style="font-family: "Zilla Slab , serif">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Number Generator with History</title>
-    <link rel="icon" href="/dist/assets/Dice.svg" type="image/x-icon">
+    <title>Random Number Generator</title>
+    <link rel="icon" href="../dist/assets/Dice.svg" type="image/x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css"></script>
 </head>
-<body class="min-h-screen bg-base-200 p-4">
-<div role="tablist" class="tabs tabs-boxed">
-    <a role="tab" class="tab" href="index.html" target="_blank"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
-    <a role="tab" class="tab tab-active" href="RNG.html"> <img src="dist/assets/Dice.svg" class="icon"> Random Generator</a>
-    <a role="tab" class="tab " href="timer.html" target="_blank"> <img src="dist/assets/Timer.svg" class="icon"> Timer</a>
-
-    <a role="tab" class="tab" href="https://hp27.netlify.app/" target="_blank"> <img src="dist/assets/link.svg" class="icon"> HomePage</a>
-</div>
-
-<div class="max-w-4xl mx-auto">
-    <div class="card bg-neutral text-neutral-content w-96">
-        <div class="card-body">
-            <header>
-                <h1 class="card-title text-5xl font-bold ">Random Generator</h1>
-                <p class="py-6">The True Random Number Generator</p>
-
+<body class="min-h-screen bg-base-200">
+<div class="max-w-4xl mx-auto " style="margin: 2rem">
+    <div class="card bg-neutral w-96 text-center space-y-8">
+        <div class="card-title">
+        </div>
+        <div class="card-body ">
+            <header >
+                <h1 class="text-primary" style="font-size: xx-large">Random Number Generator</h1>
+                <p class="py-6 ">The True Random Number Generator</p>
             </header>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
                 <div class="form-control">
                     <label class="label">
@@ -66,7 +58,7 @@
     </div>
 
     <!-- History Table -->
-    <div class="card bg-neutral text-neutral-content w-96 shadow-xl">
+    <div class="card bg-neutral text-neutral-content w-96 shadow-xl" style="margin: 2rem">
         <div class="card-body">
             <div class="flex justify-between items-center">
                 <h2 class="card-title">Generation History</h2>
@@ -178,89 +170,6 @@
         updateHistoryTable();
     }
 </script>
-<div class="header-controls">
-    <div class="dropdown mb-72">
-        <div tabindex="0" role="button" class="btn m-1">
-            Theme
-            <svg
-                    width="12px"
-                    height="12px"
-                    class="inline-block h-2 w-2 fill-current opacity-60"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 2048 2048">
-                <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
-            </svg>
-        </div>
-        <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Default"
-                        value="default" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Retro"
-                        value="retro" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Cyberpunk"
-                        value="cyberpunk" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Valentine"
-                        value="valentine" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Forest"
-                        value="forest" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Corporate"
-                        value="corporate" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Business"
-                        value="business" />
-            </li>
-            <li>
-                <input
-                        type="radio"
-                        name="theme-dropdown"
-                        class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                        aria-label="Dim"
-                        value="dim" />
-            </li>
-
-
-        </ul>
-    </div>
-</div>
 
 </body>
 </html>
