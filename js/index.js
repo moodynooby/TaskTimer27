@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modeToggleBtn.addEventListener('click', () => {
             isPomodoroMode = !isPomodoroMode;
             resetTimer();
-            modeToggleBtn.textContent = isPomodoroMode ? 'Switch to Stopwatch' : 'Switch to Pomodoro';
+            modeToggleBtn.textContent = isPomodoroMode ? ' <img src="../assets/switch.svg" class="icon">Switch to Stopwatch' : '<img src="../assets/switch.svg" class="icon">Switch to Pomodoro';
             const timerMode = document.querySelector('.timer-mode');
             if (timerMode) {
                 timerMode.textContent = isPomodoroMode ? 'Pomodoro Mode' : 'Stopwatch Mode';
