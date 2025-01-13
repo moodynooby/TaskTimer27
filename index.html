@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" style="font-family: "Zilla Slab , serif">
+<html lang="en" data-theme="dark" style="font-family: Zilla Slab , serif">
 <head>
     <title>TaskTimer</title>
 
@@ -8,22 +8,22 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="/dist/assets/TaskTimerLogo2.png" type="image/x-icon">
+    <link rel="icon" href="/assets/taskTimerLogo2.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
 <div role="tablist" class="tabs tabs-boxed">
-    <a role="tab" class="tab tab-active" href="index.html"> <img src="dist/assets/task.svg" class="icon"> Tasks Timer</a>
-    <a role="tab" class="tab" href="components/stats.html" target="_blank"> <img src="dist/assets/stat.svg" class="icon"> Statistics</a>
+    <a role="tab" class="tab tab-active" href="index.html"> <img src="assets/task.svg" class="icon"> Tasks Timer</a>
+    <a role="tab" class="tab" href="components/stats.html" target="_blank"> <img src="assets/stat.svg" class="icon"> Statistics</a>
 
-    <a role="tab" class="tab" href="https://hp27.netlify.app/" target="_blank"> <img src="dist/assets/link.svg" class="icon"> HomePage</a>
+    <a role="tab" class="tab" href="https://hp27.netlify.app/" target="_blank"> <img src="assets/link.svg" class="icon"> HomePage</a>
 
 
 </div>
 <button  class="settings-toggle btn btn-circle btn-ghost" onclick="settings.showModal()">
-    <img src="dist/assets/Settings.svg" alt="Settings">
+    <img src="assets/Settings.svg" alt="Settings">
 </button>
     <dialog class="settings "  id="settings">
         <div class="modal-box">
@@ -139,10 +139,10 @@
 
             <div class="timer-controls">
                 <button id="startBtn" class="control-btn btn btn-primary btn-circle btn-outline " >
-                    <img class=play-icon src="/dist/assets/play.svg">
+                    <img class=play-icon src="/assets/play.svg">
                 </button>
                 <button id="resetBtn" class="control-btn btn btn-primary btn-circle btn-outline ">
-                    <img class=play-icon src="/dist/assets/Stop.svg">
+                    <img class=play-icon src="/assets/stop.svg">
 
                 </button>
             </div>
@@ -151,11 +151,11 @@
     </div>
         <div class="divider divider-horizontal">    </div>
         <div class="max-w-4xl mx-auto tools">
-            <header> <h1 class="text-5xl font-bold text-secondary">Procastination Tools</h1></header>
-            <a  class="btn  btn-primary btn-outline" target="_blank" href="components/RNG.html"><img src="dist/assets/Dice.svg" class="icon" href="/components/RNG.html">  Random Number Generator</a>
-            <button id="modeToggleBtn" class="mode-toggle btn btn-secondary btn-outline">Switch to Pomodromo</button>
-            <a class="btn btn-primary btn-outline " target="_blank" href="/components/meditations.html" > <img src="dist/assets/md.svg" class="icon">Meditation</a>
-            <a class="btn btn-primary btn-outline" href="components/presenceTracker.html" target="_blank"> Presence Checker</a>
+            <header> <h1 class="text-5xl font-bold ">Procastination Tools</h1></header>
+            <a  class="btn  btn-primary btn-outline" target="_blank" href="components/RNG.html"><img src="assets/dice.svg" class="icon" href="/components/RNG.html">  Random Number Generator</a>
+            <button id="modeToggleBtn" class="mode-toggle btn btn-secondary btn-outline"><img src="assets/switch.svg" class="icon">Switch to Pomodromo</button>
+            <a class="btn btn-primary btn-outline " target="_blank" href="/components/meditations.html" > <img src="assets/meditation.svg" class="icon">Meditation</a>
+            <a class="btn btn-primary btn-outline" href="components/presenceTracker.html" target="_blank">  <img src="assets/presenceChecker.svg" class="icon"> Presence Checker</a>
         </div>
 
         </div>
