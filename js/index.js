@@ -186,14 +186,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         saveStats();
-        updateStatsDisplay();
+        // updateStatsDisplay();
     }
 
-    function formatTime(seconds) {
-        const hours = Math.floor(seconds / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
-        return `${hours}h ${minutes}m`;
-    }
+    // function formatTime(seconds) {
+    //     const hours = Math.floor(seconds / 3600);
+    //     const minutes = Math.floor((seconds % 3600) / 60);
+    //     return `${hours}h ${minutes}m`;
+    // }
 
     function updateUI() {
         const pomodoroInput = document.getElementById('pomodoroLengthInput');
@@ -304,5 +304,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize
     loadFromStorage();
     loadStats();
-    updateStatsDisplay();
+    // updateStatsDisplay();
 });
