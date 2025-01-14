@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             startTime = Date.now() - elapsedTime;
             timerInterval = setInterval(updateTimer, 1000);
             if (startBtn.querySelector('img')) {
-                startBtn.querySelector('img').src = '../ assets/pause.svg';
+                startBtn.querySelector('img').src = '../assets/pause.svg';
             }
         } else {
             isRunning = false;

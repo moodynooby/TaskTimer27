@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en" data-theme="dark" style="font-family: Zilla Slab , serif">
 <head>
     <title>TaskTimer</title>
@@ -15,71 +16,73 @@
 </head>
 <body>
 <div role="tablist" class="tabs tabs-boxed">
-    <a role="tab" class="tab tab-active" href="index.html"> <img src="assets/task.svg" class="icon"> Tasks Timer</a>
-    <a role="tab" class="tab" href="components/stats.html" target="_blank"> <img src="assets/stat.svg" class="icon"> Statistics</a>
+    <a role="tab" class="tab tab-active" href="index.html"> <img src="assets/task.svg" class="icon" alt="icon"> Tasks Timer</a>
+    <a role="tab" class="tab" href="components/stats.html" target="_blank"> <img src="assets/stat.svg" class="icon" alt="icon"> Statistics</a>
 
-    <a role="tab" class="tab" href="https://hp27.netlify.app/" target="_blank"> <img src="assets/link.svg" class="icon"> HomePage</a>
+    <a role="tab" class="tab" href="https://hp27.netlify.app/" target="_blank"> <img src="assets/link.svg" class="icon" alt="icon"> HomePage</a>
 
 
 </div>
 <button  class="settings-toggle btn btn-circle btn-ghost" onclick="settings.showModal()">
-    <img src="assets/Settings.svg" alt="Settings">
+    <img src="assets/settings.svg" alt="Settings">
 </button>
     <dialog class="settings "  id="settings">
         <div class="modal-box">
-        <h1 class="text-2xl font-bold text-center"> Settings</h1>
-        <div class="timer-settings">
-        <label class="py-6">Pomodoro Length(minutes):
-            <input id="pomodoroLengthInput" type="number" value="25" class="input input-bordered w-20">
-        </label>
-            <br>
-        <label class="py-6">Break Length(minutes):
-            <input id="breakLengthInput" type="number" value="5" class="input input-bordered w-20">
-        </label> <br>
-    </div>
-        <div><p class="py-6">Check out Material UI for mobiles</p>
-            <a href="https://tasktime-m27.netlify.app/" class="btn btn-link">Material UI</a></div>
-                   <p class="py-6">Check out Beta UI</p>
-            <a href="https://tasktime-b27.netlify.app/" class="btn btn-link">Beta UI</a></div>
-        </div>
-            <div class="form-control">
-                <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Default</span>
-                    <input type="radio" name="theme-radios" class="radio theme-controller" value="default" />
-                </label>
-            </div>
-            <div class="form-control">
-                <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Retro</span>
-                    <input type="radio" name="theme-radios" class="radio theme-controller" value="retro" />
-                </label>
-            </div>
-            <div class="form-control">
-                <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Cyberpunk</span>
-                    <input type="radio" name="theme-radios" class="radio theme-controller" value="cyberpunk" />
-                </label>
-            </div>
-            <div class="form-control">
-                <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Forest</span>
-                    <input type="radio" name="theme-radios" class="radio theme-controller" value="forest" />
-                </label>
-            </div>
-            <div class="form-control">
-                <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Business</span>
-                    <input type="radio" name="theme-radios" class="radio theme-controller" value="business" />
-                </label>
-            </div>
+<!--        <h1 class="text-2xl font-bold text-center"> Settings</h1>-->
+<!--        <div class="timer-settings">-->
+<!--        <label class="py-6">Pomodoro Length(minutes):-->
+<!--            <input id="pomodoroLengthInput" type="number" value="25" class="input input-bordered w-20">-->
+<!--        </label>-->
+<!--            <br>-->
+<!--        <label class="py-6">Break Length(minutes):-->
+<!--            <input id="breakLengthInput" type="number" value="5" class="input input-bordered w-20">-->
+<!--        </label> <br>         </div>-->
+        <div>
+               <h1 class="text-2xl font-bold text-center"> Themes</h1>
 
-          <div class="modal-action">
-            <form method="dialog">
-            <button class="btn btn-error ">Cancel</button>
-                <button onclick="updateTimerSettings()" class="btn btn-primary">Save Settings </button>
-            </form>
-            </div>
+            <div class="form-control">
+            <label class="label cursor-pointer gap-4">
+                <span class="label-text">Default</span>
+                <input type="radio" name="theme-radios" class="radio theme-controller" value="default" />
+            </label>
         </div>
+        <div class="form-control">
+            <label class="label cursor-pointer gap-4">
+                <span class="label-text">Retro</span>
+                <input type="radio" name="theme-radios" class="radio theme-controller" value="retro" />
+            </label>
+        </div>
+        <div class="form-control">
+            <label class="label cursor-pointer gap-4">
+                <span class="label-text">Cyberpunk</span>
+                <input type="radio" name="theme-radios" class="radio theme-controller" value="cyberpunk" />
+            </label>
+        </div>
+        <div class="form-control">
+            <label class="label cursor-pointer gap-4">
+                <span class="label-text">Forest</span>
+                <input type="radio" name="theme-radios" class="radio theme-controller" value="forest" />
+            </label>
+        </div>
+        <div class="form-control">
+            <label class="label cursor-pointer gap-4">
+                <span class="label-text">Business</span>
+                <input type="radio" name="theme-radios" class="radio theme-controller" value="business" />
+            </label>
+        </div>
+            <h1 class="text-2xl font-bold text-center"> Other Views</h1>
+
+            <p class="py-6">Check out Material UI for mobiles</p>
+            <a href="https://tasktime-m27.netlify.app/" class="btn btn-link">Material UI</a></div>
+            <p class="py-6">Check out Beta UI</p>
+            <a href="https://tasktime-b27.netlify.app/" class="btn btn-link">Beta UI</a></div>
+
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn btn-error ">Close</button>
+            </form>
+        </div>
+
     </dialog>
     <div class="app-container">
         <div id="taskList" class="task-list"> </div>
@@ -133,17 +136,16 @@
     </div>
         <div class="divider divider-horizontal">    </div>
         <div class="max-w-4xl mx-auto tools">
-            <header> <h1 class="text-5xl font-bold ">Procastination Tools</h1></header>
+            <header> <h1 class="text-5xl font-bold ">Procrastination Tools</h1></header>
             <a  class="btn  btn-primary btn-outline" target="_blank" href="components/RNG.html"><img src="../assets/dice.svg" class="icon" href="/components/RNG.html">  Random Number Generator</a>
-            <button id="modeToggleBtn" class="mode-toggle btn btn-secondary btn-outline"><img src="../assets/switch.svg" class="icon">Switch to Pomodromo</button>
+            <button id="modeToggleBtn" class="mode-toggle btn btn-secondary btn-outline"><img src="../assets/switch.svg" class="icon">Switch to Pomodoro</button>
             <a class="btn btn-primary btn-outline " target="_blank" href="/components/meditations.html" > <img src="../assets/meditation.svg" class="icon">Meditation</a>
             <a class="btn btn-primary btn-outline" href="components/presenceTracker.html" target="_blank">  <img src="../assets/presenceChecker.svg" class="icon"> Presence Checker</a>
         </div>
 
         </div>
-        </div>
 
-<audio id="notificationSound" src="../dist/audio-editor-output.mp3" volume="1.0"></audio>
-<script src="../js/index.js"></script>
+<audio id="notificationSound" src="/assets/audio-editor-output.mp3" volume="1.0"></audio>
+<script src="js/index.js"></script>
 </body>
 </html>
