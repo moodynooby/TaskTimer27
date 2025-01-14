@@ -252,12 +252,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="form-control">
                     <label class="label cursor-pointer">
                         <h3>${task.name}</h3>
-                        <span>Time spent: ${formatTime(task.timeSpent)}</span>
                         <input type="checkbox" class="checkbox checkbox-error" />
                     </label>
                     <p>${task.description || ''}</p>
                 </div>
             `;
+            // <span>Time spent: ${formatTime(task.timeSpent)}</span>
 
             const checkbox = taskElement.querySelector('.checkbox');
             if (checkbox) {
