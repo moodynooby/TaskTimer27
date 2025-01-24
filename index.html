@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-theme="dark">
+<!DOCTYPE html><html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,8 +30,8 @@
 
 <div class="tabs-container">
     <md-tabs active-index="0">
-        <md-primary-tab> <md-icon slot="icon"><img src="dist/assets/Task.svg" alt="task"> </md-icon>Tasks Timer</md-primary-tab>
-        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg" alt="dice"></md-icon>  Random Generator</md-primary-tab>
+        <md-primary-tab> <md-icon slot="icon"><img src="/assets/Task.svg" alt="task"> </md-icon>Tasks Timer</md-primary-tab>
+        <md-primary-tab ><md-icon slot="icon"><img src="/assets/Dice.svg" alt="dice"></md-icon>  Random Generator</md-primary-tab>
     </md-tabs>
 
 </div>
@@ -40,7 +40,7 @@
         <md-icon slot="icon" class="theme-toggle"></md-icon>
     </md-filled-button>
     <md-fab  class="settings-toggle">
-        <md-icon slot="icon"><img src="dist/assets/Setting.svg" alt="Settings"></md-icon>
+        <md-icon slot="icon"><img src="/assets/setting.svg" alt="Settings"></md-icon>
     </md-fab>
 
 </div>
@@ -63,9 +63,6 @@
         </dialog>
 
         <div class="tab-panel app-container" id="timerPanel">
-
-
-
 
 
             <header>
@@ -107,13 +104,13 @@
                 </div>
 
                 <div class="timer-controls">
-                    <button id="startBtn" class="control-btn">
-                       <img class=play-icon src="/dist/assets/play.svg" alt="icon">
-                    </button>
-                    <button id="resetBtn" class="control-btn">
-                        <img class=play-icon src="/dist/assets/Stop.svg" alt="icon">
+                    <md-filled-button id="startBtn" class="control-btn start-btn">
+                        <img class=""  src="/assets/play.svg" alt="icon">
+                    </md-filled-button>
+                    <md-filled-button id="resetBtn" class="control-btn stop-btn">
+                        <img  src="/assets/stop.svg" alt="icon">
 
-                    </button>
+                    </md-filled-button>
                     <md-filled-button id="modeToggleBtn" class="mode-toggle">Switch to Pomodoro</md-filled-button>
                 </div>
 

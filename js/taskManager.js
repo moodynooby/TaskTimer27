@@ -7,10 +7,10 @@ class TaskManager {
             document.querySelector('.timer-mode'),
             document.querySelector('.progress-ring-circle')
         );
-        
+
         this.currentMode = 'stopwatch';
         this.selectedTaskId = null;
-        
+
         this.initializeElements();
         this.setupEventListeners();
         this.renderTasks();
@@ -45,42 +45,42 @@ class TaskManager {
         if (this.elements.addTaskBtn) {
             this.elements.addTaskBtn.addEventListener('click', () => this.addTask());
         }
-        
+
         if (this.elements.taskInput) {
             this.elements.taskInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') this.addTask();
             });
         }
-        
+
         if (this.elements.taskSelect) {
             this.elements.taskSelect.addEventListener('change', (e) => {
                 this.selectedTaskId = e.target.value;
                 this.updateMainTimerDisplay();
             });
         }
-        
+
         if (this.elements.startBtn) {
             this.elements.startBtn.addEventListener('click', () => this.toggleTimer());
         }
-        
+
         if (this.elements.resetBtn) {
             this.elements.resetBtn.addEventListener('click', () => this.resetTimer());
         }
-        
+
         if (this.elements.modeToggleBtn) {
             this.elements.modeToggleBtn.addEventListener('click', () => this.toggleMode());
         }
-        
+
         if (this.elements.themeToggle) {
             this.elements.themeToggle.addEventListener('click', () => this.toggleTheme());
         }
-        
+
         if (this.elements.settingsToggle && this.elements.settingsPanel) {
             this.elements.settingsToggle.addEventListener('click', () => {
                 this.elements.settingsPanel.classList.toggle('open');
             });
         }
-        
+
         if (this.elements.workDuration && this.elements.breakDuration) {
             this.elements.workDuration.addEventListener('change', () => this.updatePomodoroSettings());
             this.elements.breakDuration.addEventListener('change', () => this.updatePomodoroSettings());
@@ -138,12 +138,12 @@ class TaskManager {
         if (timer.isRunning) {
             timer.pause();
             this.elements.startBtn.innerHTML = `
-                                       <img class=play-icon src="/dist/assets/play.svg">
+                                       <img alt="icon" src="../assets/play.svg">
 `;
         } else {
             timer.start();
             this.elements.startBtn.innerHTML = `
-                                       <img class=play-icon src="/dist/assets/pause.svg">
+                                       <img alt="icon" src="../assets/pause.svg">
 `;
         }
     }
@@ -152,7 +152,7 @@ class TaskManager {
         const timer = this.currentMode === 'stopwatch' ? this.currentTimer : this.pomodoroTimer;
         timer.reset();
         this.elements.startBtn.innerHTML = `
-                                              <img class=play-icon src="/dist/assets/play.svg">
+                                              <img alt="icon" src="../assets/play.svg">
 `;
     }
 
@@ -160,18 +160,17 @@ class TaskManager {
         const timer = this.currentMode === 'stopwatch' ? this.currentTimer : this.pomodoroTimer;
         timer.pause();
         this.elements.startBtn.innerHTML = `
-                                   <img class=play-icon src="/dist/assets/play.svg">`;
-        
+                                   <img alt="icon" src="../assets/play.svg">`;
+
         if (this.currentMode === 'stopwatch') {
             this.currentMode = 'pomodoro';
             this.currentTimer = this.pomodoroTimer;
             this.elements.modeToggleBtn.textContent = 'Switch to Stopwatch';
         } else {
             this.currentMode = 'stopwatch';
-            this.currentTimer = this.currentTimer;
             this.elements.modeToggleBtn.textContent = 'Switch to Pomodoro';
         }
-        
+
         this.currentTimer.reset();
     }
 
@@ -179,7 +178,7 @@ class TaskManager {
         const html = document.documentElement;
         const currentTheme = html.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
+
         html.setAttribute('data-theme', newTheme);
         updateThemeIcon(newTheme);
         localStorage.setItem('theme', newTheme);
@@ -218,10 +217,10 @@ class TaskManager {
                 </div>
                    <div class="task-title">
                        <button onclick="taskManager.toggleTaskComplete('${task.id}')">
-                           ${task.completed ? '<img class="themes-icon" src="/dist/assets/Check.svg">' : '<img src="/dist/assets/cancel.svg" alt="remove" class="themes-icon">'}
+                           ${task.completed ? '<img class="themes-icon" alt="icon" src="../assets/Check.svg">' : '<img src="../assets/cancel.svg" alt="remove" class="themes-icon">'}
                        </button>
                        <button class="delete-btn" onclick="taskManager.deleteTask('${task.id}')">
-                           <img src="/dist/assets/Delete.svg" alt="remove" class="themes-icon">
+                           <img src="../assets/Delete.svg" alt="remove" class="themes-icon">
                        </button>
 
 
@@ -238,13 +237,13 @@ class TaskManager {
 
     updatePomodoroSettings() {
         if (!this.elements.workDuration || !this.elements.breakDuration) return;
-        
+
         const workDuration = Math.max(1, Math.min(120, parseInt(this.elements.workDuration.value) || 50));
         const breakDuration = Math.max(1, Math.min(30, parseInt(this.elements.breakDuration.value) || 10));
-        
+
         this.elements.workDuration.value = workDuration;
         this.elements.breakDuration.value = breakDuration;
-        
+
         this.pomodoroTimer.updateSettings(workDuration, breakDuration);
     }
 

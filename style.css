@@ -221,8 +221,8 @@ header h1 {
 }
 
 .control-btn {
-    width: 48px;
-    height: 48px;
+    height: 2rem;
+    width:2rem;
     border-radius: 50%;
     border: none;
     background: var(--card-bg);
@@ -259,6 +259,7 @@ header h1 {
     padding: 1rem;
     box-shadow: 0 2px 4px var(--shadow-color);
     transition: all 0.3s;
+    position: relative;
 }
 
 .task-item.selected {
@@ -330,10 +331,7 @@ header h1 {
     height: 2rem;
     width:2rem;
 }
-.play-icon {
-    height: 3rem;
-    width: 3rem;
-}
+
 
 
 button {
@@ -343,10 +341,11 @@ button {
 }
 .tabs-container {
     display: flex;
-    top: 100%;
-    position: absolute;
+    position: fixed;
     background: var(--card-bg);
     border: 1px dotted var(--border-color);
+    bottom: 0;
+    left: 0;
     width: 100%;
     align-items: center;
     justify-content: space-evenly;
