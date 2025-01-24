@@ -5,9 +5,7 @@
     <title>TaskTimer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="/public/tasktimer-logo.png" type="image/x-icon">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script type="importmap">
         {
@@ -29,44 +27,43 @@
 
 </head>
 <body>
+
 <div class="tabs-container">
     <md-tabs active-index="0">
-        <md-primary-tab> <md-icon slot="icon"><img src="dist/assets/task.svg"> </md-icon>Tasks Timer</md-primary-tab>
-        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg"></md-icon>  Random Generator</md-primary-tab>
-        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Coin2.svg"></md-icon>  Coin Toss</md-primary-tab>
-
-
+        <md-primary-tab> <md-icon slot="icon"><img src="dist/assets/Task.svg" alt="task"> </md-icon>Tasks Timer</md-primary-tab>
+        <md-primary-tab ><md-icon slot="icon"><img src="dist/assets/Dice.svg" alt="dice"></md-icon>  Random Generator</md-primary-tab>
     </md-tabs>
+
+</div>
+<div class="header-controls">
+    <md-filled-button class="theme-toggle">
+        <md-icon slot="icon" class="theme-toggle"></md-icon>
+    </md-filled-button>
+    <md-fab  class="settings-toggle">
+        <md-icon slot="icon"><img src="dist/assets/Setting.svg" alt="Settings"></md-icon>
+    </md-fab>
+
+</div>
+
     <div class="tab-panels">
-        <div class="header-controls">
-            <md-filled-button class="theme-toggle">
-                <md-icon slot="icon" class="theme-toggle"></md-icon>
-            </md-filled-button>
-            <md-fab  class="settings-toggle">
-                <md-icon slot="icon"><img src="dist/assets/Setting.svg" alt="Settings"></md-icon>
-            </md-fab>
 
-        </div>
+        <dialog class="settings-panel">
+            <h3>   Settings</h3>
+            <div class="setting-group">
+                <label>
+                    Work Duration (min)
+                    <input type="number" id="workDuration" value="50" min="1" max="120">
+                </label>
+                <label>
+                    Break Duration (min)
+                    <input type="number" id="breakDuration" value="10" min="1" max="30">
+                </label>
+                <label for="primaryColorPicker">Choose your primary color</label><input type="color" id="primaryColorPicker" value="#294a9d">
+            </div>
+        </dialog>
 
-        <div class="tab-panel" id="timerPanel">
-            <div class="timer-container">
+        <div class="tab-panel app-container" id="timerPanel">
 
-                <div class="settings-panel">
-                    <h3>   Settings</h3>
-                    <div class="setting-group">
-                        <label>
-                            Work Duration (min)
-                            <input type="number" id="workDuration" value="50" min="1" max="120">
-                        </label>
-                        <label>
-                            Break Duration (min)
-                            <input type="number" id="breakDuration" value="10" min="1" max="30">
-                        </label>
-                        <label>Choose your primary color</label>
-                        <input type="color" id="primaryColorPicker" value="#294a9d">
-                    </div>
-                </div>
-            <div class="app-container">
 
 
 
@@ -91,10 +88,9 @@
                 </md-filled-button>
             </div>
 
-            <div class="timer-container">
                 <div class="task-select-container">
 
-                        <select    id="taskSelect" class="task-select" label="Select a task";></select>
+                    <label for="taskSelect"></label><select id="taskSelect" class="task-select" ></select>
 
                 </div>
 
@@ -112,21 +108,19 @@
 
                 <div class="timer-controls">
                     <button id="startBtn" class="control-btn">
-                       <img class=play-icon src="/dist/assets/play.svg">
+                       <img class=play-icon src="/dist/assets/play.svg" alt="icon">
                     </button>
                     <button id="resetBtn" class="control-btn">
-                        <img class=play-icon src="/dist/assets/Stop.svg">
+                        <img class=play-icon src="/dist/assets/Stop.svg" alt="icon">
 
                     </button>
                     <md-filled-button id="modeToggleBtn" class="mode-toggle">Switch to Pomodoro</md-filled-button>
                 </div>
-            </div>
+
 
             <div id="taskList" class="task-list"> </div>
         </div>
-                </div>
-        </div>
-            <div class="tab-panel " id="randomGeneratorPanel" style="display: none;">
+    <div class="tab-panel  app-container" id="randomGeneratorPanel" style="display: none;">
                 <!-- Random Number Generator Section -->
                 <div >
                     <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold ">Random Number Generator</h1>
@@ -169,42 +163,11 @@
                 </div>
 
             </div>
+    </div>
 
-        </div>
-    <div class="tab-panel" id="CoinFlipperPanel" style="display: none;">
-        <div class="coin-flipper">    <h1 class="is-size-1-desktop , is-size-2-touch , has-text-centered , has-text-weight-bold">Coin Toss</h1>
-            <div id="coin">
-                <img src="/dist/assets/coin.svg"
-                     alt="Coin" width="150" height="150">
-            </div>
-            <p id="result" style="padding: 1rem">Click the button to toss the coin!</p>
-            <md-filled-button onclick="tossCoin()" class="button is-black">Toss Coin</md-filled-button>
-
-            <script>
-                function tossCoin() {
-                    const coin = document.getElementById('coin');
-                    const result = document.getElementById('result');
-
-                    // Remove flip class to reset animation
-                    coin.classList.remove('flip');
-
-                    // Trigger reflow to restart animation
-                    void coin.offsetWidth;
-
-                    // Add flip class
-                    coin.classList.add('flip');
-
-                    // Generate random result
-                    const random = Math.random();
-
-                    // Show result after animation
-                    setTimeout(() => {
-                        const outcome = random < 0.5 ? 'Heads' : 'Tails';
-                        result.textContent = `It's ${outcome}!`;
-                    }, 1000);
-                }
-            </script>
-    <script>const savedColor = localStorage.getItem('primaryColor');
+    <!--suppress JSUnusedAssignment -->
+<script>
+        const savedColor = localStorage.getItem('primaryColor');
     if (savedColor) {
         primaryColorPicker.value = savedColor;
         document.documentElement.style.setProperty('--md-sys-color-primary', savedColor);
@@ -227,7 +190,8 @@
             this.textContent = 'Show History';
         }
     });</script>
-        <script>
+        <!--suppress RegExpRedundantEscape, RegExpUnnecessaryNonCapturingGroup -->
+<script>
 
             function saveInputs() {
                 const startValue = parseInt(document.getElementById('startInput').value);
@@ -330,6 +294,5 @@
     });
     </script>
 <audio id="notificationSound" src="/dist/countdown_30_second.mp3" volume="1.0"></audio>
-
 </body>
 </html>

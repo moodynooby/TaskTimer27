@@ -12,10 +12,10 @@
 
 [data-theme="dark"] {
     --primary-color: theme.palette.primary.main;
-    --bg-color: #191e29;
+    --bg-color: #14161a;
     --text-color: #ffffff;
     --border-color: #374151;
-    --card-bg: #191e29;
+    --card-bg: #14161a;
     --shadow-color: rgba(0, 0, 0, 0.3);
     --select-bg: #111827;
     --select-border: #374151;
@@ -34,16 +34,17 @@ body {
 
 .app-container {
     max-width: 800px;
-    margin: 0 auto;
     position: relative;
+    margin-bottom: 20%;
+
 }
 
 .header-controls {
     position: sticky;
-    top: 1rem;
-    right: 1rem;
     display: flex;
-    gap: 0.5rem;
+    flex-direction: row;
+    justify-content: space-evenly;
+
 }
 
 .theme-toggle{
@@ -57,7 +58,7 @@ body {
     transition: all 0.3s;
 }
 
-settings-toggle {
+.settings-toggle {
     width: 3rem;
     height: 3rem;
     cursor: pointer;
@@ -81,7 +82,10 @@ settings-toggle {
     padding: 1rem;
     box-shadow: 0 2px 10px var(--shadow-color);
     display: none;
-    z-index: 1000;
+    color: var(--text-color);
+    cursor: pointer;
+
+
 }
 
 .settings-panel.open {
@@ -142,11 +146,9 @@ header h1 {
 }
 
 .timer-container {
-    background: var(--card-bg);
     border-radius: 1rem;
     padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: 0 4px 6px var(--shadow-color);
 }
 
 .task-select-container {
@@ -242,8 +244,6 @@ header h1 {
     border: 2px solid var(--border-color);
     background: var(--card-bg);
     color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.3s;
 }
 
 
@@ -274,6 +274,7 @@ header h1 {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
+
 }
 
 .task-title {
@@ -341,7 +342,15 @@ button {
     cursor: pointer;
 }
 .tabs-container {
-    margin: 20px 0;
+    display: flex;
+    top: 100%;
+    position: absolute;
+    background: var(--card-bg);
+    border: 1px dotted var(--border-color);
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 25%;
 }
 
 .tab-panel {
@@ -358,30 +367,6 @@ md-tabs {
     --md-sys-color-surface: var(--bg-color);
     --md-sys-color-surface-container: var(--bg-color);
 }
-.coin-flipper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-#coin {
-    width: 150px;
-    height: 150px;
-    margin: 20px;
-    border-radius: 50%;
-    background: gold;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-#coin.flip {
-    animation: flip 1s forwards;
-}
-@keyframes flip {
-    0% { transform: rotateY(0); }
-    100% { transform: rotateY(720deg); }
-}
-
 
 .task-select {
     width: 100%;
@@ -403,9 +388,6 @@ md-outlined-text-field:hover {
     /* Styles you want to apply on hover */
     border-color: var(--md-sys-color-primary); /* Example: Change border color */
     box-shadow: 0 0 5px var(--md-sys-color-primary); /* Example: Add a subtle glow */
-    background-color: var(--md-sys-color-surface-variant); /* Slightly change bg */
-}
+    color: var(--text-color);
 
-{
-    --text-color: var(--text-color);
 }
