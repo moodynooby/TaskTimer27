@@ -85,12 +85,10 @@
 
     </dialog>
     <div class="app-container">
-        <div id="taskList" class="task-list"> </div>
         <div class="timer-container">
         <header>
-            <img src="assets/taskTimerLogo.png" class="hero-icon">
-            <h1 class="text-5xl font-bold text-primary hero-icon ">TaskTimer</h1>
-            <p class="py-6" style="    align-self:  baseline;   align-content: center;   display: flex;justify-content: space-between;">Manage your tasks and time efficiently </p>
+            <h1 class="text-5xl font-bold text-primary  ">TaskTimer</h1>
+            <p class="py-6" style="      text-align:center;">Manage your tasks and time efficiently </p>
         </header>
 
         <div class="add-task">
@@ -102,23 +100,33 @@
             </button>
         </div>
 
-        <div class="timer-container card bg-neutral text-neutral-content">
+        <div class="time-display card bg-neutral text-neutral-content">
             <div class="task-select-container">
                     <select class="select select-primary select-bordered  w-full task-select"    id="taskSelect" >
                             </select>
             </div>
 
-            <div class="timer-display">
-                <div class="progress-ring">
-                    <svg width="200" height="200">
-                        <circle class="progress-ring-circle-bg" cx="100" cy="100" r="90"/>
-                        <circle class="progress-ring-circle" cx="100" cy="100" r="90"/>
+                    <svg class="timer-svg" width="200" height="200" viewBox="0 0 200 200">
+                      <!-- Background circle (optional) -->
+                      <circle cx="100" cy="100" r="90" fill="none" stroke="#e6e6e6" stroke-width="10"></circle>
+                      
+                      <!-- Progress ring that will be animated -->
+                      <circle 
+                        class="timer-progress-ring" 
+                        cx="100" 
+                        cy="100" 
+                        r="90" 
+                        fill="none" 
+                        stroke="#ff6347" 
+                        stroke-width="10" 
+                        stroke-linecap="round"
+                        transform="rotate(-90 100 100)"
+                      ></circle>
                     </svg>
-                    <div class="time">00:00:00</div>
-                </div>
-                <div class="timer-mode">Stopwatch Mode</div>
-                <div class="timer-label">No task selected</div>
-            </div>
+                    
+                    <!-- Timer display that shows the time -->
+                      <span class="time">00:00:00</span>
+                      <div class="timer-mode">Stopwatch Mode</div>
 
             <div class="timer-controls">
                 <button id="startBtn" class="control-btn btn btn-primary btn-circle btn-outline " >
@@ -128,20 +136,27 @@
                     <img class=play-icon src="/assets/stop.svg">
 
                 </button>
+                <button id="modeToggleBtn" class="mode-toggle btn btn-secondary btn-outline"><img src="../assets/switch.svg" class="icon">Switch to Pomodoro</button>
+
             </div>
         </div>
 
     </div>
+    <div class="divider divider-horizontal">    </div>
+
+    <div id="taskList" class="task-list"> </div>
+
         <div class="divider divider-horizontal">    </div>
         <div class="max-w-4xl mx-auto tools">
-            <header> <h1 class="text-5xl font-bold  hero-icon">Procrastination <img src="assets/tools.svg" class="">Tools</h1></header>
+            <header> <h1 class="text-5xl font-bold  hero-icon">Procrastination Tools</h1></header>
             <a  class="btn  btn-primary btn-outline" target="_blank" href="components/RNG.html"><img src="../assets/dice.svg" class="icon" href="/components/RNG.html">  Random Number Generator</a>
-            <button id="modeToggleBtn" class="mode-toggle btn btn-secondary btn-outline"><img src="../assets/switch.svg" class="icon">Switch to Pomodoro</button>
             <a class="btn btn-primary btn-outline " target="_blank" href="/components/meditations.html" > <img src="../assets/meditation.svg" class="icon">Meditation</a>
             <a class="btn btn-primary btn-outline" href="components/presenceTracker.html" target="_blank">  <img src="../assets/presenceChecker.svg" class="icon"> Presence Checker</a>
         </div>
 
+
         </div>
+        
 
 <audio id="notificationSound" src="/assets/audio-editor-output.mp3" volume="1.0"></audio>
 <script src="js/index.js"></script>

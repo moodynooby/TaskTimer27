@@ -3,9 +3,11 @@ let isRunning = false;
 let isPomodoroMode = false;
 let startTime = 0;
 let elapsedTime = 0;
+let isBreakTime = false;
 let timerInterval;
 let customPomodoroLength = 25 * 60; // Default 25 minutes in seconds
 let customBreakLength = 5 * 60; // Default 5 minutes in seconds
+
 
 // Task Management
 const tasks = [];
@@ -21,7 +23,11 @@ let pomodoroStats = {
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
+
     // DOM Elements
+    if ('Notification' in window) {
+        Notification.requestPermission();
+    }    
     const taskInput = document.getElementById('taskInput');
     const descriptionInput = document.getElementById('descriptionInput');
     const addTaskBtn = document.getElementById('addTaskBtn');
@@ -63,20 +69,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function updateTimer() {
-        if (isPomodoroMode) {
-            const timeLeft = customPomodoroLength - Math.floor((Date.now() - startTime) / 1000);
-            if (timeLeft <= 0) {
-                const notificationSound = document.getElementById('notificationSound');
-                if (notificationSound) {
-                    notificationSound.play().catch(error => console.log('Error playing sound:', error));
-                }
-                onPomodoroComplete();
-                resetTimer();
-                return;
+
+function updateTimer() {
+    if (isPomodoroMode) {
+        const totalTime = isBreakTime ? customBreakLength : customPomodoroLength;
+        const timeLeft = totalTime - Math.floor((Date.now() - startTime) / 1000);
+        const progress = ((totalTime - timeLeft) / totalTime) * 100;
+        
+        // Update progress bar if it exists
+        const progressRing = document.querySelector('.timer-progress-ring');
+        if (progressRing) {
+            const radius = progressRing.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            const offset = circumference - (progress / 100) * circumference;
+            progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+            progressRing.style.strokeDashoffset = offset;
+        }
+          if (timeLeft <= 0) {
+            const notificationSound = document.getElementById('notificationSound');
+            if (notificationSound) {
+                notificationSound.play().catch(error => console.log('Error playing sound:', error));
             }
-            displayTime(timeLeft);
-        } else {
+            if (isBreakTime) {
+                isBreakTime = false;
+                startTime = Date.now();
+            } else {
+                isBreakTime = true;
+                onPomodoroComplete();
+                startTime = Date.now();
+            }
+            // Update UI to show break/work status
+            const timerMode = document.querySelector('.timer-mode');
+            if (timerMode) {
+                timerMode.textContent = isBreakTime ? 'Break Time!' : 'Work Time!';
+            }
+            return;
+        }
+        displayTime(timeLeft);
+    } else {
             elapsedTime = Date.now() - startTime;
             displayTime(Math.floor(elapsedTime / 1000));
         }
@@ -181,19 +211,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     workTime: 0
                 };
             }
-            pomodoroStats.taskStats[selectedTask].sessions++;
-            pomodoroStats.taskStats[selectedTask].workTime += customPomodoroLength;
+            const taskIndex = tasks.findIndex(task => task.id.toString() === selectedTask);
+            if (taskIndex !== -1) {
+                tasks[taskIndex].timeSpent += 1;
+                saveToStorage();
+                
+                pomodoroStats.taskStats[selectedTask].sessions++;
+                pomodoroStats.taskStats[selectedTask].workTime += customPomodoroLength;
+            }
         }
 
-        saveStats();
-        // updateStatsDisplay();
-    }
+    saveStats();
+    // updateStatsDisplay();
+}
 
-    // function formatTime(seconds) {
-    //     const hours = Math.floor(seconds / 3600);
-    //     const minutes = Math.floor((seconds % 3600) / 60);
-    //     return `${hours}h ${minutes}m`;
-    // }
+
+
+    function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        return `${hours}h ${minutes}m`;
+    }
 
     function updateUI() {
         const pomodoroInput = document.getElementById('pomodoroLengthInput');
@@ -278,12 +316,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function onPomodoroComplete() {
-        if (isPomodoroMode) {
-            updatePomodoroStats();
+
+
+// Modify onPomodoroComplete
+function onPomodoroComplete() {
+    if (isPomodoroMode) {
+        updatePomodoroStats();
+        if (Notification.permission === 'granted') {
+            new Notification(isBreakTime ? 'Break Time!' : 'Time to Work!', {
+                body: isBreakTime ? 'Take a short break.' : 'Pomodoro session completed!',
+                icon: '../assets/timer-icon.png'
+            });
         }
     }
-
+}
     // Event Listeners
     if (startBtn) startBtn.addEventListener('click', startTimer);
     if (resetBtn) resetBtn.addEventListener('click', resetTimer);
@@ -292,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modeToggleBtn.addEventListener('click', () => {
             isPomodoroMode = !isPomodoroMode;
             resetTimer();
-            modeToggleBtn.textContent = isPomodoroMode ? ' Switch to Stopwatch' : 'Switch to Pomodoro';
+            modeToggleBtn.textContent = isPomodoroMode ? 'Switch to Stopwatch' : 'Switch to Pomodoro';
             const timerMode = document.querySelector('.timer-mode');
             if (timerMode) {
                 timerMode.textContent = isPomodoroMode ? 'Pomodoro Mode' : 'Stopwatch Mode';
@@ -305,4 +351,17 @@ document.addEventListener('DOMContentLoaded', () => {
     loadFromStorage();
     loadStats();
     // updateStatsDisplay();
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            startTimer();
+        } else if (e.code === 'KeyR') {
+            e.preventDefault();
+            resetTimer();
+        } else if (e.code === 'KeyM') {
+            e.preventDefault();
+            modeToggleBtn.click();
+        }
+    });
 });

@@ -41,13 +41,6 @@ header {
 
 
 .timer-container {
-    margin-bottom: 2rem;
-    border-radius: 2rem;
-    padding: 2rem;
-    z-index: 100;
-    margin-outside: 1rem ;
-    flex-grow: 2;
-
 
 }
 .RNG-container {
@@ -59,18 +52,38 @@ header {
 
 }
 
-.timer-display {
-    text-align: center;
-    margin-bottom: 2rem;
-}
 
-.progress-ring {
+.time-display {
+    position: relative;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    left:50%;
+    margin-bottom: 2rem;
+    border-radius: 2rem;
+    padding: 2rem;
+    z-index: 100;
+    flex-grow: 2;
+    top: 30%;
+
+  }
+  
+
+
+.timer-svg {
     position: relative;
     width: 200px;
     height: 200px;
     margin: 0 auto 1rem;
+    margin-top: 0%;
 }
 
+.timer-progress-ring {
+    stroke-dasharray: 565.48; /* Initial value, will be set by JS (2πr) */
+    stroke-dashoffset: 565.48; /* Initial value, will be set by JS */
+    transition: stroke-dashoffset 0.1s linear;
+    
+  }
+  
 .progress-ring-circle-bg {
     fill: none;
     stroke: oklch(var(--pc));
@@ -90,7 +103,7 @@ header {
 
 .time {
     position: absolute;
-    top: 50%;
+    top: 41%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 2rem;
@@ -99,7 +112,8 @@ header {
 
 .timer-mode {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 /*noinspection CssUnresolvedCustomProperty*/
