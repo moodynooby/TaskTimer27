@@ -11,7 +11,7 @@ body {
     font-style: normal;
 }
 .app-container {
-    margin: 0 auto;
+    margin: 5% auto;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -40,9 +40,7 @@ header {
 
 
 
-.timer-container {
 
-}
 .RNG-container {
     margin-bottom: 2rem;
     border-radius: 2rem;
@@ -64,10 +62,12 @@ header {
     z-index: 100;
     flex-grow: 2;
     top: 30%;
-
+    max-width: 70%;
   }
   
-
+.timer-container{
+    width: 70%;
+}
 
 .timer-svg {
     position: relative;
@@ -90,7 +90,6 @@ header {
     stroke-width: 8;
 }
 
-/*noinspection ALL*/
 .progress-ring-circle {
     fill: none;
     stroke: oklch(var(--p));
@@ -103,7 +102,7 @@ header {
 
 .time {
     position: absolute;
-    top: 41%;
+    top: 49%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 2rem;
@@ -137,11 +136,10 @@ header {
     flex-grow: 1.2;
 }
 
-/*noinspection ALL*/
 .task-item {
     background: oklch(var(--pc));
     margin: 1rem;
-    border-radius: 2rem;
+    border-radius: 2rem;    
     padding: 1rem;
     box-shadow: 0 2px 4px oklch(var(--pc));
     transition: all 0.3s;
@@ -240,7 +238,7 @@ header {
 }
 .tools {
     max-width: 20%;
-display: grid;
+    display: grid;
     grid-template-rows: auto;
     margin: 01rem;
 }
@@ -252,4 +250,12 @@ display: grid;
     align-content: center;
     display: flex;
     justify-content: space-between;
+}
+.settings-container {
+    display: flex;
+    margin:auto auto;
+    align-items: flex-start;
+    font-size: 120%;
+    text-align: center;
+    padding: 2rem;
 }

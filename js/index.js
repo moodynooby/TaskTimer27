@@ -135,14 +135,14 @@ function updateTimer() {
             playButton.src = '../assets/play.svg';
         }
     }
-
     // Storage functions
     function saveToStorage() {
         const settings = {
             customPomodoroLength,
             customBreakLength,
             isPomodoroMode,
-            tasks
+            tasks,
+            theme: document.documentElement.getAttribute('data-theme') || 'default'
         };
 
         try {
@@ -168,7 +168,22 @@ function updateTimer() {
                 isPomodoroMode = settings.isPomodoroMode;
                 tasks.length = 0;
                 tasks.push(...(settings.tasks || []));
+                
+                // Apply saved theme if available
+                if (settings.theme) {
+                    document.documentElement.setAttribute('data-theme', settings.theme);
+                }
+                
                 updateUI();
+            }
+            
+            // Also check for theme in taskTimerSettings
+            const themeSettings = localStorage.getItem('taskTimerSettings');
+            if (themeSettings) {
+                const parsedThemeSettings = JSON.parse(themeSettings);
+                if (parsedThemeSettings.theme) {
+                    document.documentElement.setAttribute('data-theme', parsedThemeSettings.theme);
+                }
             }
         } catch (error) {
             console.error('Error loading settings:', error);
