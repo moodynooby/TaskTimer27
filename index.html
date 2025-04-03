@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark" style="font-family: Zilla Slab , serif">
+<html lang="en" data-theme="dark" >
+
 <head>
-    <title>TaskTimer</title>
+    <title>Task Timer</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,25 +22,24 @@
     <div class="app-container">
         <div class="timer-container">
         <header>
-            <h1 class="text-5xl font-bold text-primary  ">TaskTimer</h1>
-            <p class="py-6" style="      text-align:center;;">Manage your tasks and time efficiently </p>
+            <h1 class="text-5xl font-bold text-primary  ">Task Timer</h1>
+            <p class="py-6" > </p>
         </header>
+
 
         <div class="time-display card bg-neutral text-neutral-content">
             <div class="add-task">
                 <input  type="text" id="taskInput" placeholder="Add a new task..." class="input input-bordered input-primary w-full max-w-xs" />
                 <input  type="text" id="descriptionInput" placeholder="Add a Description..." class="input input-bordered input-primary w-full max-w-xs" >
-    
+                <input id="pomodoroLengthInput" type="number" class="input input-bordered input-primary w-20" alt="Timer custom length">
                 <button class="btn btn-primary btn-outline" id="addTaskBtn">
                     Add Task
                 </button>
             </div>
     
     
-            <div class="task-select-container">
                     <select class="select select-primary select-bordered  w-full task-select"    id="taskSelect" >
                             </select>
-            </div>
             
 
                     <svg class="timer-svg" width="200" height="200" viewBox="0 0 200 200">
@@ -49,6 +48,7 @@
                       
                       <!-- Progress ring that will be animated -->
                       <circle 
+
                         class="timer-progress-ring stroke-primary " 
                         cx="100" 
                         cy="100" 
@@ -72,11 +72,12 @@
                     <img class=play-icon src="/assets/stop.svg">
 
                 </button>
-                <button id="modeToggleBtn" class="mode-toggle btn btn-secondary btn-outline"><img src="../assets/switch.svg" class="icon">Switch to Pomodoro</button>
+                <button id="modeToggleBtn" class="mode-toggle btn btn-secondary btn-outline">Switch to Pomodoro</button>
 
             </div>
         </div>
         <div id="taskList" class="task-list"> </div>
+
 
     </div>
 
@@ -86,8 +87,10 @@
             <header> <h1 class="text-5xl font-bold  hero-icon">Procrastination Tools</h1></header>
             <a  class="btn  btn-primary btn-outline" target="_blank" href="components/RNG.html"><img src="../assets/dice.svg" class="icon" href="/components/RNG.html">  Random Number Generator</a>
             <a class="btn btn-primary btn-outline " target="_blank" href="/components/meditations.html" > <img src="../assets/meditation.svg" class="icon">Meditation</a>
+
             <a class="btn btn-primary btn-outline" href="components/presenceTracker.html" target="_blank">  <img src="../assets/presenceChecker.svg" class="icon"> Presence Checker</a>
             <a class="btn btn-primary btn-outline" href="https://smart27.netlify.app/" target="_blank">  <img src="../assets/SMART.svg" class="icon"> SMART Tasks </a>
+
 
         </div>
 

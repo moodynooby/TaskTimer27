@@ -19,57 +19,42 @@
     <a role="tab" class="tab tab-active" href="../components/Settings.html" target="_blank"><img src="../assets/settings.svg" class="icon" alt="icon">        Settings</a>
     <a role="tab" class="tab " href="https://hp27.netlify.app/" target="_blank"> <img src="../assets/link.svg" class="icon" alt="icon"> HomePage</a>
 </div>
-        <div class="app-container">
-            <ul class="steps steps-vertical">
-                <li class="step step-primary">Settings</li>
-                <li class="step step-primary">Themes</li>
-              </ul>
-        <div class="settings-container card bg-neutral text-neutral-content ">
-           <h1 class="text-5xl font-bold ">1. Settings</h1>
-           <div class="timer-settings">
-           <label class="py-6">Pomodoro Length(minutes):
-               <input id="pomodoroLengthInput" type="number" value="25" class="input input-bordered w-20">
-           </label>
-               <br>
-           <label class="py-6">Break Length(minutes):
-               <input id="breakLengthInput" type="number" value="5" class="input input-bordered w-20">
-           </label> <br>         </div>
-            <div>
-                   <h1 class="text-5xl font-bold ">2. Themes</h1>
+        <div class="settings-container">
+                   <h1 class="text-5xl font-bold ">Themes</h1>
     
-                <div class="form-control">
+                <div class="form-control theme-control">
                 <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Default</span>
+                    Default
                     <input type="radio" name="theme-radios" class="radio theme-controller" value="default" />
                 </label>
-            </div>
-            <div class="form-control">
+                </div>
+            <div class="form-control theme-control">
                 <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Forest</span>
+                    Forest
                     <input type="radio" name="theme-radios" class="radio theme-controller" value="forest" />
                 </label>
             </div>
-            <div class="form-control">
+            <div class="form-control theme-control">
                 <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Business</span>
+                    Business
                     <input type="radio" name="theme-radios" class="radio theme-controller" value="business" />
                 </label>
             </div>
-            <div class="form-control">
+            <div class="form-control theme-control">
                 <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Black</span>
+                    Black
                     <input type="radio" name="theme-radios" class="radio theme-controller" value="black" />
                 </label>
             </div>
-            <div class="form-control">
+            <div class="form-control theme-control">
                 <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Coffee</span>
+                    Coffee
                     <input type="radio" name="theme-radios" class="radio theme-controller" value="coffee" />
                 </label>
             </div>
-            <div class="form-control">
+            <div class="form-control theme-control">
                 <label class="label cursor-pointer gap-4">
-                    <span class="label-text">Custom Theme</span>
+                    Custom Theme
                     <input type="text" id="customThemeInput" placeholder="Enter theme name" class="input input-bordered w-full max-w-xs" />
                     <button id="applyCustomTheme" class="btn btn-primary">Apply</button>
                 </label>

@@ -5,11 +5,7 @@ body {
     font-family: 'Zilla Slab', serif;
 
 }
-.zilla-slab-regular {
-    font-family: "Zilla Slab", serif;
-    font-weight: 400;
-    font-style: normal;
-}
+
 .app-container {
     margin: 5% auto;
     position: relative;
@@ -18,13 +14,6 @@ body {
 
 }
 
-.Theme {
-    display: flex;
-    gap: 0.5rem;
-    position: absolute;
-    top: 4rem;
-    right: 22rem;
-}
 header {
     text-align: center;
     margin-bottom: 2rem;
@@ -46,7 +35,6 @@ header {
     border-radius: 2rem;
     padding: 2rem;
     z-index: 100;
-    margin-outside: 1rem ;
 
 }
 
@@ -102,7 +90,7 @@ header {
 
 .time {
     position: absolute;
-    top: 49%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 2rem;
@@ -113,12 +101,6 @@ header {
     font-size: 1.2rem;
     margin-top: 2%;
     margin-bottom: 2%;
-}
-
-/*noinspection CssUnresolvedCustomProperty*/
-.timer-label {
-    color: oklch(var(--p));
-    opacity: 0.8;
 }
 
 .timer-controls {
@@ -138,27 +120,24 @@ header {
 
 .task-item {
     background: oklch(var(--pc));
-    margin: 1rem;
     border-radius: 2rem;    
     padding: 1rem;
     box-shadow: 0 2px 4px oklch(var(--pc));
     transition: all 0.3s;
+    position: relative;
+    text-align: center;
+    max-width: 70%;
+    align-self: center;
+    min-width: 50%;
+
 }
 
 .task-item.selected {
-    /*noinspection CssUnresolvedCustomProperty*/
     border: 2px solid oklch(var(--p));
 }
 
 .task-item.completed {
     opacity: 0.7;
-}
-
-.task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
 }
 
 .task-title {
@@ -179,16 +158,6 @@ header {
     justify-content: center;
 }
 
-
-.task-timer {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid oklch(var(--pc));
-}
-
 .timer-control {
     background: none;
     border: none;
@@ -199,34 +168,17 @@ header {
 
 .task-select {
     width: 100%;
-    padding: 0.75rem;
     border: 1px solid oklch(var(--pc));
     border-radius: 0.5rem;
     font-size: 1rem;
+    margin-bottom: 10px;
 }
 
 
 .icon {
     margin-right: 1rem;
 }
-.settings {
-    border: 0.1rem solid oklch(var(--p));
-    border-radius: 2rem;
-    padding: 2rem;
-    box-shadow: 0 2px 2px oklch(var(--p));
-    z-index: 10;
 
-}
-.settings-toggle {
-    width: 3rem;
-    height: 3rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    font-size: 1rem;
-    transition: all 0.3s;
-    position: sticky;
-}
 .btn
 {
     align-content: space-evenly;
@@ -242,20 +194,11 @@ header {
     grid-template-rows: auto;
     margin: 01rem;
 }
-
-.hero-icon {
-    height: 10%;
-    width: 10%;
-    align-self:  baseline;
-    align-content: center;
-    display: flex;
-    justify-content: space-between;
-}
 .settings-container {
     display: flex;
-    margin:auto auto;
-    align-items: flex-start;
     font-size: 120%;
-    text-align: center;
     padding: 2rem;
+    flex-direction: column;
+    columns: 1;
+    max-width: 21%;
 }

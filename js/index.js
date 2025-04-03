@@ -1,29 +1,18 @@
+//timer=stopwatch; pomodromo=timer
+
 // Timer and Pomodoro state
 let isRunning = false;
 let isPomodoroMode = false;
 let startTime = 0;
 let elapsedTime = 0;
-let isBreakTime = false;
 let timerInterval;
-let customPomodoroLength = 25 * 60; // Default 25 minutes in seconds
-let customBreakLength = 5 * 60; // Default 5 minutes in seconds
-
+let customPomodoroLength = 25 * 60; 
 
 // Task Management
 const tasks = [];
 
-// Stats tracking state
-let pomodoroStats = {
-    completedSessions: 0,
-    totalWorkTime: 0,
-    lastSessionDate: null,
-    dailyStats: {},
-    taskStats: {}
-};
-
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-
     // DOM Elements
     if ('Notification' in window) {
         Notification.requestPermission();
@@ -37,19 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const modeToggleBtn = document.getElementById('modeToggleBtn');
     const timerDisplay = document.querySelector('.time');
     const taskList = document.getElementById('taskList');
+    const pomoBtn = document.getElementById('pomodoroLengthInput');
+
+    // Initially hide the pomodoro button
+    if (pomoBtn) {
+        pomoBtn.style.display = isPomodoroMode ? 'block' : 'none';
+        // Add onChange event listener to update settings
+        pomoBtn.addEventListener('change', (e) => {
+            customPomodoroLength = e.target.value * 60;
+            saveToStorage();
+        });
+    }
 
     // Create and configure length inputs
     const pomodoroLengthInput = document.createElement('input');
     pomodoroLengthInput.type = 'number';
-    pomodoroLengthInput.value = 25;
+    pomodoroLengthInput.value = customPomodoroLength / 60;
     pomodoroLengthInput.id = 'pomodoroLengthInput';
     pomodoroLengthInput.className = 'input input-bordered w-20';
-
-    const breakLengthInput = document.createElement('input');
-    breakLengthInput.type = 'number';
-    breakLengthInput.value = 5;
-    breakLengthInput.id = 'breakLengthInput';
-    breakLengthInput.className = 'input input-bordered w-20';
+    pomodoroLengthInput.style = 'none';
 
     // Timer Controls
     function startTimer() {
@@ -69,44 +64,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function updateTimer() {
+        if (isPomodoroMode) {
+            const totalTime = customPomodoroLength;
+            const timeLeft = totalTime - Math.floor((Date.now() - startTime) / 1000);
+            const progress = ((totalTime - timeLeft) / totalTime) * 100;
 
-function updateTimer() {
-    if (isPomodoroMode) {
-        const totalTime = isBreakTime ? customBreakLength : customPomodoroLength;
-        const timeLeft = totalTime - Math.floor((Date.now() - startTime) / 1000);
-        const progress = ((totalTime - timeLeft) / totalTime) * 100;
-        
-        // Update progress bar if it exists
-        const progressRing = document.querySelector('.timer-progress-ring');
-        if (progressRing) {
-            const radius = progressRing.r.baseVal.value;
-            const circumference = radius * 2 * Math.PI;
-            const offset = circumference - (progress / 100) * circumference;
-            progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
-            progressRing.style.strokeDashoffset = offset;
-        }
-          if (timeLeft <= 0) {
-            const notificationSound = document.getElementById('notificationSound');
-            if (notificationSound) {
-                notificationSound.play().catch(error => console.log('Error playing sound:', error));
+            // Update progress bar if it exists
+            const progressRing = document.querySelector('.timer-progress-ring');
+            if (progressRing) {
+                const radius = progressRing.r.baseVal.value;
+                const circumference = radius * 2 * Math.PI;
+                const offset = circumference - (progress / 100) * circumference;
+                progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+                progressRing.style.strokeDashoffset = offset;
             }
-            if (isBreakTime) {
-                isBreakTime = false;
-                startTime = Date.now();
-            } else {
-                isBreakTime = true;
-                onPomodoroComplete();
-                startTime = Date.now();
+            if (timeLeft <= 0) {
+                if (Notification.permission === 'granted') {
+                    new Notification('Timer Done!', {
+                        body: 'Pomodoro session completed!',
+                        icon: '../assets/timer-icon.png'
+                    });
+                }
             }
-            // Update UI to show break/work status
-            const timerMode = document.querySelector('.timer-mode');
-            if (timerMode) {
-                timerMode.textContent = isBreakTime ? 'Break Time!' : 'Work Time!';
-            }
-            return;
-        }
-        displayTime(timeLeft);
-    } else {
+            displayTime(timeLeft);
+        } else {
             elapsedTime = Date.now() - startTime;
             displayTime(Math.floor(elapsedTime / 1000));
         }
@@ -135,11 +117,11 @@ function updateTimer() {
             playButton.src = '../assets/play.svg';
         }
     }
+
     // Storage functions
     function saveToStorage() {
         const settings = {
             customPomodoroLength,
-            customBreakLength,
             isPomodoroMode,
             tasks,
             theme: document.documentElement.getAttribute('data-theme') || 'default'
@@ -164,7 +146,6 @@ function updateTimer() {
 
             if (settings) {
                 customPomodoroLength = settings.customPomodoroLength || 25 * 60;
-                customBreakLength = settings.customBreakLength || 5 * 60;
                 isPomodoroMode = settings.isPomodoroMode;
                 tasks.length = 0;
                 tasks.push(...(settings.tasks || []));
@@ -190,58 +171,6 @@ function updateTimer() {
         }
     }
 
-    // Stats functions
-    function loadStats() {
-        const savedStats = localStorage.getItem('pomodoroStats');
-        if (savedStats) {
-            pomodoroStats = JSON.parse(savedStats);
-        }
-    }
-
-    function saveStats() {
-        localStorage.setItem('pomodoroStats', JSON.stringify(pomodoroStats));
-    }
-
-    function updatePomodoroStats() {
-        const today = new Date().toISOString().split('T')[0];
-
-        pomodoroStats.completedSessions++;
-        pomodoroStats.totalWorkTime += customPomodoroLength;
-        pomodoroStats.lastSessionDate = new Date().toISOString();
-
-        if (!pomodoroStats.dailyStats[today]) {
-            pomodoroStats.dailyStats[today] = {
-                sessions: 0,
-                workTime: 0
-            };
-        }
-        pomodoroStats.dailyStats[today].sessions++;
-        pomodoroStats.dailyStats[today].workTime += customPomodoroLength;
-
-        const selectedTask = taskSelect?.value;
-        if (selectedTask && selectedTask !== "Select a task") {
-            if (!pomodoroStats.taskStats[selectedTask]) {
-                pomodoroStats.taskStats[selectedTask] = {
-                    sessions: 0,
-                    workTime: 0
-                };
-            }
-            const taskIndex = tasks.findIndex(task => task.id.toString() === selectedTask);
-            if (taskIndex !== -1) {
-                tasks[taskIndex].timeSpent += 1;
-                saveToStorage();
-                
-                pomodoroStats.taskStats[selectedTask].sessions++;
-                pomodoroStats.taskStats[selectedTask].workTime += customPomodoroLength;
-            }
-        }
-
-    saveStats();
-    // updateStatsDisplay();
-}
-
-
-
     function formatTime(seconds) {
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
@@ -250,11 +179,10 @@ function updateTimer() {
 
     function updateUI() {
         const pomodoroInput = document.getElementById('pomodoroLengthInput');
-        const breakInput = document.getElementById('breakLengthInput');
-
-        if (pomodoroInput) pomodoroInput.value = customPomodoroLength / 60;
-        if (breakInput) breakInput.value = customBreakLength / 60;
-
+        if (pomodoroInput) {
+            pomodoroInput.value = customPomodoroLength / 60;
+            pomodoroInput.style.display = isPomodoroMode ? 'block' : 'none';
+        }
         updateTaskSelect();
         updateTaskList();
     }
@@ -310,7 +238,6 @@ function updateTimer() {
                     <p>${task.description || ''}</p>
                 </div>
             `;
-            // <span>Time spent: ${formatTime(task.timeSpent)}</span>
 
             const checkbox = taskElement.querySelector('.checkbox');
             if (checkbox) {
@@ -331,20 +258,6 @@ function updateTimer() {
         }
     }
 
-
-
-// Modify onPomodoroComplete
-function onPomodoroComplete() {
-    if (isPomodoroMode) {
-        updatePomodoroStats();
-        if (Notification.permission === 'granted') {
-            new Notification(isBreakTime ? 'Break Time!' : 'Time to Work!', {
-                body: isBreakTime ? 'Take a short break.' : 'Pomodoro session completed!',
-                icon: '../assets/timer-icon.png'
-            });
-        }
-    }
-}
     // Event Listeners
     if (startBtn) startBtn.addEventListener('click', startTimer);
     if (resetBtn) resetBtn.addEventListener('click', resetTimer);
@@ -353,6 +266,12 @@ function onPomodoroComplete() {
         modeToggleBtn.addEventListener('click', () => {
             isPomodoroMode = !isPomodoroMode;
             resetTimer();
+            
+            // Update pomoBtn visibility based on mode
+            if (pomoBtn) {
+                pomoBtn.style.display = isPomodoroMode ? 'block' : 'none';
+            }
+            
             modeToggleBtn.textContent = isPomodoroMode ? 'Switch to Stopwatch' : 'Switch to Pomodoro';
             const timerMode = document.querySelector('.timer-mode');
             if (timerMode) {
@@ -365,7 +284,6 @@ function onPomodoroComplete() {
     // Initialize
     loadFromStorage();
     loadStats();
-    // updateStatsDisplay();
 
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Space') {
