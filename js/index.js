@@ -272,10 +272,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 pomoBtn.style.display = isPomodoroMode ? 'block' : 'none';
             }
             
-            modeToggleBtn.textContent = isPomodoroMode ? 'Switch to Stopwatch' : 'Switch to Pomodoro';
+            modeToggleBtn.textContent = isPomodoroMode ? 'Switch to Stopwatch' : 'Switch to Timer';
             const timerMode = document.querySelector('.timer-mode');
             if (timerMode) {
-                timerMode.textContent = isPomodoroMode ? 'Pomodoro Mode' : 'Stopwatch Mode';
+                timerMode.textContent = isPomodoroMode ? 'Timer Mode' : 'Stopwatch Mode';
             }
             saveToStorage();
         });
